@@ -5,5 +5,8 @@ export async function authenticate(data: {
   password: string;
 }) {
   const { username, password } = data;
-  return await authentication.login({ username, password });
+  const res = await authentication.login({ username, password });
+
+  console.log(res);
+  return res;
 }

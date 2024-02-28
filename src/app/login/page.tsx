@@ -14,7 +14,6 @@ export default function Login() {
             },
           }}
           children={(field) => {
-            console.log(field);
             return (
               <>
                 <input
@@ -30,15 +29,32 @@ export default function Login() {
             );
           }}
         />
-
-        <input
-          className={"w-min"}
-          type="password"
-          name="password"
-          placeholder="Password"
+        <form.Field
+          name={"password"}
+          children={(field) => {
+            return (
+              <>
+                <input
+                  className={"w-min"}
+                  placeholder="password"
+                  onChange={(e) => field.handleChange(e.target.value)}
+                  value={field.state.value}
+                />
+                {field.state.meta.errors && (
+                  <div>{field.state.meta.errors.join(", ")}</div>
+                )}
+              </>
+            );
+          }}
         />
+
         {/*<div>{errorMessage && <p>{errorMessage}</p>}</div>*/}
-        <button className={"p-1 border border-amber-500"}>Login</button>
+        <button
+          onClick={form.handleSubmit}
+          className={"p-1 border border-amber-500"}
+        >
+          Login
+        </button>
       </div>
     </form.Provider>
   );

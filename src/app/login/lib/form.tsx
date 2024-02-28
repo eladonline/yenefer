@@ -11,7 +11,7 @@ const formFactory = createFormFactory<Credentials>({
     username: "",
     password: "",
   },
-  onSubmit: async ({ value }) => authenticate(value),
+  onSubmit: async ({ value }) => await authenticate(value),
 });
 
 export default formFactory;
