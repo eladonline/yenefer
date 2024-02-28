@@ -1,3 +1,5 @@
+"use server";
+import { cookies } from "next/headers";
 import api from "@/utils/api/api";
 
 type PayloadLogin = {
@@ -12,7 +14,11 @@ class Authentication {
   }
 
   async tokenValidation() {
-    await api.http.get("/api/auth");
+    if (cookies().has("token")) {
+      await api.http.get("/api/auth");
+    }
+
+    return false;
   }
 }
 const authentication = new Authentication();

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tanstack/react-form": "^0.13.6",
     "antd": "^5.14.2",
     "axios": "^1.6.7",
     "eslint-config-prettier": "^9.1.0",

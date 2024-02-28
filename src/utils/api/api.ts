@@ -1,4 +1,6 @@
 import axios, { Axios } from "axios";
+import { cookies } from "next/headers";
+
 class Api {
   instance: Axios;
   constructor() {
@@ -9,7 +11,8 @@ class Api {
   }
 
   get http() {
-    const token = sessionStorage.getItem("token");
+    const token = cookies().get("token");
+    // @ts-ignore
     this.instance.defaults.headers.Authorization = `Bearer ${token}`;
     return this.instance;
   }
