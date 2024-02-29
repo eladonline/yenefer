@@ -1,8 +1,9 @@
 "use client";
 import formFactory from "./lib/form";
 
-export default function Login() {
+function Login() {
   const form = formFactory.useForm();
+
   return (
     <form.Provider>
       <div className={"p-3 pt-11 flex  flex-col items-center gap-3"}>
@@ -59,3 +60,5 @@ export default function Login() {
     </form.Provider>
   );
 }
+
+export default Login;

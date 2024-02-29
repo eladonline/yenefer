@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.3.1",
+    "@ant-design/nextjs-registry": "^1.0.0",
     "@tanstack/react-form": "^0.13.6",
     "antd": "^5.14.2",
     "axios": "^1.6.7",

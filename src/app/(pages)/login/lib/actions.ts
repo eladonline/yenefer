@@ -1,4 +1,4 @@
-import authentication from "@/app/server/authentication";
+import authentication from "@/app/(server)/authentication";
 
 export async function authenticate(data: {
   username: string;
