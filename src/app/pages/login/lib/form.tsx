@@ -1,5 +1,5 @@
 import { createFormFactory } from "@tanstack/react-form";
-import { authenticate } from "@/app/login/lib/actions";
+import { authenticate } from "@/app/pages/login/lib/actions";
 
 type Credentials = {
   username: string;
