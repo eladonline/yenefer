@@ -1,4 +1,4 @@
-import authentication from "@/app/(server)/authentication";
+import authentication from "@/app/service/authentication";
 import { AxiosResponse } from "axios";
 
 export async function authenticate(data: {

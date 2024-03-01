@@ -11,6 +11,11 @@ class Api extends Utility {
       timeout: 3000,
     };
   }
+  get axios(): AxiosInstance {
+    return axios.create({
+      ...this.defaults,
+    });
+  }
 
   get http(): AxiosInstance {
     const token = this.cookie.get("token");

@@ -1,6 +1,6 @@
+"use client";
 import api from "@/utils/api/api";
-import { AxiosPromise } from "axios";
-import Utitlity from "@/utils/api/Utility";
+import axios, { AxiosPromise } from "axios";
 
 type PayloadLogin = {
   username: string;
@@ -12,13 +12,13 @@ class Authentication {
     return api.http.post("/api/auth", payload);
   }
 
-  async tokenValidation() {
-    const apiUtil = new Utitlity();
-    if (apiUtil.cookie.has("token")) {
-      await api.http.get("/api/auth");
-    }
+  async tokenValidation(token: string): Promise<boolean> {
+    const res = await fetch("http://localhost:3000/api/auth", {
+      credentials: "include",
+      headers: { Cookie: `token=${token}` },
+    });
 
-    return false;
+    return res.status === 200;
   }
 }
 const authentication = new Authentication();
