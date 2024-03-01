@@ -5,8 +5,3 @@ export const POST = async (req: NextRequest) => {
   console.log(username, password);
   return NextResponse.json({ message: "POST OK" }, { status: 200 });
 };
-
-export const GET = async (req: NextRequest) => {
-  console.log(process.env.MONGODB_URI);
-  return NextResponse.json({ message: "GET OK" }, { status: 200 });
-};
