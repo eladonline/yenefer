@@ -7,6 +7,6 @@ export const POST = async (req: NextRequest) => {
 };
 
 export const GET = async (req: NextRequest) => {
-  console.log(req.cookies.get("token"));
+  console.log(process.env.MONGODB_URI);
   return NextResponse.json({ message: "GET OK" }, { status: 200 });
 };
