@@ -1,9 +1,10 @@
 import authentication from "@/app/(server)/authentication";
+import { AxiosResponse } from "axios";
 
 export async function authenticate(data: {
   username: string;
   password: string;
-}) {
+}): Promise<AxiosResponse> {
   const { username, password } = data;
   const res = await authentication.login({ username, password });
 

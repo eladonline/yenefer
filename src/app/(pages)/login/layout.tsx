@@ -1,10 +1,8 @@
-import React, { ReactNode, Suspense } from "react";
+"use client";
+import React, { ReactNode } from "react";
+
+import QueryClientProvider from "@/utils/Providers/QueryClientProvider";
 
 export default function Layout({ children }: { children: ReactNode }) {
-  return (
-    <Suspense fallback={"loading..."}>
-      blaaa
-      {children}
-    </Suspense>
-  );
+  return <QueryClientProvider>{children}</QueryClientProvider>;
 }

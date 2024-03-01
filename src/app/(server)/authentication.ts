@@ -1,4 +1,6 @@
-import http from "@/utils/api/api";
+import api from "@/utils/api/api";
+import { AxiosPromise } from "axios";
+import Utitlity from "@/utils/api/Utility";
 
 type PayloadLogin = {
   username: string;
@@ -6,17 +8,18 @@ type PayloadLogin = {
 };
 
 class Authentication {
-  async login(payload: PayloadLogin) {
-    return await http.post("/api/auth", payload);
+  login(payload: PayloadLogin): Promise<AxiosPromise> {
+    return api.http.post("/api/auth", payload);
   }
 
-  // async tokenValidation() {
-  //   if (cookies().has("token")) {
-  //     await api.http.get("/api/auth");
-  //   }
-  //
-  //   return false;
-  // }
+  async tokenValidation() {
+    const apiUtil = new Utitlity();
+    if (apiUtil.cookie.has("token")) {
+      await api.http.get("/api/auth");
+    }
+
+    return false;
+  }
 }
 const authentication = new Authentication();
 export default authentication;
