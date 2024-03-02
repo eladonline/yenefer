@@ -8,7 +8,7 @@ class Jwt {
   secret: Secret;
   defaultOptions: SignOptions;
   constructor() {
-    this.secret = process.env.jwtSecret || "default-secret-for-jwt";
+    this.secret = process.env.JWT_SECRET_KEY || "default-secret-for-jwt";
     this.defaultOptions = {
       expiresIn: "1d",
     };

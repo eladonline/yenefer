@@ -1,25 +1,22 @@
 "use server";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-
-const jwtMiddleware = async (token) => {
-  return true;
-};
+import { tokenValidator } from "@/app/(server)/middlwares/token";
 
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
-  const token = request.cookies.get("token")?.value;
-  if (!token) return NextResponse.redirect(new URL("/login", request.url));
+  // skip middleware for this pages
+  if (["/login", "/sign-up"].includes(pathname)) return NextResponse.next();
 
-  if (pathname.startsWith("/api")) {
-    const isValidToken = await jwtMiddleware(token);
-    if (!isValidToken) {
-      return NextResponse.redirect(new URL("/login", request.url));
-    }
+  const token = request.cookies.get("token")?.value;
+
+  const isValidToken = tokenValidator(token);
+  if (!isValidToken) {
+    return NextResponse.redirect(new URL("/login", request.url));
   }
 }
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: "/((?!_next/static|_next/image|favicon.ico|login|sign-up|.+.svg).*)",
+  matcher: "/((?!_next/static|_next/image|favicon.ico|.+.svg).*)",
 };
