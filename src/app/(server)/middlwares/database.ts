@@ -1,19 +1,18 @@
-import { MongoClient } from "mongodb";
-import { NextRequest } from "next/server";
+import { MongoClient, Db } from "mongodb";
 
-const client = new MongoClient(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+var client: MongoClient | null = null;
 
-type DBReq = {
-  dbClient: MongoClient;
-  db:
+type ReqDb = {
+  dbClient?: MongoClient | null;
+  db?: Db;
 };
 
-async function database(req: NextRequest) {
-  req.dbClient = client;
-  req.db = client.db("MCT");
+async function databaseConnect(): Promise<ReqDb> {
+  if (!client && process.env.MONGODB_LOCAL_URI) {
+    client = new MongoClient(process.env.MONGODB_LOCAL_URI);
+    await client.connect();
+  }
+  return { dbClient: client, db: client?.db(process.env.DB_NAME) };
 }
 
-export default database;
+export default databaseConnect;

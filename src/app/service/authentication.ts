@@ -9,7 +9,7 @@ type PayloadLogin = {
 
 class Authentication {
   login(payload: PayloadLogin): Promise<AxiosPromise> {
-    return api.http.post("/api/auth", payload);
+    return api.http.patch("/api/auth", payload);
   }
 }
 const authentication = new Authentication();
