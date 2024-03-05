@@ -1,0 +1,27 @@
+import databaseConnect from "@/app/(server)/services/database";
+import bcrypt from "bcryptjs";
+import { NextRequest, NextResponse } from "next/server";
+
+export async function signIn(req: NextRequest) {
+  const { username, password } = await req.json();
+
+  const { db } = await databaseConnect();
+  const userDoc = await db?.collection("users").findOne({ email: username });
+
+  try {
+    if (!userDoc) {
+      return NextResponse.json(
+        { message: "User does not exists" },
+        { status: 404 },
+      );
+    }
+
+    const isValidUser = await bcrypt.compare(password, userDoc.password);
+
+    if (isValidUser)
+      return NextResponse.json({ message: "Success" }, { status: 200 });
+    else return NextResponse.json({ message: "Reject" }, { status: 401 });
+  } catch (err: any) {
+    throw err;
+  }
+}

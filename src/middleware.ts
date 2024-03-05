@@ -1,7 +1,8 @@
 "use server";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { tokenValidator } from "@/app/(server)/middlwares/token";
+import { tokenValidator } from "@/app/(server)/services/token";
+
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   // skip middleware for this pages
@@ -14,7 +15,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  return NextResponse.next();
+  return NextResponse.next(request);
 }
 
 // See "Matching Paths" below to learn more
