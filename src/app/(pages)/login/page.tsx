@@ -1,35 +1,47 @@
 "use client";
 import useLogin from "./lib/useLogin";
+import Field from "@/app/components/decorators/form/Field";
+import { Input } from "antd/lib";
 
 function Login() {
   const {
     onSubmit,
+    onError,
     formFactory: { register, handleSubmit, formState, clearErrors },
   } = useLogin();
 
   return (
     <div className={"p-3 pt-11 flex  flex-col items-center gap-3"}>
-      <input
-        className={"w-min"}
-        placeholder="username"
-        {...register("username")}
-        onChange={() => clearErrors("formError")}
-      />
-
-      <input
-        className={"w-min"}
-        placeholder="password"
-        {...register("password")}
-        onChange={() => clearErrors("formError")}
-      />
+      <Field
+        label={{ text: "Username" }}
+        error={{ text: formState?.errors?.username?.message }}
+      >
+        <Input
+          className={"w-min"}
+          placeholder="username"
+          {...register("username", { required: "Required" })}
+          onChange={() => clearErrors("formError")}
+        />
+      </Field>
+      <Field
+        label={{ text: "Password" }}
+        error={{ text: formState?.errors?.password?.message }}
+      >
+        <Input
+          className={"w-min"}
+          placeholder="password"
+          {...register("password", { required: "Required" })}
+          onChange={() => clearErrors("formError")}
+        />
+      </Field>
 
       <div>
         {formState?.errors?.formError && (
-          <p>{formState?.errors?.formError.message}</p>
+          <p>{`${formState?.errors?.formError.message}`}</p>
         )}
       </div>
       <button
-        onClick={handleSubmit(onSubmit)}
+        onClick={handleSubmit(onSubmit, onError)}
         className={"p-1 border border-amber-500"}
       >
         Login

@@ -1,7 +1,7 @@
 "use client";
 import { ConfigProvider } from "antd/lib";
 import React, { ReactElement } from "react";
-import ScreenLayout from "@/app/components/Layouts/ScreenLayout";
+import ScreenLayout from "@/app/components/layouts/ScreenLayout";
 
 const AntdProvider = ({ children }: { children: ReactElement }) => {
   return (

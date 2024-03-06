@@ -1,9 +1,4 @@
-import {
-  useForm,
-  SubmitHandler,
-  UseFormReturn,
-  FieldValues,
-} from "react-hook-form";
+import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 import { login } from "@/app/service/authentication";
 import { AxiosError } from "axios";
 
@@ -13,7 +8,7 @@ type Credentials = {
 };
 
 const useLogin = () => {
-  const formFactory = useForm<FieldValues>({
+  const formFactory = useForm<FieldValues & Credentials>({
     defaultValues: {
       username: "",
       password: "",
@@ -21,7 +16,6 @@ const useLogin = () => {
   });
 
   const onSubmit: SubmitHandler<Credentials> = async (data) => {
-    console.log(data);
     try {
       await login(data);
     } catch (err: AxiosError | any) {
@@ -32,7 +26,9 @@ const useLogin = () => {
     }
   };
 
-  return { formFactory, onSubmit };
+  const onError = async (error: any) => {};
+
+  return { formFactory, onSubmit, onError };
 };
 
 export default useLogin;
