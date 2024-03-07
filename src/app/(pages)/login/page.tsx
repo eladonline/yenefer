@@ -1,13 +1,13 @@
 "use client";
 import useLogin from "./lib/useLogin";
 import Field from "@/app/components/decorators/form/Field";
-import { Input } from "antd/lib";
+import ControlledInput from "@/utils/useForm/Controlled";
 
 function Login() {
   const {
     onSubmit,
     onError,
-    formFactory: { register, handleSubmit, formState, clearErrors },
+    formFactory: { handleSubmit, formState, control },
   } = useLogin();
 
   return (
@@ -16,22 +16,23 @@ function Login() {
         label={{ text: "Username" }}
         error={{ text: formState?.errors?.username?.message }}
       >
-        <Input
+        <ControlledInput
+          control={control}
+          rules={{ required: "Required" }}
+          name={"username"}
           className={"w-min"}
           placeholder="username"
-          {...register("username", { required: "Required" })}
-          onChange={() => clearErrors("formError")}
         />
       </Field>
       <Field
         label={{ text: "Password" }}
         error={{ text: formState?.errors?.password?.message }}
       >
-        <Input
+        <ControlledInput
+          rules={{ required: "Required" }}
+          control={control}
+          name={"password"}
           className={"w-min"}
-          placeholder="password"
-          {...register("password", { required: "Required" })}
-          onChange={() => clearErrors("formError")}
         />
       </Field>
 
