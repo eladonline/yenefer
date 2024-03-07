@@ -2,12 +2,14 @@
 import useLogin from "./lib/useLogin";
 import Field from "@/app/components/decorators/form/Field";
 import ControlledInput from "@/utils/useForm/Controlled";
+import PrimaryError from "@/app/components/errors/PrimaryError";
+import { Button } from "antd/lib";
 
 function Login() {
   const {
     onSubmit,
     onError,
-    formFactory: { handleSubmit, formState, control },
+    formFactory: { handleSubmit, formState, control, clearErrors },
   } = useLogin();
 
   return (
@@ -22,6 +24,7 @@ function Login() {
           name={"username"}
           className={"w-min"}
           placeholder="username"
+          onChange={() => clearErrors("formError")}
         />
       </Field>
       <Field
@@ -33,20 +36,20 @@ function Login() {
           control={control}
           name={"password"}
           className={"w-min"}
+          onChange={() => clearErrors("formError")}
         />
       </Field>
 
-      <div>
-        {formState?.errors?.formError && (
-          <p>{`${formState?.errors?.formError.message}`}</p>
-        )}
-      </div>
-      <button
+      {formState?.errors?.["formError"] && (
+        <PrimaryError text={String(formState.errors["formError"].message)} />
+      )}
+      <Button
+        type={"primary"}
         onClick={handleSubmit(onSubmit, onError)}
         className={"p-1 border border-amber-500"}
       >
         Login
-      </button>
+      </Button>
     </div>
   );
 }

@@ -20,7 +20,11 @@ export async function signIn(req: NextRequest) {
 
     if (isValidUser)
       return NextResponse.json({ message: "Success" }, { status: 200 });
-    else return NextResponse.json({ message: "Reject" }, { status: 401 });
+    else
+      return NextResponse.json(
+        { message: "Invalid username or password" },
+        { status: 401 },
+      );
   } catch (err: any) {
     throw err;
   }

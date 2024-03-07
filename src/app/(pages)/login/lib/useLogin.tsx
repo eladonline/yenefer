@@ -14,19 +14,21 @@ const useLogin = () => {
       password: "",
     },
   });
-
+  console.log(formFactory.formState.isSubmitting);
   const onSubmit: SubmitHandler<Credentials> = async (data) => {
     try {
       await login(data);
     } catch (err: AxiosError | any) {
       formFactory.setError("formError", {
         type: "custom",
-        message: err.message,
+        message: err.response.data.message,
       });
     }
   };
 
-  const onError = async (error: any) => {};
+  const onError = async (error: any) => {
+    console.log(error);
+  };
 
   return { formFactory, onSubmit, onError };
 };

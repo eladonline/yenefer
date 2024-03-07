@@ -1,5 +1,5 @@
 import { Controller, FieldValues } from "react-hook-form";
-import React, { FC, ReactElement, ReactHTMLElement } from "react";
+import React, { FC, ReactElement } from "react";
 
 const FormController: FC<FieldValues> = ({
   name,
