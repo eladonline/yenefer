@@ -14,7 +14,7 @@ const useLogin = () => {
       password: "",
     },
   });
-  console.log(formFactory.formState.isSubmitting);
+
   const onSubmit: SubmitHandler<Credentials> = async (data) => {
     try {
       await login(data);
@@ -26,11 +26,7 @@ const useLogin = () => {
     }
   };
 
-  const onError = async (error: any) => {
-    console.log(error);
-  };
-
-  return { formFactory, onSubmit, onError };
+  return { formFactory, onSubmit };
 };
 
 export default useLogin;
