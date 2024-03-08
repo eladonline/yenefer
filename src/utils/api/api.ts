@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from "axios";
-import Utility from "./Utility";
+import Document from "../Document";
 
-class Api extends Utility {
+class Api extends Document {
   defaults: object;
 
   constructor() {
@@ -18,8 +18,7 @@ class Api extends Utility {
   }
 
   get http(): AxiosInstance {
-    const token = this.cookie.get("token");
-
+    const token = this.getCookie("token");
     return axios.create({
       ...this.defaults,
       headers: { Authorization: token ? `Bearer ${token}` : null },

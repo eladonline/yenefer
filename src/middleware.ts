@@ -2,7 +2,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { tokenValidator } from "@/app/(server)/services/token";
-import { headers } from "next/headers";
 
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
@@ -10,11 +9,10 @@ export async function middleware(request: NextRequest) {
   if (["/login", "/sign-up"].includes(pathname)) return NextResponse.next();
 
   const token = request.cookies.get("token")?.value;
-
-  const isValidToken = tokenValidator(token);
-  if (!isValidToken) {
+  let isValidToken = false;
+  if (token) isValidToken = await tokenValidator(token);
+  if (!isValidToken)
     return NextResponse.redirect(new URL("/login", request.url));
-  }
 
   return NextResponse.next();
 }

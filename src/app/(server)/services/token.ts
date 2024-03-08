@@ -1,10 +1,12 @@
-import Jwt from "@/app/(server)/services/Jwt";
+import * as jose from "jose";
 
-export const tokenValidator = (token: string | undefined): boolean => {
+export const tokenValidator = async (token: string): Promise<boolean> => {
   if (!token) return false;
+
+  const secret = new TextEncoder().encode(process.env.JWT_SECRET_KEY);
   try {
-    const jwt = new Jwt();
-    jwt.verify(token);
+    await jose.jwtVerify(token, secret);
+
     return true;
   } catch (err) {
     console.error(err, `token: ${token}`);

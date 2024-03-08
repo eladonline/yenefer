@@ -3,7 +3,7 @@ import ControlledInput from "@/utils/useForm/Controlled";
 import PrimaryError from "@/app/components/errors/PrimaryError";
 import { FC } from "react";
 import { FieldValues, useFormContext, useFormState } from "react-hook-form";
-import { Button } from "antd/lib";
+import { Button, Typography } from "antd/lib";
 import _get from "lodash/get";
 
 type FormType = {
@@ -47,7 +47,9 @@ const Form: FC<FormType> = ({ onSubmit }) => {
         />
       )}
 
-      <SubmitButton control={control} onSubmit={onSubmit} />
+      <div className={"relative top-[20px] grid"}>
+        <SubmitButton control={control} onSubmit={onSubmit} />
+      </div>
     </div>
   );
 };
@@ -58,10 +60,10 @@ const SubmitButton: FC<FieldValues> = ({ onSubmit, control }) => {
     <Button
       type={"primary"}
       onClick={onSubmit}
-      className={"justify-self-center w-[200px]"}
+      className={"justify-self-center w-[100px] h-[40px]"}
       loading={isSubmitting}
     >
-      Login
+      <Typography.Text className={"text-white"}>Login</Typography.Text>
     </Button>
   );
 };
