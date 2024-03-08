@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { Typography } from "antd/lib";
 
 type PrimaryErrorProps = {
   text: string | undefined;
@@ -6,7 +7,11 @@ type PrimaryErrorProps = {
 };
 
 const PrimaryError: FC<PrimaryErrorProps> = ({ text, className = "" }) => {
-  return <div className={`text-red-600 text-xs ${className}`}>{text}</div>;
+  return (
+    <Typography.Text className={`text-red-600 text-xs ${className}`}>
+      {text}
+    </Typography.Text>
+  );
 };
 
 export default PrimaryError;

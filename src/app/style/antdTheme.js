@@ -6,6 +6,10 @@ const theme = {
     Input: {
       colorBgContainer: "rgba(161,165,147,0.04)",
     },
+    Typography: {
+      titleMarginBottom: 0,
+      titleMarginTop: 0,
+    },
   },
 };
 

@@ -2,6 +2,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { tokenValidator } from "@/app/(server)/services/token";
+import { headers } from "next/headers";
 
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
@@ -15,7 +16,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  return NextResponse.next(request);
+  return NextResponse.next();
 }
 
 // See "Matching Paths" below to learn more

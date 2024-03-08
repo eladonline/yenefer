@@ -1,5 +1,6 @@
 import { FC, ReactElement } from "react";
 import PrimaryError from "@/app/components/errors/PrimaryError";
+import { Typography } from "antd/lib";
 
 type FormFieldProps = {
   children: ReactElement;
@@ -15,9 +16,12 @@ const Field: FC<FormFieldProps> = ({
   className = "",
 }) => {
   return (
-    <div className={`flex flex-col gap-1.5 text-lg font-semibold ${className}`}>
-      {label?.text && <label>{label.text}</label>}
-
+    <div className={`flex flex-col gap-1.5  ${className}`}>
+      {label?.text && (
+        <label className={"font-semibold"}>
+          <Typography.Title level={5}>{label.text}</Typography.Title>
+        </label>
+      )}
       <div className={"gap-1"}>
         {children}
         {error?.text && <PrimaryError text={error.text} />}
