@@ -5,7 +5,7 @@ import AntdProvider from "@/utils/Providers/AntdClientProvider";
 export default function RootLayout(props: { children: ReactElement }) {
   return (
     <html lang="en">
-      <body>
+      <body className={"m-0"}>
         <AntdProvider>{props.children}</AntdProvider>
       </body>
     </html>

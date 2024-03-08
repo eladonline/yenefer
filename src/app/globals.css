@@ -33,6 +33,6 @@ h1, h2, h3, h4, h5 {
 
 @layer utilities {
     .text-balance {
-        text-wrap: balance;
+        text-wrap: normal;
     }
 }

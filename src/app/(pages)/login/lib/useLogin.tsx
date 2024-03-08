@@ -26,7 +26,6 @@ const useLogin = () => {
       tokenService.token = token;
       router.push("/");
     } catch (err: AxiosError | any) {
-      console.log(err);
       formFactory.setError("formError", {
         type: "custom",
         message: err.response.data.message,
