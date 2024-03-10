@@ -16,7 +16,7 @@ class Token {
   }
 
   remove() {
-    this.documentUtility.remove("token");
+    this.documentUtility.removeCookie("token");
   }
 }
 export default Token;

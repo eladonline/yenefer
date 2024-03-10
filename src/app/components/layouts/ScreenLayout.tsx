@@ -1,7 +1,9 @@
 import React, { ReactElement } from "react";
 import { Layout, Menu } from "antd/lib";
+
 import { AntdRegistry } from "@ant-design/nextjs-registry/lib";
 import rootLayoutConfig from "../../(pages)/rootLayoutConfig";
+import UserMenu from "@/app/components/User/UserMenu";
 const { Header, Content, Sider } = Layout;
 
 const navbarItems = rootLayoutConfig.navigationItems.map((key) => ({
@@ -33,6 +35,7 @@ const ScreenLayout = ({ children }: { children: ReactElement }) => {
             items={navbarItems}
             className={"flex-1"}
           />
+          <UserMenu />
         </Header>
         <Layout>
           <Sider width={200}>

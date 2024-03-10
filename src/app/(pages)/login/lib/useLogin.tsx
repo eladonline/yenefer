@@ -1,8 +1,9 @@
 import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 import { login } from "@/app/service/authentication";
 import { AxiosError } from "axios";
-import Token from "@/app/service/Token";
+import Token from "@/utils/Token";
 import { useRouter } from "next/navigation";
+import AuthUtility from "@/utils/Auth";
 
 type Credentials = {
   username: string;
@@ -22,8 +23,13 @@ const useLogin = () => {
     try {
       const res = await login(data);
       const { token } = res.data;
-      const tokenService = new Token();
-      tokenService.token = token;
+      const authUtility = new AuthUtility();
+      authUtility.doLogin({
+        details: {
+          username: data.username,
+        },
+        token,
+      });
       router.push("/");
     } catch (err: AxiosError | any) {
       formFactory.setError("formError", {
