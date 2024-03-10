@@ -1,23 +1,39 @@
 "use server";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { tokenValidator } from "@/app/(server)/services/token";
+import { tokenDecrypt, tokenValidator } from "@/app/(server)/services/token";
 
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   const isAuthPage = ["/login", "/sign-up"].includes(pathname);
+  const isApiRoute = pathname.startsWith("/api");
+  const isPageRoute = !isApiRoute;
 
-  const token = request.cookies.get("token")?.value;
-  console.log(request.headers.get("Authorization"));
-  let isValidToken = false;
-  if (token) isValidToken = await tokenValidator(token);
+  if (isPageRoute) {
+    const token = request.cookies.get("token")?.value;
+    let isValidToken = false;
+    if (token) isValidToken = await tokenValidator(token);
 
-  if (isValidToken && isAuthPage) {
-    return NextResponse.redirect(new URL("/", request.url));
+    if (isValidToken && isAuthPage) {
+      return NextResponse.redirect(new URL("/", request.url));
+    }
+
+    if (!isValidToken && !isAuthPage) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
   }
 
-  if (!isValidToken && !isAuthPage) {
-    return NextResponse.redirect(new URL("/login", request.url));
+  if (isApiRoute) {
+    const authorization = request.headers.get("Authorization");
+    let payload = null;
+    if (authorization) {
+      const [, token] = authorization.split(" ");
+      payload = await tokenDecrypt(token);
+      console.log(payload);
+    }
+    if (!payload || payload.license !== "pro") {
+      return new Response("Valid authorization expected", { status: 417 });
+    }
   }
 
   return NextResponse.next();
@@ -25,5 +41,5 @@ export async function middleware(request: NextRequest) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: "/((?!api|_next/static|_next/image|favicon.ico|.+.svg).*)",
+  matcher: "/((?!api/auth|_next/static|_next/image|favicon.ico|.+.svg).*)",
 };

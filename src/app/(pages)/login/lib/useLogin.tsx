@@ -22,13 +22,14 @@ const useLogin = () => {
   const onSubmit: SubmitHandler<Credentials> = async (data) => {
     try {
       const res = await login(data);
-      const { token } = res.data;
+      const { token, authorization } = res.data;
       const authUtility = new AuthUtility();
       authUtility.doLogin({
         details: {
           username: data.username,
         },
         token,
+        authorization,
       });
       router.replace("/");
     } catch (err: AxiosError | any) {

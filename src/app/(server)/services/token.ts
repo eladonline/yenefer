@@ -13,3 +13,19 @@ export const tokenValidator = async (token: string): Promise<boolean> => {
     return false;
   }
 };
+
+export const tokenDecrypt = async (
+  token: string,
+): Promise<jose.JWTPayload | null> => {
+  if (!token) return null;
+
+  const secret = new TextEncoder().encode(process.env.JWT_SECRET_KEY);
+  try {
+    const { payload } = await jose.jwtVerify(token, secret);
+
+    return payload;
+  } catch (err) {
+    console.error(err, `token: ${token}`);
+    return null;
+  }
+};

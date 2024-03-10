@@ -1,8 +1,10 @@
 import axios, { AxiosInstance } from "axios";
 import Document from "../Document";
+import AuthUtility from "@/utils/Auth";
 
 class Api extends Document {
   defaults: object;
+  http: AxiosInstance;
 
   constructor() {
     super();
@@ -10,19 +12,29 @@ class Api extends Document {
       baseURL: "http://localhost:3000",
       timeout: 3000,
     };
-  }
-  get axios(): AxiosInstance {
-    return axios.create({
+    this.http = axios.create({
       ...this.defaults,
     });
-  }
 
-  get http(): AxiosInstance {
-    const token = this.getCookie("token");
-    return axios.create({
-      ...this.defaults,
-      headers: { Authorization: token ? `Bearer ${token}` : null },
+    this.http.interceptors.request.use((config) => {
+      config.headers["Authorization"] =
+        `Bearer ${this.getCookie("authorization")}`;
+      return config;
     });
+
+    this.http.interceptors.response.use(
+      (response) => response,
+      (err) => {
+        if (
+          err.response.status === 417 &&
+          err.response.data === "Valid authorization expected"
+        ) {
+          const authUtility = new AuthUtility();
+          authUtility.doLogout();
+          return err;
+        }
+      },
+    );
   }
 }
 const api = new Api();

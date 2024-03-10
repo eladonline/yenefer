@@ -18,7 +18,7 @@ class DocumentUtility {
   }
 
   removeCookie(key: string) {
-    this.cookie = `${key}=""`;
+    this.cookie = `${key}=null`;
   }
 }
 

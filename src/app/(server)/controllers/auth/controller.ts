@@ -20,7 +20,11 @@ export async function signIn(req: NextRequest) {
     if (isValidUser) {
       const jwtService = new Jwt();
       return NextResponse.json(
-        { message: "Success", token: jwtService.sign({ usr: username }) },
+        {
+          message: "Success",
+          token: jwtService.sign({ usr: userDoc.email }),
+          authorization: jwtService.sign({ license: userDoc.license }),
+        },
         { status: 200 },
       );
     } else
@@ -31,8 +35,4 @@ export async function signIn(req: NextRequest) {
   } catch (err: any) {
     throw err;
   }
-}
-
-export async function test(req: NextRequest) {
-  return NextResponse.json({ message: "All good" }, { status: 200 });
 }

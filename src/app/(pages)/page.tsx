@@ -4,7 +4,7 @@ import api from "@/utils/api/api";
 
 export default function Page() {
   const handleClick = async () => {
-    const res = await api.http.get("/api/auth");
+    const res = await api.http.get("/api");
     console.log(res);
   };
 

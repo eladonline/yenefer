@@ -62,7 +62,7 @@ const SubmitButton: FC<FieldValues> = ({ onSubmit, control }) => {
       className={"justify-self-center w-[100px] h-[40px]"}
       loading={isSubmitting}
     >
-      <Typography.Text className={"text-white"}>Login</Typography.Text>
+      Login
     </Button>
   );
 };

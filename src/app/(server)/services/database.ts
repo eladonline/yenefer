@@ -1,6 +1,6 @@
 import { MongoClient, Db } from "mongodb";
 
-var client: MongoClient | null = null;
+let client: MongoClient | null = null;
 
 type ReqDb = {
   dbClient?: MongoClient | null;

@@ -1,9 +1,5 @@
 import jwt, { Secret, SignOptions } from "jsonwebtoken";
 
-type SignData = {
-  usr: string;
-};
-
 class Jwt {
   secret: Secret;
   defaultOptions: SignOptions;
@@ -14,7 +10,7 @@ class Jwt {
     };
   }
 
-  sign(data: SignData): string {
+  sign(data: object): string {
     return jwt.sign(data, this.secret, { expiresIn: "1d" });
   }
 

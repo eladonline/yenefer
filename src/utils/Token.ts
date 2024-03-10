@@ -15,8 +15,12 @@ class Token {
     return this.documentUtility.getCookie("token");
   }
 
-  remove() {
+  remove(key: string) {
+    this.documentUtility.removeCookie(key);
+  }
+  removeAllTokens() {
     this.documentUtility.removeCookie("token");
+    this.documentUtility.removeCookie("authorization");
   }
 }
 export default Token;
