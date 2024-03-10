@@ -27,14 +27,14 @@ class Api extends Document {
       (response) => response,
       (err) => {
         if (
-          err.response.status === 417 &&
-          err.response.data === "Valid authorization expected"
+          err?.response?.status === 417 &&
+          err?.response?.data === "Valid authorization expected"
         ) {
           const authUtility = new AuthUtility();
           authUtility.doLogout();
           window.location.replace("/login?reject");
-          return err;
         }
+        throw err;
       },
     );
   }

@@ -16,11 +16,11 @@ const Login: NextPage<PageProps> = (props) => {
   const reject = Object(props.searchParams).hasOwnProperty("reject");
 
   return (
-    <div className={"p-3 pt-11 flex  flex-col items-center gap-3 h-[100vh]"}>
+    <div className={"p-3 pt-11 flex  flex-col items-center gap-3"}>
       {reject && (
         <PrimaryError className={"text-xl"} text={"You are unauthorized"} />
       )}
-      <div className={"justify-self-center bg-white px-5 pt-10 rounded-lg"}>
+      <div className={"pt-11 justify-self-center bg-white px-5  rounded-lg"}>
         <FormProvider {...formFactory}>
           <Form onSubmit={formFactory.handleSubmit(onSubmit)} />
         </FormProvider>
