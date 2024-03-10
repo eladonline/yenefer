@@ -1,3 +1,3 @@
-import { signIn } from "../../controllers/auth/controller";
+import { signIn, test } from "../../controllers/auth/controller";
 
-export { signIn as PATCH };
+export { signIn as PATCH, test as GET };

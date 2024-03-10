@@ -8,6 +8,7 @@ export async function middleware(request: NextRequest) {
   const isAuthPage = ["/login", "/sign-up"].includes(pathname);
 
   const token = request.cookies.get("token")?.value;
+  console.log(request.headers.get("Authorization"));
   let isValidToken = false;
   if (token) isValidToken = await tokenValidator(token);
 

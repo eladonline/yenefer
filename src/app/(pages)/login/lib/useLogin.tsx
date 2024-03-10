@@ -30,7 +30,7 @@ const useLogin = () => {
         },
         token,
       });
-      router.push("/");
+      router.replace("/");
     } catch (err: AxiosError | any) {
       formFactory.setError("formError", {
         type: "custom",

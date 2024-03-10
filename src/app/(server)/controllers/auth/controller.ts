@@ -32,3 +32,7 @@ export async function signIn(req: NextRequest) {
     throw err;
   }
 }
+
+export async function test(req: NextRequest) {
+  return NextResponse.json({ message: "All good" }, { status: 200 });
+}
