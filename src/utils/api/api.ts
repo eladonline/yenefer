@@ -32,7 +32,7 @@ class Api extends Document {
         ) {
           const authUtility = new AuthUtility();
           authUtility.doLogout();
-          window.location.replace("/login");
+          window.location.replace("/login?reject");
           return err;
         }
       },
