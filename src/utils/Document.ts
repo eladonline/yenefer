@@ -16,6 +16,11 @@ class DocumentUtility {
   set cookie(value: `${string}=${string}`) {
     document.cookie = value;
   }
+
+  remove(key: string) {
+    const cookie = this.cookies.get(key);
+    this.cookie = `${key}=${cookie};expires=0`;
+  }
 }
 
 export default DocumentUtility;

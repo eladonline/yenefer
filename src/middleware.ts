@@ -5,14 +5,19 @@ import { tokenValidator } from "@/app/(server)/services/token";
 
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
-  // skip middleware for this pages
-  if (["/login", "/sign-up"].includes(pathname)) return NextResponse.next();
+  const isAuthPage = ["/login", "/sign-up"].includes(pathname);
 
   const token = request.cookies.get("token")?.value;
   let isValidToken = false;
   if (token) isValidToken = await tokenValidator(token);
-  if (!isValidToken)
+
+  if (isValidToken && isAuthPage) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
+  if (!isValidToken && !isAuthPage) {
     return NextResponse.redirect(new URL("/login", request.url));
+  }
 
   return NextResponse.next();
 }

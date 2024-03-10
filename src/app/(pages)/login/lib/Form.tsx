@@ -25,7 +25,6 @@ const Form: FC<FormType> = ({ onSubmit }) => {
           control={control}
           rules={{ required: "Required" }}
           name={"username"}
-          placeholder="username"
           onChange={() => formError && clearErrors("formError")}
         />
       </Field>

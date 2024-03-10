@@ -1,17 +1,22 @@
+"use client";
 import DocumentUtility from "@/utils/Document";
 
 class Token {
-  document: DocumentUtility;
+  documentUtility: DocumentUtility;
   constructor() {
-    this.document = new DocumentUtility();
+    this.documentUtility = new DocumentUtility();
   }
 
   set token(token: string) {
-    this.document.cookie = `token=${token}`;
+    this.documentUtility.cookie = `token=${token}`;
   }
 
   get token(): string {
-    return this.document.getCookie("token");
+    return this.documentUtility.getCookie("token");
+  }
+
+  remove() {
+    this.documentUtility.remove("token");
   }
 }
 export default Token;
