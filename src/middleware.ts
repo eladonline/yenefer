@@ -29,7 +29,6 @@ export async function middleware(request: NextRequest) {
     if (authorization) {
       const [, token] = authorization.split(" ");
       payload = await tokenDecrypt(token);
-      console.log(payload);
     }
     if (!payload || payload.license !== "pro") {
       return new Response("Valid authorization expected", { status: 417 });
