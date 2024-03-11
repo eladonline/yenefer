@@ -8,7 +8,7 @@ type PrimaryErrorProps = {
 
 const PrimaryError: FC<PrimaryErrorProps> = ({ text, className = "" }) => {
   return (
-    <Typography.Text className={`text-red-600 text-xs ${className}`}>
+    <Typography.Text type="danger" className={`text-xs ${className}`}>
       {text}
     </Typography.Text>
   );

@@ -1,10 +1,10 @@
 "use client";
 import useLogin from "./lib/useLogin";
-import Form from "@/app/(pages)/login/lib/Form";
+import Form from "./lib/Form";
 import { FormProvider } from "react-hook-form";
-import { useEffect } from "react";
 import { NextPage } from "next";
 import PrimaryError from "@/app/components/errors/PrimaryError";
+import { Typography } from "antd/lib";
 
 type PageProps = {
   searchParams: { reject: string };
@@ -24,6 +24,9 @@ const Login: NextPage<PageProps> = (props) => {
         <FormProvider {...formFactory}>
           <Form onSubmit={formFactory.handleSubmit(onSubmit)} />
         </FormProvider>
+        <div className={"pb-2 z-1 relative"}>
+          <Typography.Link href={"/sign-up"}>Create Account</Typography.Link>
+        </div>
       </div>
     </div>
   );

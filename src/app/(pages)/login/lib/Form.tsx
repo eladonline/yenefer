@@ -1,13 +1,21 @@
 import Field from "@/app/components/decorators/form/Field";
 import ControlledInput from "@/utils/useForm/Controlled";
 import PrimaryError from "@/app/components/errors/PrimaryError";
-import { FC } from "react";
-import { FieldValues, useFormContext, useFormState } from "react-hook-form";
-import { Button, Typography } from "antd/lib";
+import { BaseSyntheticEvent, FC } from "react";
+import {
+  FieldValues,
+  useFormContext,
+  UseFormHandleSubmit,
+  useFormState,
+} from "react-hook-form";
+import { Button } from "antd/lib";
 import _get from "lodash/get";
+import { Credentials } from "./useLogin";
 
 type FormType = {
-  onSubmit: Function;
+  onSubmit: (
+    data: BaseSyntheticEvent<Credentials> | undefined,
+  ) => Promise<void>;
 };
 
 const Form: FC<FormType> = ({ onSubmit }) => {
@@ -46,7 +54,7 @@ const Form: FC<FormType> = ({ onSubmit }) => {
         />
       )}
 
-      <div className={"relative top-[20px] grid"}>
+      <div className={"relative top-[45px] grid"}>
         <SubmitButton control={control} onSubmit={onSubmit} />
       </div>
     </div>

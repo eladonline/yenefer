@@ -1,24 +1,26 @@
-import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { login } from "@/app/service/authentication";
+import AuthUtility from "@/utils/Auth";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
-import AuthUtility from "@/utils/Auth";
 
-export type Credentials = {
-  username: string;
-  password: string;
+export type SignInCredentials = {
+  username: "";
+  password: "";
+  confirmPassword: "";
 };
 
-const useLogin = () => {
+const useSignUp = () => {
   const router = useRouter();
-  const formFactory = useForm<FieldValues & Credentials>({
+  const formFactory = useForm<FieldValues & SignInCredentials>({
     defaultValues: {
       username: "",
       password: "",
+      confirmPassword: "",
     },
   });
 
-  const onSubmit: SubmitHandler<Credentials> = async (data) => {
+  const onSubmit: SubmitHandler<SignInCredentials> = async (data) => {
     try {
       const res = await login(data);
       const { token, authorization } = res.data;
@@ -42,4 +44,4 @@ const useLogin = () => {
   return { formFactory, onSubmit };
 };
 
-export default useLogin;
+export default useSignUp;
