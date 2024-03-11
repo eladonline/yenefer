@@ -33,7 +33,7 @@ const Form: React.FC<FormType> = ({ onSubmit }) => {
 
       <Field
         label={{ text: "Password" }}
-        error={{ text: formState?.errors?.username?.message as string }}
+        error={{ text: formState?.errors?.password?.message as string }}
       >
         <ControlledInput
           control={control}
@@ -45,7 +45,7 @@ const Form: React.FC<FormType> = ({ onSubmit }) => {
 
       <Field
         label={{ text: "Confirm Password" }}
-        error={{ text: formState?.errors?.username?.message as string }}
+        error={{ text: formState?.errors?.confirm?.message as string }}
       >
         <ControlledInput
           control={control}

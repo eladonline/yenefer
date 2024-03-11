@@ -40,6 +40,19 @@ export async function signIn(req: NextRequest) {
 }
 
 export async function signUp(req: NextRequest) {
-  const { username, password } = await req.json();
+  const { username: email, password } = await req.json();
+  const license = "basic";
   const { db } = await databaseConnect();
+
+  try {
+    const salt = bcrypt.genSaltSync(Number(process.env.SALT));
+
+    const hash = await bcrypt.hash(password, "salt");
+    await db?.collection("users").insertOne({ email, password: hash, license });
+    const jwtUtil = new Jwt();
+    const token = jwtUtil.sign({ usr: email, license });
+    return NextResponse.json({ token }, { status: 200 });
+  } catch (err: Error | any) {
+    throw err;
+  }
 }

@@ -1,5 +1,5 @@
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { login } from "@/app/service/authentication";
+import { signup } from "@/app/service/authentication";
 import AuthUtility from "@/utils/Auth";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 export type SignInCredentials = {
   username: "";
   password: "";
-  confirmPassword: "";
+  confirm: "";
 };
 
 const useSignUp = () => {
@@ -16,21 +16,22 @@ const useSignUp = () => {
     defaultValues: {
       username: "",
       password: "",
-      confirmPassword: "",
+      confirm: "",
     },
   });
 
-  const onSubmit: SubmitHandler<SignInCredentials> = async (data) => {
+  const onSubmit: SubmitHandler<SignInCredentials> = async (
+    data: SignInCredentials,
+  ) => {
     try {
-      const res = await login(data);
-      const { token, authorization } = res.data;
+      const res = await signup(data);
+      const { token } = res.data;
       const authUtility = new AuthUtility();
       authUtility.doLogin({
         details: {
           username: data.username,
         },
         token,
-        authorization,
       });
       router.replace("/");
     } catch (err: AxiosError | any) {

@@ -5,7 +5,7 @@ const nextConfig = {
     MONGODB_LOCAL_URI:"mongodb://localhost:27017",
     JWT_SECRET_KEY: "mySecret",
     DB_NAME: "yenefer",
-    SALT: "mySalt"
+    SALT: "10"
   }
 };
 

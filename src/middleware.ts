@@ -34,7 +34,6 @@ export async function middleware(request: NextRequest) {
       return new Response("Valid authorization expected", { status: 417 });
     }
   }
-
   return NextResponse.next();
 }
 
