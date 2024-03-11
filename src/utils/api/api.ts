@@ -18,8 +18,7 @@ class Api extends Document {
     });
 
     this.http.interceptors.request.use((config) => {
-      config.headers["Authorization"] =
-        `Bearer ${this.getCookie("authorization")}`;
+      config.headers["Authorization"] = `Bearer ${this.getCookie("token")}`;
       return config;
     });
 

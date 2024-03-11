@@ -3,7 +3,7 @@ import React from "react";
 import Form from "./lib/Form";
 import { FormProvider } from "react-hook-form";
 import useSignUp from "./lib/useSignUp";
-import { Title } from "@/app/components/antd-extends/Typography";
+import { Typography } from "antd/lib";
 
 const SingIn = () => {
   const { formFactory, onSubmit } = useSignUp();
@@ -15,7 +15,9 @@ const SingIn = () => {
         }
       >
         <header className={"self-center"}>
-          <Title className={"!text-blue-500 pb-5"}>Create Account</Title>
+          <Typography.Title className={"[&.ant-typography]:text-blue-500 pb-5"}>
+            Create Account
+          </Typography.Title>
         </header>
         <FormProvider {...formFactory}>
           <Form onSubmit={formFactory.handleSubmit(onSubmit)} />

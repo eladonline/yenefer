@@ -1,9 +1,11 @@
-import { useFormContext } from "react-hook-form";
-import React, { BaseSyntheticEvent } from "react";
+import { FieldValues, useFormContext, useFormState } from "react-hook-form";
+import React, { BaseSyntheticEvent, FC } from "react";
 import { SignInCredentials } from "@/app/(pages)/sign-up/lib/useSignUp";
 import Field from "@/app/components/decorators/form/Field";
 import ControlledInput from "@/utils/useForm/Controlled";
 import _get from "lodash/get";
+import PrimaryError from "@/app/components/errors/PrimaryError";
+import { Button } from "antd/lib";
 
 type FormType = {
   onSubmit: (
@@ -52,7 +54,32 @@ const Form: React.FC<FormType> = ({ onSubmit }) => {
           onChange={() => formError && clearErrors("formError")}
         />
       </Field>
+
+      {formState?.errors?.["formError"] && (
+        <PrimaryError
+          className={"justify-self-center"}
+          text={formError as string}
+        />
+      )}
+
+      <div className={"relative top-[15px] grid"}>
+        <SubmitButton control={control} onSubmit={onSubmit} />
+      </div>
     </div>
+  );
+};
+
+const SubmitButton: FC<FieldValues> = ({ onSubmit, control }) => {
+  const { isSubmitting } = useFormState({ control });
+  return (
+    <Button
+      type={"primary"}
+      onClick={onSubmit}
+      className={"justify-self-center w-[100px] h-[40px]"}
+      loading={isSubmitting}
+    >
+      Create
+    </Button>
   );
 };
 

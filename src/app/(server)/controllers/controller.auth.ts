@@ -22,8 +22,10 @@ export async function signIn(req: NextRequest) {
       return NextResponse.json(
         {
           message: "Success",
-          token: jwtService.sign({ usr: userDoc.email }),
-          authorization: jwtService.sign({ license: userDoc.license }),
+          token: jwtService.sign({
+            usr: userDoc.email,
+            license: userDoc.license,
+          }),
         },
         { status: 200 },
       );
@@ -35,4 +37,9 @@ export async function signIn(req: NextRequest) {
   } catch (err: any) {
     throw err;
   }
+}
+
+export async function signUp(req: NextRequest) {
+  const { username, password } = await req.json();
+  const { db } = await databaseConnect();
 }
