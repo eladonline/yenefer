@@ -9,7 +9,7 @@ const AntdProvider = ({ children }: { children: ReactElement }) => {
   const pathname = usePathname();
   const authPage = ["/login", "/sign-up"].includes(pathname);
   return (
-    <ConfigProvider theme={theme}>
+    <ConfigProvider theme={{ ...theme }}>
       {authPage ? children : <ScreenLayout>{children}</ScreenLayout>}
     </ConfigProvider>
   );
