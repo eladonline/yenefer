@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { Layout, Menu } from "antd/lib";
-
+import { useRouter } from "next/navigation";
 import rootLayoutConfig from "./rootLayoutConfig";
 import UserMenu from "@/app/components/User/UserMenu";
 const { Header, Content, Sider } = Layout;
@@ -23,6 +23,7 @@ const sideMenuItems = rootLayoutConfig.sideMenuItems.map(
   },
 );
 const ScreenLayout = ({ children }: { children: ReactElement }) => {
+  const router = useRouter();
   return (
     <Layout className={"h-[100vh]"}>
       <Header className={"flex items-center"}>
@@ -31,6 +32,10 @@ const ScreenLayout = ({ children }: { children: ReactElement }) => {
           mode="horizontal"
           defaultSelectedKeys={["1"]}
           items={navbarItems}
+          onSelect={({ key }: { key: string }) => {
+            if (key === "Home") return router.replace("/");
+            return router.replace(`/${key.toLowerCase()}`);
+          }}
           className={"flex-1"}
         />
         <UserMenu />
