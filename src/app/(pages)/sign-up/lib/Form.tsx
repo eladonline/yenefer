@@ -73,7 +73,7 @@ const Form: React.FC<FormType> = ({ onSubmit }) => {
         />
       )}
 
-      <div className={"relative top-[15px] grid"}>
+      <div className={"relative top-[47px] grid"}>
         <SubmitButton control={control} onSubmit={onSubmit} />
       </div>
     </div>

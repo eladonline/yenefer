@@ -6,7 +6,7 @@ type FormFieldProps = {
   children: ReactElement;
   label?: { text: string };
   error?: { text: string | undefined };
-  className?: { text: string | undefined };
+  className?: string;
 };
 
 const Field: FC<FormFieldProps> = ({
@@ -16,9 +16,9 @@ const Field: FC<FormFieldProps> = ({
   className = "",
 }) => {
   return (
-    <div className={`flex flex-col gap-1.5  ${className}`}>
+    <div className={`flex flex-col gap-1.5 ${className}`}>
       {label?.text && (
-        <label className={"font-semibold"}>
+        <label>
           <Typography.Title level={5}>{label.text}</Typography.Title>
         </label>
       )}

@@ -11,7 +11,7 @@ const SingIn = () => {
     <div className={"p-3 pt-11 flex  flex-col items-center gap-3"}>
       <div
         className={
-          "pt-11 justify-self-center bg-white px-5  rounded-lg flex flex-col"
+          "pt-11 justify-self-center bg-white px-5 rounded-lg flex flex-col"
         }
       >
         <header className={"self-center"}>
@@ -22,6 +22,10 @@ const SingIn = () => {
         <FormProvider {...formFactory}>
           <Form onSubmit={formFactory.handleSubmit(onSubmit)} />
         </FormProvider>
+
+        <div className={"pb-2 z-1 relative w-max"}>
+          <Typography.Link href={"/login"}>Login</Typography.Link>
+        </div>
       </div>
     </div>
   );

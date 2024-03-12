@@ -1,6 +1,9 @@
 const theme = {
   token: {
     controlHeight: 36,
+    fontSizeHeading5: 14,
+    fontSizeHeading4: 16,
+    fontSizeHeading3: 20,
   },
   components: {
     Input: {
