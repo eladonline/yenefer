@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import { Layout, Menu } from "antd/lib";
 
-import rootLayoutConfig from "../../(pages)/rootLayoutConfig";
+import rootLayoutConfig from "./rootLayoutConfig";
 import UserMenu from "@/app/components/User/UserMenu";
 const { Header, Content, Sider } = Layout;
 
@@ -36,7 +36,7 @@ const ScreenLayout = ({ children }: { children: ReactElement }) => {
         <UserMenu />
       </Header>
       <Layout>
-        <Sider width={200}>
+        <Sider width={200} breakpoint="lg" collapsedWidth="0">
           <Menu
             mode="inline"
             defaultSelectedKeys={["1"]}
