@@ -45,14 +45,27 @@ export async function signUp(req: NextRequest) {
   const { db } = await databaseConnect();
 
   try {
-    const salt = bcrypt.genSaltSync(Number(process.env.SALT));
+    const alreadyExists = await db?.collection("users").findOne({ email });
+    if (alreadyExists)
+      return NextResponse.json(
+        { message: "User already exists" },
+        { status: 409 },
+      );
 
-    const hash = await bcrypt.hash(password, "salt");
+    const salt = bcrypt.genSaltSync(Number(process.env.SALT));
+    const hash = await bcrypt.hash(password, salt);
+
     await db?.collection("users").insertOne({ email, password: hash, license });
+
     const jwtUtil = new Jwt();
     const token = jwtUtil.sign({ usr: email, license });
+
     return NextResponse.json({ token }, { status: 200 });
   } catch (err: Error | any) {
-    throw err;
+    console.error(err.stack);
+    return NextResponse.json(
+      { message: "Something went wrong please try again later..." },
+      { status: 500 },
+    );
   }
 }

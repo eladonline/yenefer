@@ -25,7 +25,13 @@ const Form: React.FC<FormType> = ({ onSubmit }) => {
       >
         <ControlledInput
           control={control}
-          rules={{ required: "Required" }}
+          rules={{
+            required: "Required",
+            pattern: {
+              value: /[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$/,
+              message: "Invalid email",
+            },
+          }}
           name={"username"}
           onChange={() => formError && clearErrors("formError")}
         />
@@ -49,7 +55,12 @@ const Form: React.FC<FormType> = ({ onSubmit }) => {
       >
         <ControlledInput
           control={control}
-          rules={{ required: "Required" }}
+          rules={{
+            required: "Required",
+            validate: (value: string, rest: FieldValues) => {
+              return value === rest.password || "Password does not match";
+            },
+          }}
           name={"confirm"}
           onChange={() => formError && clearErrors("formError")}
         />
@@ -71,12 +82,14 @@ const Form: React.FC<FormType> = ({ onSubmit }) => {
 
 const SubmitButton: FC<FieldValues> = ({ onSubmit, control }) => {
   const { isSubmitting } = useFormState({ control });
+
   return (
     <Button
       type={"primary"}
       onClick={onSubmit}
       className={"justify-self-center w-[100px] h-[40px]"}
       loading={isSubmitting}
+      disabled={isSubmitting}
     >
       Create
     </Button>
