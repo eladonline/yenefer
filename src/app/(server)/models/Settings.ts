@@ -4,44 +4,33 @@ type SettingsForm = {
   options?: string[];
 };
 
-type SettingsProps = {
+type SettingsType = {
   pointer: string;
-  forms?: SettingsForm[];
+  type: "text" | "number" | "textarea" | "select";
+  config: {
+    forms?: SettingsForm[];
+  };
+  options?: string[];
 };
+import { Schema, model, models } from "mongoose";
 
-class Settings {
-  template: SettingsProps;
+const schema = new Schema<SettingsType>({
+  pointer: { type: String, required: true },
+  config: {
+    type: {
+      forms: {
+        type: [
+          {
+            name: String,
+            type: { type: { type: String, required: true } },
+            options: [String],
+          },
+        ],
+        default: undefined,
+      },
+    },
+    required: true,
+  },
+});
 
-  constructor(data: SettingsProps) {
-    this.template = data;
-    if (data.forms) {
-      this.validateForm(data.forms);
-    }
-  }
-
-  validateForm(forms: SettingsForm[]): SettingsForm[] {
-    return forms.map(({ name, type, options }: SettingsForm) => {
-      const isSelect = type === "select";
-
-      if (!name || !type || (isSelect && !options?.length))
-        throw new Error("Settings model is not valid");
-
-      const next: SettingsForm = { name, type };
-      if (isSelect) next.options = options;
-      return next;
-    });
-  }
-
-  get schema() {
-    const { pointer, forms } = this.template;
-
-    if (!pointer) throw new Error("Missing Key");
-    const nextSchema: SettingsProps = { pointer: pointer };
-
-    if (forms) nextSchema.forms = forms;
-
-    return nextSchema;
-  }
-}
-
-export default Settings;
+export default models.settings || model("settings", schema);

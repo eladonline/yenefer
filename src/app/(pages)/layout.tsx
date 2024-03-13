@@ -3,6 +3,9 @@ import "@/app/globals.css";
 import AntdProvider from "@/utils/Providers/AntdClientProvider";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { Metadata } from "next";
+import dbConnect from "@/app/(server)/services/mongooseDB";
+
+await (async () => dbConnect().catch((err) => console.error(err.stack)))();
 
 export const metadata: Metadata = {
   title: "Yenefer",

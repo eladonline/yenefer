@@ -1,26 +1,15 @@
-type UserProps = {
+import { Schema, model, models } from "mongoose";
+
+type UserType = {
   email: string;
   password: string;
   license?: string;
 };
 
-class User {
-  template: UserProps;
+const schema = new Schema<UserType>({
+  email: { type: String, required: true },
+  password: { type: String, required: true },
+  license: String,
+});
 
-  constructor(data: UserProps) {
-    this.template = data;
-  }
-
-  get schema() {
-    const { password, email, license } = this.template;
-    if (!password || !email) throw new Error("Missing Key");
-
-    return {
-      password,
-      email,
-      license: license || "basic",
-    };
-  }
-}
-
-export default User;
+export default models.users || model("users", schema);
