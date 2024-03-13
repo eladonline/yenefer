@@ -3,6 +3,7 @@ import { Layout, Menu } from "antd/lib";
 import { useRouter, usePathname } from "next/navigation";
 import rootLayoutConfig from "./rootLayoutConfig";
 import UserMenu from "@/app/components/User/UserMenu";
+
 const { Header, Content, Sider } = Layout;
 
 const navbarItems = rootLayoutConfig.navigationItems.map((key, i) => ({
@@ -10,16 +11,6 @@ const navbarItems = rootLayoutConfig.navigationItems.map((key, i) => ({
   label: key,
 }));
 
-const sideMenuItems = rootLayoutConfig.sideMenuItems.map(
-  ({ icon, label, children }, index) => {
-    return {
-      key: label.toLowerCase(),
-      icon: React.createElement(icon),
-      label,
-      children,
-    };
-  },
-);
 const ScreenLayout = ({ children }: { children: ReactElement }) => {
   const router = useRouter();
   const pathName = usePathname();
@@ -29,13 +20,19 @@ const ScreenLayout = ({ children }: { children: ReactElement }) => {
     return pathName.charAt(1).toUpperCase() + pathName.substring(2);
   };
 
+  const pathNameAsMenuKey = translatePathNameToKeys(pathName);
+  const pathNameAsSideMenuKey = pathNameAsMenuKey.toLowerCase();
+
+  const sideMenuItems =
+    rootLayoutConfig.sideMenuItems[pathNameAsSideMenuKey] || [];
+
   return (
     <Layout className={"h-[100vh]"}>
       <Header className={"flex items-center"}>
         <Menu
           theme="dark"
           mode="horizontal"
-          selectedKeys={[translatePathNameToKeys(pathName)]}
+          selectedKeys={[pathNameAsMenuKey]}
           items={navbarItems}
           onSelect={({ key }: { key: string }) => {
             if (key === "Home") return router.replace("/");
@@ -48,9 +45,15 @@ const ScreenLayout = ({ children }: { children: ReactElement }) => {
       <Layout>
         <Sider width={200} breakpoint="lg" collapsedWidth="0">
           <Menu
-            mode="inline"
             style={{ height: "100%", borderRight: 0 }}
-            items={sideMenuItems}
+            defaultSelectedKeys={["default"]}
+            items={sideMenuItems.map(({ icon, label, key }) => {
+              return {
+                key: key || label.toLowerCase(),
+                icon: React.createElement(icon),
+                label,
+              };
+            })}
           />
         </Sider>
         <Layout>
