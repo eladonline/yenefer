@@ -6,25 +6,18 @@ import UserMenu from "@/app/components/User/UserMenu";
 
 const { Header, Content, Sider } = Layout;
 
-const navbarItems = rootLayoutConfig.navigationItems.map((key, i) => ({
-  key,
-  label: key,
-}));
+const navbarItems = rootLayoutConfig.navigationItems;
 
 const ScreenLayout = ({ children }: { children: ReactElement }) => {
   const router = useRouter();
   const pathName = usePathname();
 
-  const translatePathNameToKeys = (pathName: string): string => {
-    if (pathName === "/") return "Home";
-    return pathName.charAt(1).toUpperCase() + pathName.substring(2);
-  };
+  const [topMenuKey, depth2] = pathName.split("/");
+  const selectedTopKey = rootLayoutConfig.sideMenuItems[depth2]
+    ? depth2
+    : topMenuKey;
 
-  const pathNameAsMenuKey = translatePathNameToKeys(pathName);
-  const pathNameAsSideMenuKey = pathNameAsMenuKey.toLowerCase();
-
-  const sideMenuItems =
-    rootLayoutConfig.sideMenuItems[pathNameAsSideMenuKey] || [];
+  const sideMenuItems = rootLayoutConfig.sideMenuItems[selectedTopKey] || [];
 
   return (
     <Layout className={"h-[100vh]"}>
@@ -32,12 +25,9 @@ const ScreenLayout = ({ children }: { children: ReactElement }) => {
         <Menu
           theme="dark"
           mode="horizontal"
-          selectedKeys={[pathNameAsMenuKey]}
+          selectedKeys={[selectedTopKey]}
           items={navbarItems}
-          onSelect={({ key }: { key: string }) => {
-            if (key === "Home") return router.replace("/");
-            return router.replace(`/${key.toLowerCase()}`);
-          }}
+          onSelect={({ key }: { key: string }) => router.replace(key || "/")}
           className={"flex-1"}
         />
         <UserMenu />
@@ -46,14 +36,17 @@ const ScreenLayout = ({ children }: { children: ReactElement }) => {
         <Sider width={200} breakpoint="lg" collapsedWidth="0">
           <Menu
             style={{ height: "100%", borderRight: 0 }}
-            defaultSelectedKeys={["default"]}
-            items={sideMenuItems.map(({ icon, label, key }) => {
-              return {
-                key: key || label.toLowerCase(),
-                icon: React.createElement(icon),
-                label,
-              };
-            })}
+            selectedKeys={[pathName]}
+            onSelect={({ key }: { key: string }) => router.replace(key)}
+            items={[
+              ...sideMenuItems.map(({ icon, label, key }) => {
+                return {
+                  key: key || label.toLowerCase(),
+                  icon: React.createElement(icon),
+                  label,
+                };
+              }),
+            ]}
           />
         </Sider>
         <Layout>

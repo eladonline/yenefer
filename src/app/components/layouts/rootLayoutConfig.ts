@@ -3,31 +3,40 @@ import { UserOutlined } from "@ant-design/icons/lib";
 type SideMenuItem = {
   icon: any;
   label: string;
-  key?: "default";
+  key?: string;
 };
 
 type RootLayoutConfig = {
-  navigationItems: Array<string>;
+  navigationItems: { key: string; label: string }[];
   sideMenuItems: {
     [key: string]: SideMenuItem[];
   };
 };
 
 const rootLayoutConfig: RootLayoutConfig = {
-  navigationItems: ["Home", "Settings"],
+  navigationItems: [
+    {
+      key: "",
+      label: "Home",
+    },
+    {
+      key: "settings",
+      label: "Settings",
+    },
+  ],
   sideMenuItems: {
-    home: [
+    "": [
       {
         icon: UserOutlined,
         label: "Tasks",
-        key: "default",
+        key: "/tasks",
       },
     ],
     settings: [
       {
         icon: UserOutlined,
         label: "Forms",
-        key: "default",
+        key: "/settings/forms",
       },
     ],
   },
