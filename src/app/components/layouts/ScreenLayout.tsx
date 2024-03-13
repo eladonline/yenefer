@@ -13,7 +13,9 @@ const ScreenLayout = ({ children }: { children: ReactElement }) => {
   const pathName = usePathname();
 
   const [topMenuKey, depth2] = pathName.split("/");
-  const selectedTopKey = rootLayoutConfig.sideMenuItems[depth2]
+  const selectedTopKey = rootLayoutConfig.navigationItems.find(
+    ({ key }) => key === depth2,
+  )
     ? depth2
     : topMenuKey;
 
