@@ -1,21 +1,19 @@
 import React, { ReactElement } from "react";
 import { Layout, Menu } from "antd/lib";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import rootLayoutConfig from "./rootLayoutConfig";
 import UserMenu from "@/app/components/User/UserMenu";
 const { Header, Content, Sider } = Layout;
 
-const navbarItems = rootLayoutConfig.navigationItems.map((key) => ({
+const navbarItems = rootLayoutConfig.navigationItems.map((key, i) => ({
   key,
   label: key,
 }));
 
 const sideMenuItems = rootLayoutConfig.sideMenuItems.map(
   ({ icon, label, children }, index) => {
-    const key = String(index + 1);
-
     return {
-      key: `sub${key}`,
+      key: label.toLowerCase(),
       icon: React.createElement(icon),
       label,
       children,
@@ -24,13 +22,20 @@ const sideMenuItems = rootLayoutConfig.sideMenuItems.map(
 );
 const ScreenLayout = ({ children }: { children: ReactElement }) => {
   const router = useRouter();
+  const pathName = usePathname();
+
+  const translatePathNameToKeys = (pathName: string): string => {
+    if (pathName === "/") return "Home";
+    return pathName.charAt(1).toUpperCase() + pathName.substring(2);
+  };
+
   return (
     <Layout className={"h-[100vh]"}>
       <Header className={"flex items-center"}>
         <Menu
           theme="dark"
           mode="horizontal"
-          defaultSelectedKeys={["1"]}
+          selectedKeys={[translatePathNameToKeys(pathName)]}
           items={navbarItems}
           onSelect={({ key }: { key: string }) => {
             if (key === "Home") return router.replace("/");
@@ -44,13 +49,11 @@ const ScreenLayout = ({ children }: { children: ReactElement }) => {
         <Sider width={200} breakpoint="lg" collapsedWidth="0">
           <Menu
             mode="inline"
-            defaultSelectedKeys={["1"]}
-            defaultOpenKeys={["sub1"]}
             style={{ height: "100%", borderRight: 0 }}
             items={sideMenuItems}
           />
         </Sider>
-        <Layout style={{ padding: "0 24px 24px" }}>
+        <Layout>
           <Content className={"bg-snow p-3"}>{children}</Content>
         </Layout>
       </Layout>

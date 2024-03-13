@@ -1,4 +1,5 @@
+import DefaultPageLoading from "@/app/(pages)/lib/DefaultPageLoading";
+
 export default function Loading() {
-  // You can add any UI inside Loading, including a Skeleton.
-  return <div>LOADING...</div>;
+  return <DefaultPageLoading position={"absolute"} />;
 }

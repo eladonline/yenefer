@@ -17,7 +17,7 @@ const rootLayoutConfig: RootLayoutConfig = {
     {
       icon: UserOutlined,
       label: "Posts",
-      children: [{ key: "My posts", label: "My posts" }],
+      children: [{ key: "settings", label: "My posts" }],
     },
   ],
 };
