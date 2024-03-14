@@ -2,7 +2,7 @@ import bcrypt from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
 import Jwt from "@/app/(server)/services/Jwt";
 import UserModel from "@/app/(server)/models/User";
-import Settings from "@/app/(server)/models/Settings";
+import Settings, { modelConfigExample } from "@/app/(server)/models/Settings";
 
 export async function signIn(req: NextRequest) {
   const { username, password } = await req.json();
@@ -59,10 +59,26 @@ export async function signUp(req: NextRequest) {
     const hash = await bcrypt.hash(password, salt);
 
     const user = new UserModel({ email, password: hash, license });
-    await user.save();
 
-    const settingsModel = new Settings({ pointer: email, config: {} });
-    await settingsModel.save();
+    const settingsModel = new Settings({
+      pointer: email,
+      config: {},
+    });
+
+    const results = await Promise.allSettled([
+      user.save(),
+      settingsModel.save(),
+    ]);
+
+    const isNotFulfilled = results.some(({ status }) => status !== "fulfilled");
+    if (isNotFulfilled) {
+      await user.deleteOne();
+      await settingsModel.deleteOne();
+      return NextResponse.json(
+        { message: "Something went wrong please try again later..." },
+        { status: 500 },
+      );
+    }
 
     const jwtUtil = new Jwt();
     const token = jwtUtil.sign({ usr: email, license });
