@@ -28,7 +28,7 @@ const rootLayoutConfig: RootLayoutConfig = {
     "": [
       {
         icon: UserOutlined,
-        label: "Tasks",
+        label: "Tasks Management",
         key: "/tasks",
       },
     ],

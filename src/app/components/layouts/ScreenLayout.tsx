@@ -29,7 +29,9 @@ const ScreenLayout = ({ children }: { children: ReactElement }) => {
           mode="horizontal"
           selectedKeys={[selectedTopKey]}
           items={navbarItems}
-          onSelect={({ key }: { key: string }) => router.replace(key || "/")}
+          onClick={({ key }: { key: string }) => {
+            router.push(key ? `/${key}` : "/");
+          }}
           className={"flex-1"}
         />
         <UserMenu />
