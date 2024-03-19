@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
-import { login } from "@/app/service/authentication";
+import { login } from "@/app/services/authentication";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import AuthUtility from "@/utils/Auth";

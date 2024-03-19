@@ -1,6 +1,6 @@
 "use client";
 import { useQuery } from "react-query";
-import { formsSettings } from "@/app/service/settings";
+import { formsSettings } from "@/app/services/settings";
 
 const useFormsSettings = () => {
   const { isLoading, data } = useQuery("data", formsSettings);
