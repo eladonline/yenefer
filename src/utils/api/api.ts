@@ -10,7 +10,7 @@ class Api extends Document {
   constructor() {
     super();
     this.defaults = {
-      baseURL: "http://localhost:3000",
+      baseURL: "http://localhost:3000/api",
       timeout: 3000,
     };
     this.http = axios.create({

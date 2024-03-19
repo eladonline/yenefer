@@ -27,7 +27,7 @@ const schema = new Schema<SettingsType>({
               {
                 label: { type: String, required: true },
                 fieldType: { type: String, required: true },
-                options: [String],
+                options: { type: [String], default: undefined },
               },
             ],
           },
@@ -46,6 +46,7 @@ export default models.settings || model("settings", schema);
 export const modelConfigExample = {
   forms: [
     {
+      name: "example",
       fields: [
         {
           label: "my text label",

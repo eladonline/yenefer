@@ -1,6 +1,5 @@
-import React from "react";
+import { redirect } from "next/navigation";
 
-const Page = () => {
-  return <div>settings</div>;
-};
+const Page = () => redirect("settings/forms");
+
 export default Page;

@@ -62,22 +62,23 @@ export async function signUp(req: NextRequest) {
 
     const settingsModel = new Settings({
       pointer: email,
-      config: {},
+      config: modelConfigExample,
     });
 
     const results = await Promise.allSettled([
       user.save(),
       settingsModel.save(),
     ]);
-
     const isNotFulfilled = results.some(({ status }) => status !== "fulfilled");
     if (isNotFulfilled) {
+      // @ts-ignore
+      results.forEach(({ status, reason }: PromiseSettledResult<void>) => {
+        if (status === "rejected") console.error(reason);
+      });
+
       await user.deleteOne();
       await settingsModel.deleteOne();
-      return NextResponse.json(
-        { message: "Something went wrong please try again later..." },
-        { status: 500 },
-      );
+      throw new Error("Creating one of the Collections failed");
     }
 
     const jwtUtil = new Jwt();

@@ -43,7 +43,10 @@ const Form: React.FC<FormType> = ({ onSubmit }) => {
       >
         <ControlledInput
           control={control}
-          rules={{ required: "Required" }}
+          rules={{
+            required: "Required",
+            deps: ["confirm"],
+          }}
           name={"password"}
           onChange={() => formError && clearErrors("formError")}
         />

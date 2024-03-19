@@ -4,6 +4,7 @@ import AntdProvider from "@/utils/Providers/AntdClientProvider";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { Metadata } from "next";
 import dbConnect from "@/app/(server)/services/mongooseDB";
+import QueryClientProvider from "@/utils/Providers/QueryClientProvider";
 
 await (async () => dbConnect().catch((err) => console.error(err.stack)))();
 
@@ -17,7 +18,9 @@ export default function RootLayout(props: { children: ReactElement }) {
     <html lang="en">
       <body className={"m-0 min-h-[100vh]"}>
         <AntdRegistry>
-          <AntdProvider>{props.children}</AntdProvider>
+          <AntdProvider>
+            <QueryClientProvider>{props.children}</QueryClientProvider>
+          </AntdProvider>
         </AntdRegistry>
       </body>
     </html>
