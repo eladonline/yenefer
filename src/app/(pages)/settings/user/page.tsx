@@ -1,14 +1,11 @@
-"use client";
 import React from "react";
-import useFormsSettings from "@/app/(pages)/settings/user/lib/useFormsSettings";
-import QueryClientProvider from "@/utils/Providers/QueryClientProvider";
+import Form from "@/app/(pages)/settings/user/lib/Form";
 
-const Page = () => {
-  const { data } = useFormsSettings();
+const Page = async () => {
   return (
-    <QueryClientProvider>
-      <div className={"flex flex-col"}>{data}</div>
-    </QueryClientProvider>
+    <div>
+      <Form />
+    </div>
   );
 };
 export default Page;

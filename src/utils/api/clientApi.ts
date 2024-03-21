@@ -3,14 +3,14 @@ import axios, { AxiosInstance } from "axios";
 import Document from "../Document";
 import AuthUtility from "@/utils/Auth";
 
-class Api extends Document {
+class ClientApi extends Document {
   defaults: object;
   http: AxiosInstance;
 
   constructor() {
     super();
     this.defaults = {
-      baseURL: "http://localhost:3000/api",
+      baseURL: process.env.BASE_API_URI,
       timeout: 3000,
     };
     this.http = axios.create({
@@ -38,5 +38,6 @@ class Api extends Document {
     );
   }
 }
-const api = new Api();
+
+const api = new ClientApi();
 export default api;

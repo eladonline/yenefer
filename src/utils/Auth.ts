@@ -1,5 +1,4 @@
 import TokenUtil from "@/utils/Token";
-import DocumentUtility from "@/utils/Document";
 
 type DoLogin = {
   details: { username: string };

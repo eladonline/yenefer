@@ -1,6 +1,12 @@
 import { AxiosResponse } from "axios";
-import api from "@/utils/api/api";
+import api from "@/utils/api/clientApi";
+
+export const baseEndpoint = "/settings";
+
+export const endpoints = {
+  user: `${baseEndpoint}/user`,
+};
 
 export function userSettings(): Promise<AxiosResponse> {
-  return api.http.get("/settings/user");
+  return api.http.get(endpoints.user);
 }

@@ -11,7 +11,7 @@ class Jwt {
   }
 
   sign(data: { usr: string; license: string; id: string }): string {
-    return jwt.sign(data, this.secret, { expiresIn: "1d" });
+    return jwt.sign(data, this.secret, this.defaultOptions);
   }
 
   verify(token: string): JwtPayload | string {

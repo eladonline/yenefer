@@ -1,10 +1,10 @@
 "use client";
 import { Button } from "antd/lib";
-import api from "@/utils/api/api";
+import api from "@/utils/api/clientApi";
 
 export default function Page() {
   const handleClick = async () => {
-    const res = await api.http.get("/api");
+    const res = await api.http.get("/");
     console.log(res);
   };
 

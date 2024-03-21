@@ -31,7 +31,10 @@ export async function middleware(request: NextRequest) {
       payload = await tokenDecrypt(token);
     }
     if (!payload) {
-      return new Response("Valid authorization expected", { status: 417 });
+      return NextResponse.json(
+        { message: "Valid authorization expected" },
+        { status: 417 },
+      );
     }
   }
   return NextResponse.next();
