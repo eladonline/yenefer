@@ -1,4 +1,4 @@
-import jwt, { Secret, SignOptions } from "jsonwebtoken";
+import jwt, { Secret, SignOptions, JwtPayload } from "jsonwebtoken";
 
 class Jwt {
   secret: Secret;
@@ -14,7 +14,7 @@ class Jwt {
     return jwt.sign(data, this.secret, { expiresIn: "1d" });
   }
 
-  verify(token: string) {
+  verify(token: string): JwtPayload | string {
     return jwt.verify(token, this.secret);
   }
 }

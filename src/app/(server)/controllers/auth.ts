@@ -2,7 +2,7 @@ import bcrypt from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
 import Jwt from "@/app/(server)/services/Jwt";
 import UserModel from "@/app/(server)/models/User";
-import Settings, { modelConfigExample } from "@/app/(server)/models/Settings";
+import Settings from "@/app/(server)/models/Settings";
 
 export async function signIn(req: NextRequest) {
   const { username, password } = await req.json();
@@ -62,7 +62,9 @@ export async function signUp(req: NextRequest) {
 
     const settingsModel = new Settings({
       pointer: email,
-      config: modelConfigExample,
+      config: {
+        user: { name: email },
+      },
     });
 
     const results = await Promise.allSettled([

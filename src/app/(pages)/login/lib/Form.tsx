@@ -47,7 +47,7 @@ const Form: FC<FormType> = ({ onSubmit }) => {
           onChange={() => formError && clearErrors("formError")}
         />
       </Field>
-      {formState?.errors?.["formError"] && (
+      {formState.errors?.["formError"] && (
         <PrimaryError
           className={"justify-self-center"}
           text={formError as string}

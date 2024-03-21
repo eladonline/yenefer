@@ -12,11 +12,11 @@ const ScreenLayout = ({ children }: { children: ReactElement }) => {
   const router = useRouter();
   const pathName = usePathname();
 
-  const [topMenuKey, depth2] = pathName.split("/");
+  const [topMenuKey, subMenu] = pathName.split("/");
   const selectedTopKey = rootLayoutConfig.navigationItems.find(
-    ({ key }) => key === depth2,
+    ({ key }) => key === subMenu,
   )
-    ? depth2
+    ? subMenu
     : topMenuKey;
 
   const sideMenuItems = rootLayoutConfig.sideMenuItems[selectedTopKey] || [];
