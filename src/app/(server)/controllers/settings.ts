@@ -3,7 +3,7 @@ import Jwt from "@/app/(server)/services/Jwt";
 import { headers } from "next/headers";
 import SettingsModel from "@/app/(server)/models/Settings";
 
-export async function forms(req: NextRequest): Promise<NextResponse> {
+export async function user(req: NextRequest): Promise<NextResponse> {
   const authorization = headers().get("authorization");
   const jwtService = new Jwt();
 
@@ -11,7 +11,7 @@ export async function forms(req: NextRequest): Promise<NextResponse> {
   const payload = jwtService.verify(token);
 
   if (typeof payload === "object") {
-    const settings = await SettingsModel.findOne({ pointer: payload.usr });
+    const settings = await SettingsModel.findOne({ users_id: payload.id });
 
     if (settings) {
       return NextResponse.json(settings.config, { status: 200 });

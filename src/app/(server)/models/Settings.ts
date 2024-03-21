@@ -1,14 +1,14 @@
 import { Schema, model, models } from "mongoose";
 
 type SettingsType = {
-  pointer: string;
+  users_id: string;
   config: {
-    user: {};
+    user: { name: string };
   };
 };
 
 const schema = new Schema<SettingsType>({
-  pointer: { type: String, required: true },
+  users_id: { type: String, required: true },
   config: {
     type: {
       user: {

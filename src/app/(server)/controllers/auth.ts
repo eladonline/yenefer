@@ -25,6 +25,7 @@ export async function signIn(req: NextRequest) {
           token: jwtService.sign({
             usr: userDoc.email,
             license: userDoc.license,
+            id: userDoc.id,
           }),
         },
         { status: 200 },
@@ -61,7 +62,7 @@ export async function signUp(req: NextRequest) {
     const user = new UserModel({ email, password: hash, license });
 
     const settingsModel = new Settings({
-      pointer: email,
+      users_id: user._id,
       config: {
         user: { name: email },
       },
@@ -84,7 +85,7 @@ export async function signUp(req: NextRequest) {
     }
 
     const jwtUtil = new Jwt();
-    const token = jwtUtil.sign({ usr: email, license });
+    const token = jwtUtil.sign({ usr: email, license, id: user._id });
 
     return NextResponse.json({ token }, { status: 200 });
   } catch (err: Error | any) {

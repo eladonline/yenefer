@@ -10,7 +10,7 @@ class Jwt {
     };
   }
 
-  sign(data: { usr: string; license: string }): string {
+  sign(data: { usr: string; license: string; id: string }): string {
     return jwt.sign(data, this.secret, { expiresIn: "1d" });
   }
 

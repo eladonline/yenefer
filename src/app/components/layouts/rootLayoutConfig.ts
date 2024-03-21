@@ -28,15 +28,15 @@ const rootLayoutConfig: RootLayoutConfig = {
     "": [
       {
         icon: UserOutlined,
-        label: "Tasks Management",
-        key: "/tasks",
+        label: "Products",
+        key: "/products",
       },
     ],
     settings: [
       {
         icon: UserOutlined,
-        label: "Forms",
-        key: "/settings/forms",
+        label: "User",
+        key: "/settings/user",
       },
     ],
   },

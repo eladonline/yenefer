@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import api from "@/utils/api/api";
 
-export function formsSettings(): Promise<AxiosResponse> {
-  return api.http.get("/settings/forms");
+export function userSettings(): Promise<AxiosResponse> {
+  return api.http.get("/settings/user");
 }
