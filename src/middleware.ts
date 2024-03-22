@@ -25,17 +25,23 @@ export async function middleware(request: NextRequest) {
 
   if (isApiRoute) {
     const authorization = request.headers.get("Authorization");
-    let payload = null;
+    const headers = new Headers(request.headers);
     if (authorization) {
       const [, token] = authorization.split(" ");
-      payload = await tokenDecrypt(token);
+      let payload = await tokenDecrypt(token);
+      if (payload) {
+        headers.set("id", payload.id as string);
+
+        return NextResponse.next({
+          request: { headers },
+        });
+      }
     }
-    if (!payload) {
-      return NextResponse.json(
-        { message: "Valid authorization expected" },
-        { status: 417 },
-      );
-    }
+
+    return NextResponse.json(
+      { message: "Valid authorization expected" },
+      { status: 417 },
+    );
   }
   return NextResponse.next();
 }

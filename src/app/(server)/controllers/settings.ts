@@ -4,6 +4,8 @@ import { headers } from "next/headers";
 import SettingsModel from "@/app/(server)/models/Settings";
 
 export async function user(req: NextRequest): Promise<NextResponse> {
+  console.log(req.headers.get("id"));
+
   const authorization = headers().get("authorization");
   const jwtService = new Jwt();
 
