@@ -15,8 +15,8 @@ const Form: React.FC = (): ReactElement => {
       key = key.charAt(0).toUpperCase() + key.substring(1);
 
       return (
-        <li key={key} className={"flex items-center gap-2"}>
-          <Text className={"[&.ant-typography]:break-keep"} strong>
+        <li key={key} className={"flex items-center"}>
+          <Text className={"[&.ant-typography]:break-keep w-[80px]"} strong>
             {key}:
           </Text>
 
