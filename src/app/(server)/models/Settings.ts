@@ -3,7 +3,7 @@ import { Schema, model, models } from "mongoose";
 type SettingsType = {
   users_id: string;
   config: {
-    user: { name: string };
+    user: { username: string };
   };
 };
 
@@ -12,7 +12,7 @@ const schema = new Schema<SettingsType>({
   config: {
     type: {
       user: {
-        name: String,
+        username: String,
       },
     },
     required: true,

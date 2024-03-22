@@ -64,7 +64,7 @@ export async function signUp(req: NextRequest) {
     const settingsModel = new Settings({
       users_id: user._id,
       config: {
-        user: { name: email },
+        user: { username: email },
       },
     });
 

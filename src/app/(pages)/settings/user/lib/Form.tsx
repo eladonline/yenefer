@@ -1,29 +1,38 @@
 "use client";
-import React from "react";
+import React, { ReactElement } from "react";
 import QueryClientProvider from "@/utils/Providers/QueryClientProvider";
 import useFormsSettings from "@/app/(pages)/settings/user/lib/useFormsSettings";
 import Text from "antd/lib/typography/Text";
 import { Skeleton } from "antd/lib";
 
-const Form = () => {
+const Form: React.FC = (): ReactElement => {
   const { settings } = useFormsSettings();
-  const name = settings?.user?.name || null;
+  const user = settings?.user || {};
+  const userFields: [string, string | number][] = Object.entries(user);
 
-  const fields = [name].map((text: string | null) => {
-    return (
-      <li key={text} className={"flex items-center gap-2"}>
-        <Text className={"[&.ant-typography]:break-keep"} strong>
-          Name:
-        </Text>
+  const fields: ReactElement[] = userFields.map(
+    ([key, value]: [string, string | number]) => {
+      key = key.charAt(0).toUpperCase() + key.substring(1);
 
-        <Text>
-          {text || (
-            <Skeleton title={false} paragraph={{ rows: 1, width: 60 }} active />
-          )}
-        </Text>
-      </li>
-    );
-  });
+      return (
+        <li key={key} className={"flex items-center gap-2"}>
+          <Text className={"[&.ant-typography]:break-keep"} strong>
+            {key}:
+          </Text>
+
+          <Text>
+            {value || (
+              <Skeleton
+                title={false}
+                paragraph={{ rows: 1, width: 60 }}
+                active
+              />
+            )}
+          </Text>
+        </li>
+      );
+    },
+  );
 
   return (
     <div className={"p-5 bg-white rounded"}>
