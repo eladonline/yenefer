@@ -31,10 +31,9 @@ const useLogin = () => {
       });
       router.replace("/");
     } catch (err: AxiosError | any) {
-      console.log(err);
       formFactory.setError("formError", {
         type: "custom",
-        message: err.message,
+        message: err.response.data.message || err.message,
       });
     }
   };

@@ -1,7 +1,10 @@
 "use server";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { tokenDecrypt, tokenValidator } from "@/app/(server)/services/token";
+import {
+  tokenDecrypt,
+  tokenValidator,
+} from "@/app/(server)/services/joseToken";
 
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;

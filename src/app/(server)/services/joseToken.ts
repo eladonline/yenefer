@@ -1,3 +1,4 @@
+// EDGE runtime cannot do decryption on runtime therefore jose being used
 import * as jose from "jose";
 
 export const tokenValidator = async (token: string): Promise<boolean> => {
