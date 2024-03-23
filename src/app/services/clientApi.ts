@@ -1,6 +1,6 @@
 "use client";
 import axios, { AxiosInstance } from "axios";
-import Document from "../Document";
+import Document from "../../utils/Document";
 import AuthUtility from "@/utils/Auth";
 
 class ClientApi extends Document {

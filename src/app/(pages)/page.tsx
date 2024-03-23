@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "antd/lib";
-import api from "@/utils/api/clientApi";
+import api from "@/app/services/clientApi";
 
 export default function Page() {
   const handleClick = async () => {

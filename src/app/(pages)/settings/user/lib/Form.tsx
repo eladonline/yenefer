@@ -1,12 +1,19 @@
 "use client";
 import React, { ReactElement } from "react";
 import QueryClientProvider from "@/utils/Providers/QueryClientProvider";
-import useFormsSettings from "@/app/(pages)/settings/user/lib/useFormsSettings";
+import useSettings from "@/app/(pages)/settings/user/lib/useSettings";
 import Text from "antd/lib/typography/Text";
 import { Skeleton } from "antd/lib";
 
-const Form: React.FC = (): ReactElement => {
-  const { settings } = useFormsSettings();
+export type SettingsDataType = {
+  user: { [key: string]: string | number };
+};
+type FormProps = {
+  userSettings: SettingsDataType;
+};
+
+const Form: React.FC<FormProps> = ({ userSettings }) => {
+  const { settings } = useSettings(userSettings);
   const user = settings?.user || {};
   const userFields: [string, string | number][] = Object.entries(user);
 

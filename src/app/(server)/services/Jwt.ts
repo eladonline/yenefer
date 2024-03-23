@@ -1,5 +1,8 @@
 import jwt, { Secret, SignOptions, JwtPayload } from "jsonwebtoken";
 
+type clientTokenProps = { usr: string; license: string; id: string };
+type serverTokenProps = { int: string };
+
 class Jwt {
   secret: Secret;
   defaultOptions: SignOptions;
@@ -10,7 +13,7 @@ class Jwt {
     };
   }
 
-  sign(data: { usr: string; license: string; id: string }): string {
+  sign(data: clientTokenProps | serverTokenProps): string {
     return jwt.sign(data, this.secret, this.defaultOptions);
   }
 

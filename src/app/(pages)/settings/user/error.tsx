@@ -1,13 +1,15 @@
 "use client";
+
+import { AxiosError } from "axios";
 import { useEffect } from "react";
 
-export default function Error({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string };
+type ErrorProps = {
+  error: AxiosError;
   reset: () => void;
-}) {
+};
+
+export default function Error({ error, reset }: ErrorProps) {
+  console.log(error);
   useEffect(() => {
     // Log the error to an error reporting service
     console.error(error);
@@ -15,15 +17,12 @@ export default function Error({
 
   return (
     <div>
-      <h2>Something went wrong!</h2>
-      <button
-        onClick={
-          // Attempt to recover by trying to re-render the segment
-          () => reset()
-        }
-      >
-        Try again
-      </button>
+      <h2>
+        {(error?.response?.data as { message: string })?.message ||
+          "An error occurred"}
+        !
+      </h2>
+      <button onClick={reset}>Try again</button>
     </div>
   );
 }

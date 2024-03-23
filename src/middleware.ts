@@ -1,10 +1,7 @@
 "use server";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import {
-  tokenDecrypt,
-  tokenValidator,
-} from "@/app/(server)/services/joseToken";
+import { tokenDecrypt } from "@/app/(server)/services/joseToken";
 
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
@@ -15,7 +12,19 @@ export async function middleware(request: NextRequest) {
   if (isPageRoute) {
     const token = request.cookies.get("token")?.value;
     let isValidToken = false;
-    if (token) isValidToken = await tokenValidator(token);
+    const headers = new Headers(request.headers);
+
+    if (token) {
+      let payload = await tokenDecrypt(token);
+      isValidToken = Boolean(payload);
+      if (payload) {
+        headers.set("id", payload.id as string);
+
+        return NextResponse.next({
+          request: { headers },
+        });
+      }
+    }
 
     if (isValidToken && isAuthPage) {
       return NextResponse.redirect(new URL("/", request.url));
@@ -33,7 +42,7 @@ export async function middleware(request: NextRequest) {
       const [, token] = authorization.split(" ");
       let payload = await tokenDecrypt(token);
       if (payload) {
-        headers.set("id", payload.id as string);
+        if (!headers.get("id")) headers.set("id", payload.id as string);
 
         return NextResponse.next({
           request: { headers },

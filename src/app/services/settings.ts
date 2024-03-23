@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import api from "@/utils/api/clientApi";
+import api from "@/app/services/clientApi";
 
 export const baseEndpoint = "/settings";
 

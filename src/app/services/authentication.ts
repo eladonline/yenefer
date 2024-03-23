@@ -1,5 +1,5 @@
 "use client";
-import api from "@/utils/api/clientApi";
+import api from "@/app/services/clientApi";
 import { AxiosPromise, AxiosResponse } from "axios";
 
 type PayloadLogin = {

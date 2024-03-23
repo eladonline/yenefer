@@ -12,7 +12,7 @@
     "@ant-design/icons": "^5.3.1",
     "@ant-design/nextjs-registry": "^1.0.0",
     "@types/jsonwebtoken": "^9.0.6",
-    "@types/lodash": "^4.14.202",
+    "@types/lodash": "^4.17.0",
     "antd": "^5.14.2",
     "axios": "^1.6.7",
     "bcryptjs": "^2.4.3",
