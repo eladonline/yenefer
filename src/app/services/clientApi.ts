@@ -12,6 +12,9 @@ class ClientApi extends Document {
     this.defaults = {
       baseURL: process.env.BASE_API_URI,
       timeout: 3000,
+      headers: {
+        "Cache-Control": "no-cache",
+      },
     };
     this.http = axios.create({
       ...this.defaults,
