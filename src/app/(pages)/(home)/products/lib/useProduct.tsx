@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
-import { userSettings } from "@/app/services/settings";
-import { ProductType } from "@/types/apis/configurations";
+import { ProductType } from "@/types/apis/usersData";
+import { getProducts } from "@/app/services/userData";
 
 type ProductsType = {
   products: ProductType[];
@@ -16,15 +16,13 @@ const useProducts = (initialData: ProductsType): useProductsHook => {
     data: ProductsType;
   }>({
     queryKey: ["products"],
-    queryFn: userSettings,
+    queryFn: getProducts,
     initialData: { data: initialData },
   });
   if (error) {
     throw error;
   }
-  console.log(data);
   const products = data?.data?.products;
-  console.log(products);
 
   return { isLoading, products };
 };

@@ -1,5 +1,5 @@
 import { Schema, model, models } from "mongoose";
-import userConfigurationsSchema from "@/app/(server)/models/subModels/configurations.user";
+import userConfigurationsSchema from "@/app/(server)/models/subModels/configurations";
 import { ConfigurationsType } from "@/types/apis/configurations";
 
 const schema = new Schema<ConfigurationsType>({

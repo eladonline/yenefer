@@ -1,3 +1,6 @@
-import { createProduct } from "@/app/(server)/controllers/usersData.products";
+import {
+  createProduct,
+  getProduct,
+} from "@/app/(server)/controllers/usersData.products";
 
-export { createProduct as POST };
+export { createProduct as POST, getProduct as GET };

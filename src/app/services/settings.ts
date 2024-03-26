@@ -5,7 +5,6 @@ export const baseEndpoint = "/settings";
 
 export const endpoints = {
   user: `${baseEndpoint}/user`,
-  products: `${baseEndpoint}/products`,
 };
 
 export function userSettings(): Promise<AxiosResponse> {

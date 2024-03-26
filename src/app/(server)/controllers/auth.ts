@@ -4,6 +4,7 @@ import Jwt from "@/app/(server)/services/Jwt";
 import UserModel from "@/app/(server)/models/User";
 import Configurations from "@/app/(server)/models/Configurations";
 import errorHandler from "@/app/(server)/handlers/errorHandler";
+import UsersData from "@/app/(server)/models/UsersData";
 
 async function signInController(req: NextRequest) {
   const { username, password } = await req.json();
@@ -61,9 +62,14 @@ async function signUpController(req: NextRequest) {
     },
   });
 
+  const usersDataModel = new UsersData({
+    users_id: user._id,
+  });
+
   const results = await Promise.allSettled([
     user.save(),
     configurationsModel.save(),
+    usersDataModel.save(),
   ]);
   const isNotFulfilled = results.some(({ status }) => status !== "fulfilled");
   if (isNotFulfilled) {
