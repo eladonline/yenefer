@@ -14,12 +14,11 @@ const useSettings = (initialData: SettingsDataType): UseSettingsHook => {
     queryFn: userSettings,
     initialData: { data: initialData },
   });
-
   if (error) {
     throw error;
   }
+
   const settings = data?.data;
-  console.log("settings", settings);
 
   return { isLoading, settings };
 };

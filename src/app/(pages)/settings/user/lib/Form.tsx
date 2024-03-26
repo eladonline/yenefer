@@ -9,11 +9,11 @@ export type SettingsDataType = {
   user: { [key: string]: string | number };
 };
 type FormProps = {
-  userSettings: SettingsDataType;
+  data: SettingsDataType;
 };
 
-const Form: React.FC<FormProps> = ({ userSettings }) => {
-  const { settings } = useSettings(userSettings);
+const Form: React.FC<FormProps> = ({ data }) => {
+  const { settings, isLoading } = useSettings(data);
   const user = settings?.user || {};
   const userFields: [string, string | number][] = Object.entries(user);
 
@@ -28,12 +28,14 @@ const Form: React.FC<FormProps> = ({ userSettings }) => {
           </Text>
 
           <Text>
-            {value || (
+            {isLoading ? (
               <Skeleton
                 title={false}
                 paragraph={{ rows: 1, width: 60 }}
                 active
               />
+            ) : (
+              value
             )}
           </Text>
         </li>

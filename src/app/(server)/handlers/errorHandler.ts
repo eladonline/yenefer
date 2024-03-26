@@ -9,7 +9,7 @@ const errorHandler = async <T>(
   } catch (err: ReturnType<typeof Error> | any) {
     return NextResponse.json(
       { message: err.message || "Something went wrong" },
-      { status: 500 },
+      { status: err.statusCode || 500 },
     );
   }
 };

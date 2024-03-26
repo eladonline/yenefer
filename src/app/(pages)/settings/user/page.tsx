@@ -8,7 +8,7 @@ import ServerApi from "@/app/services/ServerApi";
 const Page = async () => {
   const serverApi = new ServerApi();
 
-  const userSettings = await serverApi.get(endpoints.user, {
+  const data = await serverApi.get(endpoints.user, {
     headers: {
       id: headers().get("id") as string,
     },
@@ -19,7 +19,7 @@ const Page = async () => {
       <header className={"text-center mb-4"}>
         <Title level={2}>User settings</Title>
       </header>
-      {userSettings && <Form userSettings={userSettings} />}
+      {data && <Form data={data} />}
     </div>
   );
 };
