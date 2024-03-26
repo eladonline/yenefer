@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import errorHandler from "@/app/(server)/handlers/errorHandler";
-import SettingsModel from "@/app/(server)/models/Settings";
-import { ProductType, SettingsType } from "@/types/apis/settings";
+import SettingsModel from "@/app/(server)/models/Configurations";
+import { ProductType, ConfigurationsType } from "@/types/apis/configurations";
 import { ErrorType } from "@/types/globalTypes";
 
 type SettingsProductsType = NextRequest & {
@@ -15,7 +15,7 @@ export const createProductController = async (
   const { name, category, description, price } = request.body;
   const product: ProductType = { name, category, description, price };
 
-  const settings: SettingsType = await SettingsModel.findOne({
+  const settings: ConfigurationsType = await SettingsModel.findOne({
     users_id: id,
   });
 
@@ -45,7 +45,7 @@ export const createProduct = async (...args: any) =>
 export const getProductController = async (request: NextRequest) => {
   const id = request.headers.get("id");
 
-  const settings: SettingsType = await SettingsModel.findOne({
+  const settings: ConfigurationsType = await SettingsModel.findOne({
     users_id: id,
   });
 

@@ -1,5 +1,5 @@
 import { Schema, model, models } from "mongoose";
-import productSchema from "@/app/(server)/models/subModels/product";
+import productSchema from "@/app/(server)/models/subModels/usersData.product";
 import { UsersDataType } from "@/types/apis/usersData";
 
 const schema = new Schema<UsersDataType>({

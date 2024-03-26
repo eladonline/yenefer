@@ -1,19 +1,21 @@
 "use client";
 import { useQuery } from "react-query";
 import { userSettings } from "@/app/services/settings";
-import { SettingsUserType } from "@/types/apis/settings";
+import { ConfigurationsUserType } from "@/types/apis/configurations";
 
 type UseSettingsHook = {
   isLoading: boolean;
-  settings: SettingsUserType | undefined;
+  settings: ConfigurationsUserType | undefined;
 };
 
-const useSettings = (initialData: SettingsUserType): UseSettingsHook => {
-  const { isLoading, data, error } = useQuery<{ data: SettingsUserType }>({
-    queryKey: ["settings"],
-    queryFn: userSettings,
-    initialData: { data: initialData },
-  });
+const useSettings = (initialData: ConfigurationsUserType): UseSettingsHook => {
+  const { isLoading, data, error } = useQuery<{ data: ConfigurationsUserType }>(
+    {
+      queryKey: ["settings"],
+      queryFn: userSettings,
+      initialData: { data: initialData },
+    },
+  );
   if (error) {
     throw error;
   }

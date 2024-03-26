@@ -2,7 +2,7 @@ import bcrypt from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
 import Jwt from "@/app/(server)/services/Jwt";
 import UserModel from "@/app/(server)/models/User";
-import Settings from "@/app/(server)/models/Settings";
+import Configurations from "@/app/(server)/models/Configurations";
 import errorHandler from "@/app/(server)/handlers/errorHandler";
 
 async function signInController(req: NextRequest) {
@@ -54,14 +54,17 @@ async function signUpController(req: NextRequest) {
 
   const user = new UserModel({ email, password: hash, license });
 
-  const settingsModel = new Settings({
+  const configurationsModel = new Configurations({
     users_id: user._id,
     config: {
       user: { username: email },
     },
   });
 
-  const results = await Promise.allSettled([user.save(), settingsModel.save()]);
+  const results = await Promise.allSettled([
+    user.save(),
+    configurationsModel.save(),
+  ]);
   const isNotFulfilled = results.some(({ status }) => status !== "fulfilled");
   if (isNotFulfilled) {
     // @ts-ignore
@@ -70,7 +73,7 @@ async function signUpController(req: NextRequest) {
     });
 
     await user.deleteOne();
-    await settingsModel.deleteOne();
+    await configurationsModel.deleteOne();
     throw new Error("Creating one of the Collections failed");
   }
 

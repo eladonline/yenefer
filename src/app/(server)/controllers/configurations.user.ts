@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import SettingsModel from "@/app/(server)/models/Settings";
+import ConfigurationsModel from "@/app/(server)/models/Configurations";
 import errorHandler from "@/app/(server)/handlers/errorHandler";
 
 async function userController(request: NextRequest): Promise<NextResponse> {
   const id = request.headers.get("id");
-  const settings = await SettingsModel.findOne({ users_id: id });
-  if (settings) {
-    return NextResponse.json(settings.config, { status: 200 });
+  const configs = await ConfigurationsModel.findOne({ users_id: id });
+  if (configs) {
+    return NextResponse.json(configs.settings, { status: 200 });
   } else throw new Error();
 }
 
