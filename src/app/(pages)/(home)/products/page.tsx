@@ -3,7 +3,7 @@ import ServerApi from "@/app/services/ServerApi";
 import { endpoints } from "@/app/services/userData";
 import { headers } from "next/headers";
 import Title from "antd/lib/typography/Title";
-import Form from "@/app/(pages)/settings/user/lib/Form";
+import Form from "@/app/(pages)/(home)/products/lib/Form";
 
 const Page = async () => {
   const serverApi = new ServerApi();

@@ -5,7 +5,7 @@ import { SettingsUserType } from "@/types/apis/configurations";
 
 type UseSettingsHook = {
   isLoading: boolean;
-  userData: SettingsUserType | undefined;
+  user: SettingsUserType | undefined;
 };
 
 const useSettings = (initialData: SettingsUserType): UseSettingsHook => {
@@ -18,9 +18,9 @@ const useSettings = (initialData: SettingsUserType): UseSettingsHook => {
     throw error;
   }
 
-  const userData = data?.data;
+  const user = data?.data;
 
-  return { isLoading, userData };
+  return { isLoading, user };
 };
 
 export default useSettings;

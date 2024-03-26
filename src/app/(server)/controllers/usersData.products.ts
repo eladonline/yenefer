@@ -52,9 +52,8 @@ export const getProductController = async (request: NextRequest) => {
     error.statusCode = 410;
     throw error;
   }
-  console.log(userData);
 
-  return NextResponse.json(userData.products, { status: 200 });
+  return NextResponse.json(userData.products || [], { status: 200 });
 };
 
 export const createProduct = async (...args: any) =>

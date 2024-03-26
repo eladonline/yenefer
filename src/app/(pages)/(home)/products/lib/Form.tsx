@@ -1,52 +1,20 @@
 "use client";
-import React, { ReactElement } from "react";
+import React from "react";
 import QueryClientProvider from "@/utils/Providers/QueryClientProvider";
-import useSettings from "@/app/(pages)/settings/user/lib/useSettings";
-import Text from "antd/lib/typography/Text";
-import { Skeleton } from "antd/lib";
+import useProduct from "@/app/(pages)/(home)/products/lib/useProduct";
+import { ProductType } from "@/types/apis/usersData";
 
-export type SettingsDataType = {
-  products: { [key: string]: string | number };
-};
 type FormProps = {
-  data: SettingsDataType;
+  data: ProductType[];
 };
 
 const Form: React.FC<FormProps> = ({ data }) => {
-  const { settings, isLoading } = useSettings(data);
-  const user = settings?.user || {};
-  const userFields: [string, string | number][] = Object.entries(user);
-
-  const fields: ReactElement[] = userFields.map(
-    ([key, value]: [string, string | number]) => {
-      key = key.charAt(0).toUpperCase() + key.substring(1);
-
-      return (
-        <li key={key} className={"flex items-center"}>
-          <Text className={"[&.ant-typography]:break-keep w-[80px]"} strong>
-            {key}:
-          </Text>
-
-          <Text>
-            {isLoading ? (
-              <Skeleton
-                title={false}
-                paragraph={{ rows: 1, width: 60 }}
-                active
-              />
-            ) : (
-              value
-            )}
-          </Text>
-        </li>
-      );
-    },
-  );
-
+  const { products, isLoading } = useProduct(data);
+  console.log(products);
   return (
     <div className={"p-5 bg-white rounded"}>
       <QueryClientProvider>
-        <ul className={"flex-col flex gap-3"}>{fields}</ul>
+        <ul className={"flex-col flex gap-3"}>test</ul>
       </QueryClientProvider>
     </div>
   );

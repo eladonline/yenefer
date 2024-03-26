@@ -2,18 +2,14 @@ import { useQuery } from "react-query";
 import { ProductType } from "@/types/apis/usersData";
 import { getProducts } from "@/app/services/userData";
 
-type ProductsType = {
-  products: ProductType[];
-};
-
 type useProductsHook = {
   isLoading: boolean;
   products: ProductType[] | undefined;
 };
 
-const useProducts = (initialData: ProductsType): useProductsHook => {
+const useProducts = (initialData: ProductType[]): useProductsHook => {
   const { data, isLoading, error } = useQuery<{
-    data: ProductsType;
+    data: ProductType[];
   }>({
     queryKey: ["products"],
     queryFn: getProducts,
@@ -22,8 +18,7 @@ const useProducts = (initialData: ProductsType): useProductsHook => {
   if (error) {
     throw error;
   }
-  const products = data?.data?.products;
-
+  const products = data?.data;
   return { isLoading, products };
 };
 
