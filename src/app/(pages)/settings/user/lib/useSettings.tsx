@@ -1,15 +1,15 @@
 "use client";
 import { useQuery } from "react-query";
 import { userSettings } from "@/app/services/settings";
-import { SettingsDataType } from "@/app/(pages)/settings/user/lib/Form";
+import { SettingsUserType } from "@/types/settings";
 
 type UseSettingsHook = {
   isLoading: boolean;
-  settings: SettingsDataType | undefined;
+  settings: SettingsUserType | undefined;
 };
 
-const useSettings = (initialData: SettingsDataType): UseSettingsHook => {
-  const { isLoading, data, error } = useQuery<{ data: SettingsDataType }>({
+const useSettings = (initialData: SettingsUserType): UseSettingsHook => {
+  const { isLoading, data, error } = useQuery<{ data: SettingsUserType }>({
     queryKey: ["settings"],
     queryFn: userSettings,
     initialData: { data: initialData },

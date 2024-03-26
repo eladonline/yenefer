@@ -1,12 +1,7 @@
 import { useQuery } from "react-query";
 import { userSettings } from "@/app/services/settings";
+import { ProductType } from "@/types/settings";
 
-type ProductType = {
-  name: string;
-  category: string;
-  description: string;
-  price: number | string;
-};
 type ProductsType = {
   products: ProductType[];
 };

@@ -1,16 +1,17 @@
 import { Schema, model, models } from "mongoose";
-import productSchema from "@/app/(server)/models/subModels/products";
+import productSchema from "@/app/(server)/models/subModels/product";
 import userSettingsSchema from "@/app/(server)/models/subModels/user";
+import { SettingsType } from "@/types/settings";
 
-const schema = new Schema({
+const schema = new Schema<SettingsType>({
   users_id: { type: String, required: true },
   config: {
     type: {
       user: userSettingsSchema,
-      products: { type: [productSchema] },
     },
     required: true,
   },
+  products: { type: [productSchema] },
 });
 
 export default models.settings || model("settings", schema);
