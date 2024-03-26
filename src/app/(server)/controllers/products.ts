@@ -6,7 +6,6 @@ export const createProductController = async (request: NextRequest) => {
   const id = request.headers.get("id");
 
   const settings = await SettingsModel.findOne({ users_id: id });
-  console.log(settings);
   return NextResponse.json({ message: "create products" }, { status: 200 });
 };
 
