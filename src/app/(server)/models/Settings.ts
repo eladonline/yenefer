@@ -1,7 +1,7 @@
 import { Schema, model, models } from "mongoose";
 import productSchema from "@/app/(server)/models/subModels/product";
 import userSettingsSchema from "@/app/(server)/models/subModels/user";
-import { SettingsType } from "@/types/settings";
+import { SettingsType } from "@/types/apis/settings";
 
 const schema = new Schema<SettingsType>({
   users_id: { type: String, required: true },

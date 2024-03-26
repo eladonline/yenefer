@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import errorHandler from "@/app/(server)/handlers/errorHandler";
 import SettingsModel from "@/app/(server)/models/Settings";
-import { ProductType, SettingsType } from "@/types/settings";
+import { ProductType, SettingsType } from "@/types/apis/settings";
 import { ErrorType } from "@/types/globalTypes";
 
 type SettingsProductsType = NextRequest & {
