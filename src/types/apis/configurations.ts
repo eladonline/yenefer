@@ -1,5 +1,5 @@
 export type SettingsUserType = {
-  user: { type: { username: string } };
+  username: string;
 };
 
 export type SettingsType = {

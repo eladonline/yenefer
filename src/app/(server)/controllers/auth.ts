@@ -56,7 +56,7 @@ async function signUpController(req: NextRequest) {
 
   const configurationsModel = new Configurations({
     users_id: user._id,
-    config: {
+    settings: {
       user: { username: email },
     },
   });

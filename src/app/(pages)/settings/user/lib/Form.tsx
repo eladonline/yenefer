@@ -4,16 +4,18 @@ import QueryClientProvider from "@/utils/Providers/QueryClientProvider";
 import useSettings from "@/app/(pages)/settings/user/lib/useSettings";
 import Text from "antd/lib/typography/Text";
 import { Skeleton } from "antd/lib";
-import { ConfigurationsUserType } from "@/types/apis/configurations";
+import { SettingsUserType } from "@/types/apis/configurations";
 
 type FormProps = {
-  data: ConfigurationsUserType;
+  data: SettingsUserType;
 };
 
 const Form: React.FC<FormProps> = ({ data }) => {
-  const { settings, isLoading } = useSettings(data);
-  const user = settings?.user || {};
-  const userFields: [string, string | number][] = Object.entries(user);
+  const { userData, isLoading } = useSettings(data);
+
+  const userFields: [string, string | number][] = userData
+    ? Object.entries(userData)
+    : [];
 
   const fields: ReactElement[] = userFields.map(
     ([key, value]: [string, string | number]) => {
