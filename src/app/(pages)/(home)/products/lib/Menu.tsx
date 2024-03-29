@@ -7,12 +7,17 @@ const Menu = ({ modalApi }) => {
     <div className={"p-2 bg-stone-700 rounded-2xl sticky top-0 z-10"}>
       <Tooltip title={"Add product"}>
         <Button
-          onClick={() => {
-            modalApi.confirm({
+          onClick={async () => {
+            await modalApi.confirm({
               title: "confirm title",
               content: "confirm content",
-              onOk: () => {
-                console.log("asdasdsad");
+              onOk: async () => {
+                await new Promise((res) => {
+                  setTimeout(() => {
+                    res("promise");
+                  }, 1000);
+                });
+                console.log("after");
               },
             });
           }}
