@@ -15,11 +15,6 @@ const Menu = ({ modalApi }) => {
                 console.log("asdasdsad");
               },
             });
-
-            modalApi.info({
-              title: "info title",
-              content: "info content",
-            });
           }}
           className={
             "ovd ovd2 [&.ant-btn]:bg-green-400 hover:[&.ovd.ovd2.ant-btn]:bg-green-300 active:[&.ovd.ovd2.ant-btn]:bg-green-600"
