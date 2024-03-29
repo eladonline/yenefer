@@ -26,8 +26,10 @@ class ServerApi {
     }).finally(() => {
       clearTimeout(timeoutId);
     });
+    const result = await res.json();
 
-    return res.json();
+    if (res.status !== 200) throw new Error(result.message);
+    return result;
   }
 }
 

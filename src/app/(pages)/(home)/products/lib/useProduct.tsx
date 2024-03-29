@@ -15,6 +15,7 @@ const useProducts = (initialData: ProductType[]): useProductsHook => {
     queryFn: getProducts,
     initialData: { data: initialData },
   });
+
   if (error) {
     throw error;
   }

@@ -2,7 +2,8 @@ export type ProductType = {
   name: string;
   category: string;
   description: string;
-  price: number | string;
+  price: number;
+  created?: Date;
 };
 
 export type UsersDataType = {

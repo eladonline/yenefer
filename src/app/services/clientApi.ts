@@ -36,7 +36,11 @@ class ClientApi extends Document {
           authUtility.doLogout();
           window.location.replace("/login?reject");
         }
-        throw err;
+        const error: Error & { statusCode?: number } = new Error(
+          err?.response?.data?.message || err?.message,
+        );
+        error.statusCode = err?.response?.status || 500;
+        throw error;
       },
     );
   }

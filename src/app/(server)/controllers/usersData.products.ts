@@ -12,7 +12,7 @@ export const createProductController = async (
   request: UserDataProductsType,
 ) => {
   const id = request.headers.get("id");
-  const { name, category, description, price } = request.body;
+  const { name, category, description, price } = await request.json();
   const product: ProductType = { name, category, description, price };
   const userData: UsersDataType = await UserDataModel.findOne({
     users_id: id,
@@ -40,21 +40,19 @@ export const createProductController = async (
 
 export const getProductController = async (request: NextRequest) => {
   const id = request.headers.get("id");
-  console.log(id);
 
-  const userData: UsersDataType = await UserDataModel.findOne({
+  const data = await UserDataModel.findOne({
     users_id: id,
-  });
+  }).select("products -_id");
 
-  if (!userData) {
-    console.log("!userData", userData);
+  if (!data?.products) {
     const error: ErrorType = new Error("User Data was not found");
 
     error.statusCode = 410;
     throw error;
   }
 
-  return NextResponse.json(userData.products || [], { status: 200 });
+  return NextResponse.json(data?.products || [], { status: 200 });
 };
 
 export const createProduct = async (...args: any) =>

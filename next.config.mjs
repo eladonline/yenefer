@@ -6,7 +6,7 @@ const nextConfig = {
     JWT_SECRET_KEY: "mySecret",
     DB_NAME: "yenefer",
     SALT: "10",
-    BASE_API_URI: "http://localhost:3000/api",
+    BASE_API_URI: "http://localhost:3009/api",
     SERVER_TOKEN:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpbnQiOiJGcmkgTWFyIDIyIDIwMjQgMTI6MjM6MjggR01UKzAyMDAgKElzcmFlbCBTdGFuZGFyZCBUaW1lKSIsImlhdCI6MTcxMTEwMzAwOH0.1Wy5HZQvvBUhZhpnVj8RI7ebXGWi6lr_thwNpZi5gYc"
   }
 };

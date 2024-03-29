@@ -6,6 +6,7 @@ const productSchema = new Schema<ProductType>({
   category: { type: String, required: true },
   description: String,
   price: { type: Number, default: 0 },
+  created: Date,
 });
 
 export default productSchema;

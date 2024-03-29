@@ -33,7 +33,7 @@ const useLogin = () => {
     } catch (err: AxiosError | any) {
       formFactory.setError("formError", {
         type: "custom",
-        message: err.response.data.message || err.message,
+        message: err.message,
       });
     }
   };
