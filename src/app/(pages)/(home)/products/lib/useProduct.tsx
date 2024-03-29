@@ -19,8 +19,9 @@ const useProducts = (initialData: ProductType[]): useProductsHook => {
   if (error) {
     throw error;
   }
-  const products = data?.data;
+  const products: ProductType[] | undefined = data?.data;
   return { isLoading, products };
 };
 
 export default useProducts;
+``;

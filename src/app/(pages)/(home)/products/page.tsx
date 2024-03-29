@@ -15,7 +15,7 @@ const Page = async () => {
   });
 
   return (
-    <div className={"p-5 grid justify-center grid-cols-1 md:grid-cols-[80%] "}>
+    <div className={"p-5 grid justify-center grid-cols-1 md:grid-cols-1 "}>
       <header className={"text-center mb-4"}>
         <Title level={2}>Products</Title>
       </header>
