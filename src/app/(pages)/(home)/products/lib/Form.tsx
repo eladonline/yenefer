@@ -1,16 +1,20 @@
 "use client";
-import React, { ReactElement, FC } from "react";
+import React, { ReactElement, FC, useCallback } from "react";
 import QueryClientProvider from "@/utils/Providers/QueryClientProvider";
 import { useProduct } from "@/app/(pages)/(home)/products/lib/useProduct";
 import { ProductType } from "@/types/apis/usersData";
 import Menu from "@/app/(pages)/(home)/products/lib/Menu";
-import { Modal } from "antd/lib";
 import { FormProvider } from "react-hook-form";
 import ProductForm from "@/app/(pages)/(home)/products/lib/ProductForm";
+import { useModal } from "@/utils/hooks/useModal/useModal";
 
 const Form: FC = () => {
-  const { products, isLoading, formFactory, onSubmit } = useProduct();
-  const [modal, contextHolder] = Modal.useModal();
+  const { products, formFactory, onSubmit } = useProduct();
+  const [ModalRoot, modalApi] = useModal();
+  const {
+    formState: { isSubmitting, errors },
+    handleSubmit,
+  } = formFactory;
 
   const productsEl: ReactElement<ProductType>[] | undefined = products?.map(
     ({ name }) => {
@@ -21,18 +25,17 @@ const Form: FC = () => {
   return (
     <div className={"grid grid-cols-1 gap-[20px]"}>
       <FormProvider {...formFactory}>
-        <div>{contextHolder}</div>
+        {ModalRoot({
+          title: "Add new product",
+          onOk: async () => {
+            await handleSubmit(onSubmit)();
+            modalApi.close();
+          },
+          confirmLoading: isSubmitting,
+          children: <ProductForm />,
+        })}
       </FormProvider>
-      <Menu
-        onClickAddProduct={() => {
-          modal.info({
-            title: "Add new product",
-            content: <ProductForm />,
-            onOk: formFactory.handleSubmit(onSubmit),
-            width: "max-content",
-          });
-        }}
-      />
+      <Menu onClickAddProduct={modalApi.open} />
       <div className={"p-5 bg-white rounded "}>
         <QueryClientProvider>
           <ul className={"flex-col flex gap-3"}>{productsEl}</ul>

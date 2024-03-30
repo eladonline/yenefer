@@ -8,14 +8,13 @@ import { createContext, FC, ReactNode, useContext } from "react";
 const ProductContext = createContext<useProductsHook>({} as useProductsHook);
 
 type useProductsHook = {
-  isLoading: boolean;
   products: ProductType[] | undefined;
   formFactory: UseFormReturn<ProductType>;
   onSubmit: SubmitHandler<ProductType>;
 };
 
 const useLogic = (initialData: ProductType[]): useProductsHook => {
-  const { data, isLoading, error } = useQuery<{
+  const { data, error } = useQuery<{
     data: ProductType[];
   }>({
     queryKey: ["products"],
@@ -30,7 +29,7 @@ const useLogic = (initialData: ProductType[]): useProductsHook => {
   const products: ProductType[] | undefined = data?.data;
 
   const onSubmit = async (fields: ProductType) => {
-    await new Promise((res) => {
+    return await new Promise((res) => {
       setTimeout(() => {
         console.log("fieldsfieldsfields", fields);
         res();
@@ -38,7 +37,7 @@ const useLogic = (initialData: ProductType[]): useProductsHook => {
     });
   };
 
-  return { isLoading, products, formFactory, onSubmit };
+  return { products, formFactory, onSubmit };
 };
 
 const ProductProvider: FC<{ children: ReactNode; data: ProductType[] }> = ({

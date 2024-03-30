@@ -5,6 +5,7 @@ import { headers } from "next/headers";
 import Title from "antd/lib/typography/Title";
 import Form from "@/app/(pages)/(home)/products/lib/Form";
 import ProductProvider from "@/app/(pages)/(home)/products/lib/useProduct";
+import ModalProvider from "@/utils/hooks/useModal/useModal";
 
 const Page = async () => {
   const serverApi = new ServerApi();
@@ -21,9 +22,11 @@ const Page = async () => {
         <Title level={2}>Products</Title>
       </header>
       {data && (
-        <ProductProvider data={data}>
-          <Form />
-        </ProductProvider>
+        <ModalProvider>
+          <ProductProvider data={data}>
+            <Form />
+          </ProductProvider>
+        </ModalProvider>
       )}
     </div>
   );
