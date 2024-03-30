@@ -4,6 +4,7 @@ import { endpoints } from "@/app/services/userData";
 import { headers } from "next/headers";
 import Title from "antd/lib/typography/Title";
 import Form from "@/app/(pages)/(home)/products/lib/Form";
+import ProductProvider from "@/app/(pages)/(home)/products/lib/useProduct";
 
 const Page = async () => {
   const serverApi = new ServerApi();
@@ -19,7 +20,11 @@ const Page = async () => {
       <header className={"text-center mb-4"}>
         <Title level={2}>Products</Title>
       </header>
-      {data && <Form data={data} />}
+      {data && (
+        <ProductProvider data={data}>
+          <Form />
+        </ProductProvider>
+      )}
     </div>
   );
 };

@@ -1,15 +1,20 @@
+"use client";
 import { useQuery } from "react-query";
 import { ProductType } from "@/types/apis/usersData";
 import { getProducts } from "@/app/services/userData";
-import { useForm, UseFormReturn } from "react-hook-form";
+import { SubmitHandler, useForm, UseFormReturn } from "react-hook-form";
+import { createContext, FC, ReactNode, useContext } from "react";
+
+const ProductContext = createContext<useProductsHook>({} as useProductsHook);
 
 type useProductsHook = {
   isLoading: boolean;
   products: ProductType[] | undefined;
   formFactory: UseFormReturn<ProductType>;
+  onSubmit: SubmitHandler<ProductType>;
 };
 
-const useProducts = (initialData: ProductType[]): useProductsHook => {
+const useLogic = (initialData: ProductType[]): useProductsHook => {
   const { data, isLoading, error } = useQuery<{
     data: ProductType[];
   }>({
@@ -17,13 +22,37 @@ const useProducts = (initialData: ProductType[]): useProductsHook => {
     queryFn: getProducts,
     initialData: { data: initialData },
   });
-  const formFactory = useForm<ProductType>({});
+  const formFactory = useForm<ProductType>();
 
   if (error) {
     throw error;
   }
   const products: ProductType[] | undefined = data?.data;
-  return { isLoading, products, formFactory };
+
+  const onSubmit = async (fields: ProductType) => {
+    await new Promise((res) => {
+      setTimeout(() => {
+        console.log("fieldsfieldsfields", fields);
+        res();
+      }, 1000);
+    });
+  };
+
+  return { isLoading, products, formFactory, onSubmit };
 };
 
-export default useProducts;
+const ProductProvider: FC<{ children: ReactNode; data: ProductType[] }> = ({
+  children,
+  data,
+}) => {
+  const values = useLogic(data);
+  return (
+    <ProductContext.Provider value={values}>{children}</ProductContext.Provider>
+  );
+};
+
+export const useProduct = () => {
+  return useContext(ProductContext);
+};
+
+export default ProductProvider;

@@ -2,7 +2,7 @@ import { FieldValues, useFormContext, useFormState } from "react-hook-form";
 import React, { BaseSyntheticEvent, FC } from "react";
 import { SignInCredentials } from "@/app/(pages)/sign-up/lib/useSignUp";
 import Field from "@/app/components/decorators/form/Field";
-import ControlledInput from "@/utils/useForm/Controlled";
+import ControlledInput from "@/utils/hooks/useForm/ControlledInputs";
 import _get from "lodash/get";
 import PrimaryError from "@/app/components/errors/PrimaryError";
 import { Button } from "antd/lib";

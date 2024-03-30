@@ -1,4 +1,4 @@
-import Controller from "@/utils/useForm/Controller";
+import Controller from "@/utils/hooks/useForm/Controller";
 import { FC, ComponentPropsWithoutRef } from "react";
 import { Input } from "antd/lib";
 import { FieldValues } from "react-hook-form";
