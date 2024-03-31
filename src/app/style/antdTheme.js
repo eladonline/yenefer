@@ -9,6 +9,10 @@ const theme = {
     Input: {
       colorBgContainer: "rgba(161,165,147,0.04)",
     },
+    Modal: {
+      titleFontSize: 18,
+      titleLineHeight: 1,
+    },
     Typography: {
       titleMarginBottom: 0,
       titleMarginTop: 0,

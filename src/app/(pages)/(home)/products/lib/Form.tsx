@@ -14,6 +14,7 @@ const Form: FC = () => {
   const {
     formState: { isSubmitting, errors },
     handleSubmit,
+    reset,
   } = formFactory;
 
   const productsEl: ReactElement<ProductType>[] | undefined = products?.map(
@@ -33,6 +34,10 @@ const Form: FC = () => {
           },
           confirmLoading: isSubmitting,
           children: <ProductForm />,
+          afterClose: () => {
+            reset();
+            console.log("closed");
+          },
         })}
       </FormProvider>
       <Menu onClickAddProduct={modalApi.open} />

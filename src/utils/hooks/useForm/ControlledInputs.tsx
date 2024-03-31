@@ -1,6 +1,6 @@
 import Controller from "@/utils/hooks/useForm/Controller";
 import { FC, ComponentPropsWithoutRef } from "react";
-import { Input } from "antd/lib";
+import { Input, InputNumber } from "antd/lib";
 import { FieldValues } from "react-hook-form";
 
 const { TextArea } = Input;
@@ -22,6 +22,27 @@ export const ControlledInput: FC<ControlledInput> = ({
   return (
     <Controller name={name} control={control} rules={rules}>
       <Input name={name} placeholder={placeholder} {...props} />
+    </Controller>
+  );
+};
+
+type ControlledInputNumber = {
+  name: string;
+  rules?: FieldValues;
+  control: FieldValues;
+  placeholder?: string;
+} & ComponentPropsWithoutRef<any>;
+
+export const ControlledInputNumber: FC<ControlledInputNumber> = ({
+  name,
+  rules,
+  control,
+  placeholder = "Type Here",
+  ...props
+}) => {
+  return (
+    <Controller name={name} control={control} rules={rules}>
+      <InputNumber name={name} placeholder={placeholder} {...props} />
     </Controller>
   );
 };

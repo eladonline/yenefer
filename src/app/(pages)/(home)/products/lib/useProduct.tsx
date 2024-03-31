@@ -21,7 +21,14 @@ const useLogic = (initialData: ProductType[]): useProductsHook => {
     queryFn: getProducts,
     initialData: { data: initialData },
   });
-  const formFactory = useForm<ProductType>();
+  const formFactory = useForm<ProductType>({
+    defaultValues: {
+      name: "",
+      category: "",
+      description: "",
+      price: 0,
+    },
+  });
 
   if (error) {
     throw error;

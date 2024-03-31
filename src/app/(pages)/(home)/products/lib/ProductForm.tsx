@@ -1,19 +1,31 @@
 import React from "react";
 import {
   ControlledInput,
+  ControlledInputNumber,
   ControlledTextArea,
 } from "@/utils/hooks/useForm/ControlledInputs";
 import { useFormContext } from "react-hook-form";
+import Field from "@/app/components/decorators/form/Field";
 
 const ProductForm = () => {
   const { control, getValues } = useFormContext();
   console.log(getValues());
   return (
-    <div className={"grid grid-cols-[400px_400px] gap-12"}>
-      <ControlledInput name={"name"} control={control} />
-      <ControlledInput name={"price"} control={control} />
-      <ControlledInput name={"category"} control={control} />
-      <ControlledTextArea name={"description"} control={control} />
+    <div className={"flex flex-col gap-5"}>
+      <div className={"grid grid-cols-[400px_400px] gap-5"}>
+        <Field label={{ text: "Name" }}>
+          <ControlledInput name={"name"} control={control} />
+        </Field>
+        <Field label={{ text: "Category" }}>
+          <ControlledInput name={"category"} control={control} />
+        </Field>
+      </div>
+      <Field label={{ text: "Description" }}>
+        <ControlledTextArea name={"description"} control={control} />
+      </Field>
+      <Field label={{ text: "Price" }}>
+        <ControlledInputNumber name={"price"} control={control} />
+      </Field>
     </div>
   );
 };
