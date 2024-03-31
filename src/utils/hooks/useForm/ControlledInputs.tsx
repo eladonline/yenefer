@@ -3,6 +3,8 @@ import { FC, ComponentPropsWithoutRef } from "react";
 import { Input } from "antd/lib";
 import { FieldValues } from "react-hook-form";
 
+const { TextArea } = Input;
+
 type ControlledInput = {
   name: string;
   rules?: FieldValues;
@@ -10,7 +12,7 @@ type ControlledInput = {
   placeholder?: string;
 } & ComponentPropsWithoutRef<any>;
 
-const ControlledInput: FC<ControlledInput> = ({
+export const ControlledInput: FC<ControlledInput> = ({
   name,
   rules,
   control,
@@ -24,4 +26,16 @@ const ControlledInput: FC<ControlledInput> = ({
   );
 };
 
-export default ControlledInput;
+export const ControlledTextArea: FC<ControlledInput> = ({
+  name,
+  rules,
+  control,
+  placeholder = "Type Here",
+  ...props
+}) => {
+  return (
+    <Controller name={name} control={control} rules={rules}>
+      <TextArea name={name} placeholder={placeholder} {...props} />
+    </Controller>
+  );
+};

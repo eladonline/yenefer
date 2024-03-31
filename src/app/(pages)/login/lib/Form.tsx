@@ -1,5 +1,5 @@
 import Field from "@/app/components/decorators/form/Field";
-import ControlledInput from "@/utils/hooks/useForm/ControlledInputs";
+import { ControlledInput } from "@/utils/hooks/useForm/ControlledInputs";
 import PrimaryError from "@/app/components/errors/PrimaryError";
 import { BaseSyntheticEvent, FC } from "react";
 import { FieldValues, useFormContext, useFormState } from "react-hook-form";
