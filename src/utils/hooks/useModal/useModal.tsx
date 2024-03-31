@@ -30,7 +30,8 @@ const useLogic = (): useModalType => {
         width="max-content"
         {...restProps}
       >
-        <div style={{ marginTop: "20px" }}>{children}</div>
+        <div style={{ marginTop: "20px" }} />
+        {children}
       </Modal>
     );
   };

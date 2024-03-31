@@ -23,9 +23,9 @@ const useLogic = (initialData: ProductType[]): useProductsHook => {
   });
   const formFactory = useForm<ProductType>({
     defaultValues: {
-      name: "",
-      category: "",
-      description: "",
+      name: undefined,
+      category: undefined,
+      description: undefined,
       price: 0,
     },
   });

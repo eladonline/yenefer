@@ -9,6 +9,10 @@ const theme = {
     Input: {
       colorBgContainer: "rgba(161,165,147,0.04)",
     },
+    Select: {
+      colorBgContainer: "rgba(161,165,147,0.04)",
+      width: "100%",
+    },
     Modal: {
       titleFontSize: 18,
       titleLineHeight: 1,

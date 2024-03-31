@@ -2,14 +2,19 @@ import React from "react";
 import {
   ControlledInput,
   ControlledInputNumber,
+  ControlledSelect,
   ControlledTextArea,
 } from "@/utils/hooks/useForm/ControlledInputs";
 import { useFormContext } from "react-hook-form";
 import Field from "@/app/components/decorators/form/Field";
+import config from "./config.json";
 
 const ProductForm = () => {
   const { control, getValues } = useFormContext();
-  console.log(getValues());
+  const categories = config.categories.map((id) => ({
+    value: id.toLocaleLowerCase(),
+    label: id,
+  }));
   return (
     <div className={"flex flex-col gap-5"}>
       <div className={"grid grid-cols-[400px_400px] gap-5"}>
@@ -17,7 +22,11 @@ const ProductForm = () => {
           <ControlledInput name={"name"} control={control} />
         </Field>
         <Field label={{ text: "Category" }}>
-          <ControlledInput name={"category"} control={control} />
+          <ControlledSelect
+            options={categories}
+            name={"category"}
+            control={control}
+          />
         </Field>
       </div>
       <Field label={{ text: "Description" }}>

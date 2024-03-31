@@ -1,18 +1,27 @@
 import Controller from "@/utils/hooks/useForm/Controller";
 import { FC, ComponentPropsWithoutRef } from "react";
-import { Input, InputNumber } from "antd/lib";
+import {
+  Input,
+  InputNumber,
+  InputNumberProps,
+  InputProps,
+  Select,
+  SelectProps,
+} from "antd/lib";
 import { FieldValues } from "react-hook-form";
+import { TextAreaProps } from "antd/lib/input";
 
 const { TextArea } = Input;
 
-type ControlledInput = {
+type ControlledInputType = {
   name: string;
   rules?: FieldValues;
   control: FieldValues;
   placeholder?: string;
-} & ComponentPropsWithoutRef<any>;
+} & InputProps &
+  ComponentPropsWithoutRef<any>;
 
-export const ControlledInput: FC<ControlledInput> = ({
+export const ControlledInput: FC<ControlledInputType> = ({
   name,
   rules,
   control,
@@ -26,14 +35,36 @@ export const ControlledInput: FC<ControlledInput> = ({
   );
 };
 
-type ControlledInputNumber = {
+type ControlledSelectType = {
+  name: string;
+  rules?: FieldValues;
+  control: FieldValues;
+} & SelectProps &
+  ComponentPropsWithoutRef<any>;
+
+export const ControlledSelect: FC<ControlledSelectType> = ({
+  name,
+  rules,
+  control,
+  placeholder = "Type Here",
+  ...props
+}) => {
+  return (
+    <Controller name={name} control={control} rules={rules}>
+      <Select className={"w-[100%]"} placeholder={placeholder} {...props} />
+    </Controller>
+  );
+};
+
+type ControlledInputNumberType = {
   name: string;
   rules?: FieldValues;
   control: FieldValues;
   placeholder?: string;
-} & ComponentPropsWithoutRef<any>;
+} & InputNumberProps &
+  ComponentPropsWithoutRef<any>;
 
-export const ControlledInputNumber: FC<ControlledInputNumber> = ({
+export const ControlledInputNumber: FC<ControlledInputNumberType> = ({
   name,
   rules,
   control,
@@ -47,7 +78,15 @@ export const ControlledInputNumber: FC<ControlledInputNumber> = ({
   );
 };
 
-export const ControlledTextArea: FC<ControlledInput> = ({
+type ControlledTextAreaType = {
+  name: string;
+  rules?: FieldValues;
+  control: FieldValues;
+  placeholder?: string;
+} & TextAreaProps &
+  ComponentPropsWithoutRef<any>;
+
+export const ControlledTextArea: FC<ControlledTextAreaType> = ({
   name,
   rules,
   control,
