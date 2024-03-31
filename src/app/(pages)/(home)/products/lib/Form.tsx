@@ -7,8 +7,11 @@ import Menu from "@/app/(pages)/(home)/products/lib/Menu";
 import { FormProvider } from "react-hook-form";
 import ProductForm from "@/app/(pages)/(home)/products/lib/ProductForm";
 import { useModal } from "@/utils/hooks/useModal/useModal";
+import { notification } from "antd/lib";
 
 const Form: FC = () => {
+  const [, contextHolder] = notification.useNotification();
+
   const { products, formFactory, onSubmit } = useProduct();
   const [ModalRoot, modalApi] = useModal();
   const {
@@ -25,6 +28,7 @@ const Form: FC = () => {
 
   return (
     <div className={"grid grid-cols-1 gap-[20px]"}>
+      {contextHolder}
       <FormProvider {...formFactory}>
         {ModalRoot({
           title: "Add new product",

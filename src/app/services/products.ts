@@ -1,5 +1,6 @@
 import { AxiosResponse } from "axios";
 import api from "@/app/services/clientApi";
+import { ProductType } from "@/types/apis/usersData";
 
 export const endpoints = {
   products: `/products`,
@@ -7,4 +8,8 @@ export const endpoints = {
 
 export function getProducts(): Promise<AxiosResponse> {
   return api.http.get(endpoints.products);
+}
+
+export function createProduct(body: ProductType): Promise<AxiosResponse> {
+  return api.http.post(endpoints.products, body);
 }

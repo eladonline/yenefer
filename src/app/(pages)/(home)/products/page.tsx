@@ -1,6 +1,6 @@
 import React from "react";
 import ServerApi from "@/app/services/ServerApi";
-import { endpoints } from "@/app/services/userData";
+import { endpoints } from "@/app/services/products";
 import { headers } from "next/headers";
 import Title from "antd/lib/typography/Title";
 import Form from "@/app/(pages)/(home)/products/lib/Form";

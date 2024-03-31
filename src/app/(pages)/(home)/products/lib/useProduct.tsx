@@ -1,9 +1,10 @@
 "use client";
 import { useQuery } from "react-query";
 import { ProductType } from "@/types/apis/usersData";
-import { getProducts } from "@/app/services/userData";
+import { createProduct, getProducts } from "@/app/services/products";
 import { SubmitHandler, useForm, UseFormReturn } from "react-hook-form";
 import { createContext, FC, ReactNode, useContext } from "react";
+import { notification } from "antd/lib";
 
 const ProductContext = createContext<useProductsHook>({} as useProductsHook);
 
@@ -14,6 +15,8 @@ type useProductsHook = {
 };
 
 const useLogic = (initialData: ProductType[]): useProductsHook => {
+  const [api] = notification.useNotification();
+
   const { data, error } = useQuery<{
     data: ProductType[];
   }>({
@@ -21,6 +24,7 @@ const useLogic = (initialData: ProductType[]): useProductsHook => {
     queryFn: getProducts,
     initialData: { data: initialData },
   });
+
   const formFactory = useForm<ProductType>({
     defaultValues: {
       name: undefined,
@@ -35,13 +39,13 @@ const useLogic = (initialData: ProductType[]): useProductsHook => {
   }
   const products: ProductType[] | undefined = data?.data;
 
+  api.info({ message: "test" });
   const onSubmit = async (fields: ProductType) => {
-    return await new Promise((res) => {
-      setTimeout(() => {
-        console.log("fieldsfieldsfields", fields);
-        res();
-      }, 1000);
-    });
+    try {
+      await createProduct(fields);
+    } catch (err) {
+      api.info({ message: "test" });
+    }
   };
 
   return { products, formFactory, onSubmit };
