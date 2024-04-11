@@ -1,7 +1,11 @@
 "use client";
 import { useQuery } from "react-query";
 import { ProductType } from "@/types/apis/usersData";
-import { createProduct, getProducts } from "@/app/services/products";
+import {
+  createProduct,
+  editProduct,
+  getProducts,
+} from "@/app/services/products";
 import { SubmitHandler, useForm, UseFormReturn } from "react-hook-form";
 import { createContext, FC, ReactNode, useContext } from "react";
 import { notification } from "antd/lib";
@@ -10,8 +14,17 @@ const ProductContext = createContext<useProductsHook>({} as useProductsHook);
 
 type useProductsHook = {
   products: ProductType[] | undefined;
-  formFactory: UseFormReturn<ProductType>;
+  formFactory: UseFormReturn<ProductType & { isEdit?: boolean }>;
   onSubmit: SubmitHandler<ProductType>;
+  onSubmitEdit: SubmitHandler<ProductType>;
+  resetFormToDefault: () => void;
+};
+
+const defaultValues = {
+  name: undefined,
+  category: undefined,
+  description: undefined,
+  price: 0,
 };
 
 const useLogic = (initialData: ProductType[]): useProductsHook => {
@@ -26,12 +39,7 @@ const useLogic = (initialData: ProductType[]): useProductsHook => {
   });
 
   const formFactory = useForm<ProductType>({
-    defaultValues: {
-      name: undefined,
-      category: undefined,
-      description: undefined,
-      price: 0,
-    },
+    defaultValues,
   });
 
   if (error) {
@@ -39,7 +47,6 @@ const useLogic = (initialData: ProductType[]): useProductsHook => {
   }
   const products: ProductType[] | undefined = data?.data;
 
-  api.info({ message: "test" });
   const onSubmit = async (fields: ProductType) => {
     try {
       await createProduct(fields);
@@ -48,7 +55,18 @@ const useLogic = (initialData: ProductType[]): useProductsHook => {
     }
   };
 
-  return { products, formFactory, onSubmit };
+  const onSubmitEdit = async ({ ...fields }: ProductType) => {
+    try {
+      // await editProduct(fields);
+    } catch (err) {
+      api.info({ message: "test" });
+    }
+  };
+  const resetFormToDefault = () => {
+    formFactory.reset(defaultValues);
+  };
+
+  return { products, formFactory, onSubmit, resetFormToDefault, onSubmitEdit };
 };
 
 const ProductProvider: FC<{ children: ReactNode; data: ProductType[] }> = ({

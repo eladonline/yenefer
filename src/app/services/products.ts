@@ -13,3 +13,7 @@ export function getProducts(): Promise<AxiosResponse> {
 export function createProduct(body: ProductType): Promise<AxiosResponse> {
   return api.http.post(endpoints.products, body);
 }
+
+export function editProduct(body: ProductType): Promise<AxiosResponse> {
+  return api.http.patch(endpoints.products, body);
+}

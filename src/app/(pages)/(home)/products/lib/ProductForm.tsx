@@ -10,7 +10,7 @@ import Field from "@/app/components/decorators/form/Field";
 import config from "./config.json";
 
 const ProductForm = () => {
-  const { control, getValues } = useFormContext();
+  const { control } = useFormContext();
   const categories = config.categories.map((id) => ({
     value: id.toLocaleLowerCase(),
     label: id,
@@ -33,7 +33,7 @@ const ProductForm = () => {
         <ControlledTextArea name={"description"} control={control} />
       </Field>
       <Field label={{ text: "Price" }}>
-        <ControlledInputNumber name={"price"} control={control} />
+        <ControlledInputNumber min={0} name={"price"} control={control} />
       </Field>
     </div>
   );

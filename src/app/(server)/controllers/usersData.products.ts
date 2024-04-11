@@ -43,7 +43,7 @@ export const getProductController = async (request: NextRequest) => {
 
   const data = await UserDataModel.findOne({
     users_id: id,
-  }).select("products -_id");
+  }).select("products");
 
   if (!data?.products) {
     const error: ErrorType = new Error("User Data was not found");
