@@ -8,7 +8,7 @@ export default function DefaultPageLoading({
 
   return (
     <div className={`h-[100%] w-[100%] ${position}`}>
-      <PrimaryLoader />;
+      <PrimaryLoader />
     </div>
   );
 }

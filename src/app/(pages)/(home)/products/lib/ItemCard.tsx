@@ -40,7 +40,7 @@ const ItemCard: FC<ItemCardType> = ({
       }
       title={
         <Typography.Text
-          className={"max-w-[90%]"}
+          className={"ovrd [&.ovrd]:max-w-[90%]"}
           ellipsis={{ tooltip: { title: name } }}
         >
           {name}
