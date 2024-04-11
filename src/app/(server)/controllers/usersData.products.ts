@@ -38,15 +38,18 @@ export const createProductController = async (
   );
 };
 
-export const patchProductController = async (request: UserDataProductsType) => {
+export const patchProductController = async (
+  request: UserDataProductsType,
+  { params }: { params: { productId: string } },
+) => {
   const id = request.headers.get("id");
-  const { name, category, description, price, _id } = await request.json();
+  const { name, category, description, price } = await request.json();
 
   const product: ProductType = { name, category, description, price };
   await UserDataModel.findOneAndUpdate(
     {
       users_id: id,
-      "products._id": _id,
+      "products._id": params.productId,
     },
     {
       $set: {
@@ -57,6 +60,28 @@ export const patchProductController = async (request: UserDataProductsType) => {
 
   return NextResponse.json(
     { message: "Product updated successfully" },
+    { status: 200 },
+  );
+};
+
+export const deleteProductController = async (
+  request: UserDataProductsType,
+  { params }: { params: { productId: string } },
+) => {
+  const id = request.headers.get("id");
+  console.log("delete");
+  await UserDataModel.findOneAndUpdate(
+    {
+      users_id: id,
+      "products._id": params.productId,
+    },
+    {
+      $pull: { products: { _id: params.productId } },
+    },
+  );
+
+  return NextResponse.json(
+    { message: "Product Deleted successfully" },
     { status: 200 },
   );
 };
@@ -76,6 +101,9 @@ export const createProduct = async (...args: any) =>
 
 export const patchProduct = async (...args: any) =>
   errorHandler(patchProductController, args);
+
+export const deleteProduct = async (...args: any) =>
+  errorHandler(deleteProductController, args);
 
 export const getProduct = async (...args: any) =>
   errorHandler(getProductController, args);

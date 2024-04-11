@@ -1,6 +1,5 @@
 "use client";
 import React, { ReactElement, FC } from "react";
-import QueryClientProvider from "@/utils/Providers/QueryClientProvider";
 import { useProduct } from "@/app/(pages)/(home)/products/lib/useProduct";
 import Menu from "@/app/(pages)/(home)/products/lib/Menu";
 import { FormProvider } from "react-hook-form";
@@ -9,8 +8,14 @@ import { useModal } from "@/utils/hooks/useModal/useModal";
 import ItemCard from "@/app/(pages)/(home)/products/lib/ItemCard";
 
 const Products: FC = () => {
-  const { products, formFactory, onSubmit, resetFormToDefault, onSubmitEdit } =
-    useProduct();
+  const {
+    products,
+    formFactory,
+    onSubmit,
+    resetFormToDefault,
+    onSubmitEdit,
+    onDeleteItem,
+  } = useProduct();
   const [ModalRoot, modalApi] = useModal();
   const {
     formState: { isSubmitting },
@@ -26,6 +31,7 @@ const Products: FC = () => {
             reset({ ...props });
             modalApi.open();
           }}
+          onDelete={() => onDeleteItem(props._id as string)}
           key={props._id}
           {...props}
         />
@@ -50,9 +56,7 @@ const Products: FC = () => {
         })}
       </FormProvider>
       <Menu onClickAddProduct={modalApi.open} />
-      <div className={"p-5"}>
-        <ul className={"flex flex-wrap gap-3"}>{productsEl}</ul>
-      </div>
+      <ul className={"flex flex-wrap gap-3"}>{productsEl}</ul>
     </div>
   );
 };

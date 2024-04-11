@@ -5,10 +5,12 @@ import {
   createProduct,
   editProduct,
   getProducts,
+  deleteProduct,
 } from "@/app/services/products";
 import { SubmitHandler, useForm, UseFormReturn } from "react-hook-form";
 import { createContext, FC, ReactNode, useContext } from "react";
 import { notification } from "antd/lib";
+import { NotificationInstance } from "antd/lib/notification/interface";
 
 const ProductContext = createContext<useProductsHook>({} as useProductsHook);
 
@@ -18,6 +20,7 @@ type useProductsHook = {
   onSubmit: SubmitHandler<ProductType>;
   onSubmitEdit: SubmitHandler<ProductType>;
   resetFormToDefault: () => void;
+  onDeleteItem: (id: string) => void;
 };
 
 const defaultValues = {
@@ -28,7 +31,10 @@ const defaultValues = {
   _id: undefined,
 };
 
-const useLogic = (initialData: ProductType[]): useProductsHook => {
+const useLogic = (
+  initialData: ProductType[],
+  notificationApi: NotificationInstance,
+): useProductsHook => {
   const [api] = notification.useNotification();
 
   const { data, error, refetch } = useQuery<{
@@ -52,33 +58,57 @@ const useLogic = (initialData: ProductType[]): useProductsHook => {
     try {
       await createProduct(fields);
       await refetch();
-    } catch (err) {
-      api.info({ message: "test" });
+    } catch (err: any) {
+      notificationApi.error({ message: err.message });
     }
   };
 
-  const onSubmitEdit = async (fields: ProductType) => {
+  const onSubmitEdit = async ({ _id, ...fields }: ProductType) => {
     try {
-      await editProduct(fields);
+      await editProduct(_id as string, fields);
       await refetch();
-    } catch (err) {
-      api.info({ message: "test" });
+    } catch (err: any) {
+      notificationApi.error({ message: err.message });
     }
   };
+
+  const onDeleteItem = async (_id: string) => {
+    try {
+      await deleteProduct(_id);
+      await refetch();
+      resetFormToDefault();
+    } catch (err: any) {
+      notificationApi.error({ message: err.message });
+    }
+  };
+
   const resetFormToDefault = () => {
     formFactory.reset(defaultValues);
   };
 
-  return { products, formFactory, onSubmit, resetFormToDefault, onSubmitEdit };
+  return {
+    products,
+    formFactory,
+    onSubmit,
+    resetFormToDefault,
+    onSubmitEdit,
+    onDeleteItem,
+  };
 };
 
 const ProductProvider: FC<{ children: ReactNode; data: ProductType[] }> = ({
   children,
   data,
 }) => {
-  const values = useLogic(data);
+  const [notificationApi, contextHolder] = notification.useNotification();
+
+  const values = useLogic(data, notificationApi);
+
   return (
-    <ProductContext.Provider value={values}>{children}</ProductContext.Provider>
+    <ProductContext.Provider value={values}>
+      {contextHolder}
+      {children}
+    </ProductContext.Provider>
   );
 };
 

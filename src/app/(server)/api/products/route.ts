@@ -4,4 +4,4 @@ import {
   patchProduct,
 } from "@/app/(server)/controllers/usersData.products";
 
-export { createProduct as POST, getProduct as GET, patchProduct as PATCH };
+export { createProduct as POST, getProduct as GET };
