@@ -14,7 +14,7 @@ const ProductContext = createContext<useProductsHook>({} as useProductsHook);
 
 type useProductsHook = {
   products: ProductType[] | undefined;
-  formFactory: UseFormReturn<ProductType & { isEdit?: boolean }>;
+  formFactory: UseFormReturn<ProductType>;
   onSubmit: SubmitHandler<ProductType>;
   onSubmitEdit: SubmitHandler<ProductType>;
   resetFormToDefault: () => void;
@@ -25,12 +25,13 @@ const defaultValues = {
   category: undefined,
   description: undefined,
   price: 0,
+  _id: undefined,
 };
 
 const useLogic = (initialData: ProductType[]): useProductsHook => {
   const [api] = notification.useNotification();
 
-  const { data, error } = useQuery<{
+  const { data, error, refetch } = useQuery<{
     data: ProductType[];
   }>({
     queryKey: ["products"],
@@ -47,17 +48,19 @@ const useLogic = (initialData: ProductType[]): useProductsHook => {
   }
   const products: ProductType[] | undefined = data?.data;
 
-  const onSubmit = async (fields: ProductType) => {
+  const onSubmit = async ({ _id, ...fields }: ProductType) => {
     try {
       await createProduct(fields);
+      await refetch();
     } catch (err) {
       api.info({ message: "test" });
     }
   };
 
-  const onSubmitEdit = async ({ ...fields }: ProductType) => {
+  const onSubmitEdit = async (fields: ProductType) => {
     try {
-      // await editProduct(fields);
+      await editProduct(fields);
+      await refetch();
     } catch (err) {
       api.info({ message: "test" });
     }

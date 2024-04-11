@@ -19,14 +19,14 @@ const Products: FC = () => {
   } = formFactory;
 
   const productsEl: ReactElement[] | undefined = products?.map(
-    ({ _id, ...props }) => {
+    ({ ...props }) => {
       return (
         <ItemCard
           onEdit={() => {
-            reset({ ...props, isEdit: true });
+            reset({ ...props });
             modalApi.open();
           }}
-          key={_id}
+          key={props._id}
           {...props}
         />
       );
@@ -39,9 +39,8 @@ const Products: FC = () => {
         {ModalRoot({
           title: "Product",
           onOk: async () => {
-            await handleSubmit(({ isEdit, ...values }) => {
-              console.log(isEdit);
-              isEdit ? onSubmitEdit(values) : onSubmit(values);
+            await handleSubmit((values) => {
+              values._id ? onSubmitEdit(values) : onSubmit(values);
             })();
             modalApi.close();
           },
