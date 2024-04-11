@@ -8,13 +8,13 @@ import {
 import { useFormContext } from "react-hook-form";
 import Field from "@/app/components/decorators/form/Field";
 import config from "./config.json";
-
+const categories = config.categories.map((id) => ({
+  value: id.toLocaleLowerCase(),
+  label: id,
+}));
 const ProductForm = () => {
   const { control } = useFormContext();
-  const categories = config.categories.map((id) => ({
-    value: id.toLocaleLowerCase(),
-    label: id,
-  }));
+
   return (
     <div className={"flex flex-col gap-5"}>
       <div className={"grid grid-cols-[400px_400px] gap-5"}>
