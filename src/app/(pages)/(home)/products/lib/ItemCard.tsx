@@ -38,7 +38,14 @@ const ItemCard: FC<ItemCardType> = ({
           </div>
         )
       }
-      title={name}
+      title={
+        <Typography.Text
+          className={"max-w-[90%]"}
+          ellipsis={{ tooltip: { title: name } }}
+        >
+          {name}
+        </Typography.Text>
+      }
       className={"flex flex-col gap-3 w-[25%] min-w-[250px] "}
     >
       <div className={"flex gap-2"}>
