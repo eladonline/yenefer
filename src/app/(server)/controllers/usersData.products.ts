@@ -69,7 +69,6 @@ export const deleteProductController = async (
   { params }: { params: { productId: string } },
 ) => {
   const id = request.headers.get("id");
-  console.log("delete");
   await UserDataModel.findOneAndUpdate(
     {
       users_id: id,

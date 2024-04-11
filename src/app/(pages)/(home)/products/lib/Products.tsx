@@ -23,22 +23,6 @@ const Products: FC = () => {
     reset,
   } = formFactory;
 
-  const productsEl: ReactElement[] | undefined = products?.map(
-    ({ ...props }) => {
-      return (
-        <ItemCard
-          onEdit={() => {
-            reset({ ...props });
-            modalApi.open();
-          }}
-          onDelete={() => onDeleteItem(props._id as string)}
-          key={props._id}
-          {...props}
-        />
-      );
-    },
-  );
-
   return (
     <div className={"grid grid-cols-1 gap-[20px]"}>
       <FormProvider {...formFactory}>
@@ -56,7 +40,22 @@ const Products: FC = () => {
         })}
       </FormProvider>
       <Menu onClickAddProduct={modalApi.open} />
-      <ul className={"flex flex-wrap gap-3"}>{productsEl}</ul>
+      <ul className={"flex flex-wrap gap-3"}>
+        {products?.map(({ ...props }) => {
+          return (
+            <ItemCard
+              loading={isSubmitting}
+              onEdit={() => {
+                reset({ ...props });
+                modalApi.open();
+              }}
+              onDelete={() => onDeleteItem(props._id as string)}
+              key={props._id}
+              {...props}
+            />
+          );
+        })}
+      </ul>
     </div>
   );
 };

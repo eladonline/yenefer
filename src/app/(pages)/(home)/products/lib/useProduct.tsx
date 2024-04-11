@@ -35,8 +35,6 @@ const useLogic = (
   initialData: ProductType[],
   notificationApi: NotificationInstance,
 ): useProductsHook => {
-  const [api] = notification.useNotification();
-
   const { data, error, refetch } = useQuery<{
     data: ProductType[];
   }>({
@@ -58,6 +56,7 @@ const useLogic = (
     try {
       await createProduct(fields);
       await refetch();
+      resetFormToDefault();
     } catch (err: any) {
       notificationApi.error({ message: err.message });
     }
@@ -67,6 +66,7 @@ const useLogic = (
     try {
       await editProduct(_id as string, fields);
       await refetch();
+      resetFormToDefault();
     } catch (err: any) {
       notificationApi.error({ message: err.message });
     }
