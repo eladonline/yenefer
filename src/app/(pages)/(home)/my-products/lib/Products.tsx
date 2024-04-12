@@ -1,7 +1,7 @@
 "use client";
 import React, { FC, ReactElement, useState } from "react";
 import { useProduct } from "@/app/(pages)/(home)/my-products/lib/useProduct";
-import ProductsBar from "@/app/(pages)/(home)/my-products/lib/ProductsBar";
+import ProductsBar from "@/app/components/bars/ProductsBar";
 import { FormProvider } from "react-hook-form";
 import ProductForm from "@/app/(pages)/(home)/my-products/lib/ProductForm";
 import { useModal } from "@/utils/hooks/useModal/useModal";
