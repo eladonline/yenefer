@@ -3,15 +3,23 @@ import { Button, Tooltip } from "antd/lib";
 import { PlusOutlined } from "@ant-design/icons";
 import AccessControl from "@/app/components/decorators/access-control/AccessControl";
 
-const ActionsBar: FC<{ onClickAddProduct: MouseEventHandler }> = ({
-  onClickAddProduct,
+type ActionBarTypes = {
+  onFiltersClick: MouseEventHandler;
+  onAddProductClick: MouseEventHandler;
+};
+
+const ActionsBar: FC<ActionBarTypes> = ({
+  onAddProductClick,
+  onFiltersClick,
 }) => {
   return (
-    <div className={"p-2 bg-stone-700 rounded-2xl sticky top-0 z-10"}>
+    <div
+      className={"p-2 bg-stone-700 rounded-2xl sticky top-0 z-10 gap-3 flex"}
+    >
       <Tooltip title={"Add product"}>
         <AccessControl access={"seller"}>
           <Button
-            onClick={onClickAddProduct}
+            onClick={onAddProductClick}
             className={
               "ovd ovd2 [&.ant-btn]:bg-green-400 hover:[&.ovd.ovd2.ant-btn]:bg-green-300 active:[&.ovd.ovd2.ant-btn]:bg-green-600"
             }
@@ -21,6 +29,9 @@ const ActionsBar: FC<{ onClickAddProduct: MouseEventHandler }> = ({
           />
         </AccessControl>
       </Tooltip>
+      <Button onClick={onFiltersClick} shape="round" type="primary">
+        Filters
+      </Button>
     </div>
   );
 };

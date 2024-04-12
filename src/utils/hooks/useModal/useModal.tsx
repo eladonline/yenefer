@@ -12,20 +12,20 @@ type useModalType = [
   {
     close: () => void;
     open: () => void;
-    state: boolean;
+    isOpen: boolean;
   },
 ];
 
 const ModalContext = createContext({} as useModalType);
 
 const useLogic = (): useModalType => {
-  const [modalState, setModalState] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const ModalRoot: useModalType[0] = ({ children, ...restProps }) => {
     return (
       <Modal
-        onCancel={() => setModalState(false)}
-        open={modalState}
+        onCancel={() => setIsOpen(false)}
+        open={isOpen}
         maskClosable={false}
         width="max-content"
         {...restProps}
@@ -39,9 +39,9 @@ const useLogic = (): useModalType => {
   return [
     ModalRoot,
     {
-      close: () => setModalState(false),
-      open: () => setModalState(true),
-      state: modalState,
+      close: () => setIsOpen(false),
+      open: () => setIsOpen(true),
+      isOpen,
     },
   ];
 };
