@@ -13,9 +13,7 @@ const ProductsBar: FC<ActionBarTypes> = ({
   onFiltersClick,
 }) => {
   return (
-    <div
-      className={"p-2 bg-stone-700 rounded-2xl sticky top-0 z-10 gap-3 flex"}
-    >
+    <div className={"p-2 bg-stone-700 rounded sticky top-0 z-10 gap-3 flex"}>
       <Tooltip title={"Add product"}>
         <AccessControl access={"seller"}>
           <Button

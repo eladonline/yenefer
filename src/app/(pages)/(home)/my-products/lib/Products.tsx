@@ -1,12 +1,16 @@
 "use client";
-import React, { FC, ReactElement, useState } from "react";
+import React, { FC, useState } from "react";
 import { useProduct } from "@/app/(pages)/(home)/my-products/lib/useProduct";
-import ProductsBar from "@/app/components/bars/ProductsBar";
+import ProductsBar from "@/app/components/bars/products/ProductsBar";
 import { FormProvider } from "react-hook-form";
 import ProductForm from "@/app/(pages)/(home)/my-products/lib/ProductForm";
 import { useModal } from "@/utils/hooks/useModal/useModal";
 import ProductCard from "@/app/(pages)/(home)/my-products/lib/ProductCard";
 import { ModalProps } from "antd/lib";
+import Filters from "@/app/components/bars/products/lib/Filters";
+import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import _isEmpty from "lodash/isEmpty";
 
 const Products: FC = () => {
   const {
@@ -17,6 +21,8 @@ const Products: FC = () => {
     onSubmitEdit,
     onDeleteItem,
   } = useProduct();
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [ModalRoot, modalApi] = useModal();
   const [modalConfigs, setModalConfigs] = useState<ModalProps>({});
 
@@ -55,13 +61,25 @@ const Products: FC = () => {
   };
 
   const handleFiltersClick = () => {
+    let filters: { [key: string]: string } = {};
     setModalConfigs({
       title: "Filters",
       onOk: async () => {
-        console.log("onOk");
+        if (!_isEmpty(filters)) {
+          let query = "";
+          for (let key in filters) query += `${key}=${filters[key]}`;
+          router.push(`/my-products?${query}`);
+        }
         modalApi.close();
       },
-      children: <div>filters</div>,
+      children: (
+        <Filters
+          onChange={(key: string, values: string[]) => {
+            filters[key] = values.map((item) => item.toLowerCase()).join();
+          }}
+        />
+      ),
+      width: 600,
     });
     modalApi.open();
   };
