@@ -86,6 +86,9 @@ export const deleteProductController = async (
 };
 
 export const getProductController = async (request: NextRequest) => {
+  const searchParams = request.nextUrl.searchParams;
+  const query = searchParams.get("categories");
+  console.log(query);
   const id = request.headers.get("id");
 
   const data = await UserDataModel.findOne({

@@ -7,11 +7,21 @@ import Products from "@/app/(pages)/(home)/my-products/lib/Products";
 import ProductProvider from "@/app/(pages)/(home)/my-products/lib/useProduct";
 import ModalProvider from "@/utils/hooks/useModal/useModal";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
+import filtersService from "@/utils/Filters";
+import { NextPage } from "next";
 
-const Page = async () => {
+const Page = async ({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string };
+}) => {
   const serverApi = new ServerApi();
 
-  const data = await serverApi.get(endpoints.products, {
+  const query = filtersService.filtersAsQuery(
+    searchParams as { [key: string]: string },
+  );
+
+  const data = await serverApi.get(`${endpoints.products}?${query}`, {
     headers: {
       id: headers().get("id") as string,
     },

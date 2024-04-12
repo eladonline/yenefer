@@ -9,8 +9,8 @@ import ProductCard from "@/app/(pages)/(home)/my-products/lib/ProductCard";
 import { ModalProps } from "antd/lib";
 import Filters from "@/app/components/bars/products/lib/Filters";
 import { useRouter } from "next/navigation";
-import { useSearchParams } from "next/navigation";
 import _isEmpty from "lodash/isEmpty";
+import filtersService from "@/utils/Filters";
 
 const Products: FC = () => {
   const {
@@ -22,7 +22,7 @@ const Products: FC = () => {
     onDeleteItem,
   } = useProduct();
   const router = useRouter();
-  const searchParams = useSearchParams();
+
   const [ModalRoot, modalApi] = useModal();
   const [modalConfigs, setModalConfigs] = useState<ModalProps>({});
 
@@ -66,8 +66,7 @@ const Products: FC = () => {
       title: "Filters",
       onOk: async () => {
         if (!_isEmpty(filters)) {
-          let query = "";
-          for (let key in filters) query += `${key}=${filters[key]}`;
+          const query = filtersService.filtersAsQuery(filters);
           router.push(`/my-products?${query}`);
         }
         modalApi.close();
