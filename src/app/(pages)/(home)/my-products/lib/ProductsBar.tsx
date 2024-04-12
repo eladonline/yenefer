@@ -8,7 +8,7 @@ type ActionBarTypes = {
   onAddProductClick: MouseEventHandler;
 };
 
-const ActionsBar: FC<ActionBarTypes> = ({
+const ProductsBar: FC<ActionBarTypes> = ({
   onAddProductClick,
   onFiltersClick,
 }) => {
@@ -35,4 +35,4 @@ const ActionsBar: FC<ActionBarTypes> = ({
     </div>
   );
 };
-export default ActionsBar;
+export default ProductsBar;

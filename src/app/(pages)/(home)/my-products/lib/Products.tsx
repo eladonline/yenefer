@@ -1,7 +1,7 @@
 "use client";
 import React, { FC, ReactElement, useState } from "react";
 import { useProduct } from "@/app/(pages)/(home)/my-products/lib/useProduct";
-import ActionsBar from "@/app/(pages)/(home)/my-products/lib/ActionsBar";
+import ProductsBar from "@/app/(pages)/(home)/my-products/lib/ProductsBar";
 import { FormProvider } from "react-hook-form";
 import ProductForm from "@/app/(pages)/(home)/my-products/lib/ProductForm";
 import { useModal } from "@/utils/hooks/useModal/useModal";
@@ -69,7 +69,7 @@ const Products: FC = () => {
   return (
     <div className={"grid grid-cols-1 gap-[20px]"}>
       <FormProvider {...formFactory}>{ModalRoot(modalConfigs)}</FormProvider>
-      <ActionsBar
+      <ProductsBar
         onFiltersClick={handleFiltersClick}
         onAddProductClick={handleAddProductClick}
       />
