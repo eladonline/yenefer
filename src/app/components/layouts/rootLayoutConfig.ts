@@ -28,8 +28,8 @@ const rootLayoutConfig: RootLayoutConfig = {
     "": [
       {
         icon: UserOutlined,
-        label: "Products",
-        key: "/products",
+        label: "My Products",
+        key: "/my-products",
       },
     ],
     settings: [
