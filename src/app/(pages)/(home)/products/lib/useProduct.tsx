@@ -41,6 +41,7 @@ const useLogic = (
     queryKey: ["products"],
     queryFn: getProducts,
     initialData: { data: initialData },
+    staleTime: Infinity,
   });
 
   const formFactory = useForm<ProductType>({
@@ -48,7 +49,7 @@ const useLogic = (
   });
 
   if (error) {
-    throw error;
+    notificationApi.error({ message: error as string });
   }
   const products: ProductType[] | undefined = data?.data;
 
@@ -103,7 +104,6 @@ const ProductProvider: FC<{ children: ReactNode; data: ProductType[] }> = ({
   const [notificationApi, contextHolder] = notification.useNotification();
 
   const values = useLogic(data, notificationApi);
-
   return (
     <ProductContext.Provider value={values}>
       {contextHolder}

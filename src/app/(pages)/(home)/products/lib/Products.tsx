@@ -1,7 +1,7 @@
 "use client";
-import React, { ReactElement, FC } from "react";
+import React, { FC } from "react";
 import { useProduct } from "@/app/(pages)/(home)/products/lib/useProduct";
-import Menu from "@/app/(pages)/(home)/products/lib/Menu";
+import ActionsBar from "@/app/(pages)/(home)/products/lib/ActionsBar";
 import { FormProvider } from "react-hook-form";
 import ProductForm from "@/app/(pages)/(home)/products/lib/ProductForm";
 import { useModal } from "@/utils/hooks/useModal/useModal";
@@ -39,7 +39,7 @@ const Products: FC = () => {
           afterClose: resetFormToDefault,
         })}
       </FormProvider>
-      <Menu onClickAddProduct={modalApi.open} />
+      <ActionsBar onClickAddProduct={modalApi.open} />
       <ul className={"flex flex-wrap gap-3"}>
         {products?.map(({ ...props }) => {
           return (
