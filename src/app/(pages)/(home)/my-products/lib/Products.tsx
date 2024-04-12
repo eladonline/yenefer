@@ -5,7 +5,7 @@ import ActionsBar from "@/app/(pages)/(home)/my-products/lib/ActionsBar";
 import { FormProvider } from "react-hook-form";
 import ProductForm from "@/app/(pages)/(home)/my-products/lib/ProductForm";
 import { useModal } from "@/utils/hooks/useModal/useModal";
-import ItemCard from "@/app/(pages)/(home)/my-products/lib/ItemCard";
+import ProductCard from "@/app/(pages)/(home)/my-products/lib/ProductCard";
 
 const Products: FC = () => {
   const {
@@ -43,7 +43,7 @@ const Products: FC = () => {
       <ul className={"flex flex-wrap gap-3"}>
         {products?.map(({ ...props }) => {
           return (
-            <ItemCard
+            <ProductCard
               loading={isSubmitting}
               onEdit={() => {
                 reset({ ...props });

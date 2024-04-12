@@ -57,7 +57,7 @@ const useLogic = (
     try {
       await createProduct(fields);
       await refetch();
-      resetFormToDefault();
+      formFactory.reset(defaultValues);
     } catch (err: any) {
       notificationApi.error({ message: err.message });
     }
@@ -67,7 +67,7 @@ const useLogic = (
     try {
       await editProduct(_id as string, fields);
       await refetch();
-      resetFormToDefault();
+      formFactory.reset(defaultValues);
     } catch (err: any) {
       notificationApi.error({ message: err.message });
     }
@@ -77,21 +77,17 @@ const useLogic = (
     try {
       await deleteProduct(_id);
       await refetch();
-      resetFormToDefault();
+      formFactory.reset(defaultValues);
     } catch (err: any) {
       notificationApi.error({ message: err.message });
     }
-  };
-
-  const resetFormToDefault = () => {
-    formFactory.reset(defaultValues);
   };
 
   return {
     products,
     formFactory,
     onSubmit,
-    resetFormToDefault,
+    resetFormToDefault: () => formFactory.reset(defaultValues),
     onSubmitEdit,
     onDeleteItem,
   };

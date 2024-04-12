@@ -9,7 +9,7 @@ type ItemCardType = ProductType & {
   loading: boolean;
 };
 
-const ItemCard: FC<ItemCardType> = ({
+const ProductCard: FC<ItemCardType> = ({
   onEdit,
   onDelete,
   name,
@@ -73,4 +73,4 @@ const ItemCard: FC<ItemCardType> = ({
     </Card>
   );
 };
-export default ItemCard;
+export default ProductCard;
