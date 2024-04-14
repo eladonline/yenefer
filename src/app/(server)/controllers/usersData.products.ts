@@ -12,8 +12,8 @@ export const createProductController = async (
   request: UserDataProductsType,
 ) => {
   const id = request.headers.get("id");
-  const { name, category, description, price } = await request.json();
-  const product: ProductType = { name, category, description, price };
+  const { name, category, description, price, terms } = await request.json();
+  const product: ProductType = { name, category, description, price, terms };
   const userData: UsersDataType = await UserDataModel.findOne({
     users_id: id,
   });
@@ -43,9 +43,8 @@ export const patchProductController = async (
   { params }: { params: { productId: string } },
 ) => {
   const id = request.headers.get("id");
-  const { name, category, description, price } = await request.json();
+  const { name, category, description, price, terms } = await request.json();
 
-  const product: ProductType = { name, category, description, price };
   await UserDataModel.findOneAndUpdate(
     {
       users_id: id,
@@ -53,11 +52,14 @@ export const patchProductController = async (
     },
     {
       $set: {
-        "products.$": product,
+        "products.$.name": name,
+        "products.$.category": category,
+        "products.$.description": description,
+        "products.$.price": price,
+        "products.$.terms": terms,
       },
     },
   );
-
   return NextResponse.json(
     { message: "Product updated successfully" },
     { status: 200 },

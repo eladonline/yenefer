@@ -4,6 +4,12 @@ export type ProductType = {
   description: string;
   price: number;
   created?: Date;
+  terms: {
+    min_price: number;
+    discount_each_buyer: number;
+    end_date: Date;
+    max_buyers: number;
+  };
   _id?: string;
 };
 

@@ -6,7 +6,7 @@ import { FormProvider } from "react-hook-form";
 import ProductForm from "@/app/(pages)/(home)/my-products/lib/ProductForm";
 import { useModal } from "@/utils/hooks/useModal/useModal";
 import ProductCard from "@/app/(pages)/(home)/my-products/lib/ProductCard";
-import { ModalProps } from "antd/lib";
+import { ModalProps, Empty } from "antd/lib";
 import Filters from "@/app/components/bars/products/lib/Filters";
 import { useRouter } from "next/navigation";
 import _isEmpty from "lodash/isEmpty";
@@ -95,17 +95,23 @@ const Products: FC = () => {
         onAddProductClick={handleAddProductClick}
       />
       <ul className={"flex flex-wrap gap-3"}>
-        {products?.map(({ ...props }) => {
-          return (
-            <ProductCard
-              loading={isSubmitting}
-              onEdit={() => handleEditProductClick(props)}
-              onDelete={() => onDeleteItem(props._id as string)}
-              key={props._id}
-              {...props}
-            />
-          );
-        })}
+        {products?.length ? (
+          products.map(({ ...props }) => {
+            return (
+              <ProductCard
+                loading={isSubmitting}
+                onEdit={() => handleEditProductClick(props)}
+                onDelete={() => onDeleteItem(props._id as string)}
+                key={props._id}
+                {...props}
+              />
+            );
+          })
+        ) : (
+          <div className={"flex flex-grow justify-center"}>
+            <Empty />
+          </div>
+        )}
       </ul>
     </div>
   );

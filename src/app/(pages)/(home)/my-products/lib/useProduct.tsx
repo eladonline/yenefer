@@ -28,9 +28,10 @@ type useProductsHook = {
 
 const defaultValues = {
   name: "",
-  category: "",
+  category: undefined,
   description: "",
   price: 0,
+  terms: {},
   _id: "",
 };
 

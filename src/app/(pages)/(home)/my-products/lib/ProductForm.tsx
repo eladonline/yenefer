@@ -8,12 +8,13 @@ import {
 import { useFormContext } from "react-hook-form";
 import Field from "@/app/components/decorators/form/Field";
 import config from "./config.json";
+import ProductTermsBar from "@/app/(pages)/(home)/my-products/lib/ProductTermsBar";
 const categories = config.categories.map((id) => ({
   value: id.toLocaleLowerCase(),
   label: id,
 }));
 const ProductForm = () => {
-  const { control, getValues } = useFormContext();
+  const { control } = useFormContext();
   return (
     <div className={"flex flex-col gap-5"}>
       <div className={"grid grid-cols-[400px_400px] gap-5"}>
@@ -25,6 +26,7 @@ const ProductForm = () => {
             options={categories}
             name={"category"}
             control={control}
+            placeholder={"Category"}
           />
         </Field>
       </div>
@@ -34,6 +36,7 @@ const ProductForm = () => {
       <Field label={{ text: "Price" }}>
         <ControlledInputNumber min={0} name={"price"} control={control} />
       </Field>
+      <ProductTermsBar />
     </div>
   );
 };
