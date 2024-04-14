@@ -1,5 +1,5 @@
 "use client";
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { ProductType } from "@/types/apis/usersData";
 import {
   createProduct,
@@ -59,11 +59,11 @@ const useLogic = (
   });
 
   useEffect(() => {
-    queryClient.setQueryData("products", { data: initialData });
+    queryClient.setQueryData(["products"], { data: initialData });
   }, [queryClient, initialData]);
 
   if (error) {
-    notificationApi.error({ message: error as string });
+    notificationApi.error({ message: error.message });
   }
   const products: ProductType[] | undefined = data?.data;
 

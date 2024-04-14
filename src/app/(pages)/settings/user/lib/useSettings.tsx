@@ -1,5 +1,5 @@
 "use client";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { userSettings } from "@/app/services/settings";
 import { SettingsUserType } from "@/types/apis/configurations";
 
