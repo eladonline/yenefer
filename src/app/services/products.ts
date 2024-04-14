@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import api from "@/app/services/clientApi";
-import { ProductType } from "@/types/apis/usersData";
+import { ProductFormType, ProductType } from "@/types/apis/usersData";
 
 export const endpoints = {
   products: `/products`,
@@ -12,13 +12,13 @@ export function getProducts(query: string | undefined): Promise<AxiosResponse> {
   return api.http.get(endpoint);
 }
 
-export function createProduct(body: ProductType): Promise<AxiosResponse> {
+export function createProduct(body: ProductFormType): Promise<AxiosResponse> {
   return api.http.post(endpoints.products, body);
 }
 
 export function editProduct(
   _id: string,
-  body: ProductType,
+  body: ProductFormType,
 ): Promise<AxiosResponse> {
   return api.http.patch(`${endpoints.products}/${_id}`, body);
 }

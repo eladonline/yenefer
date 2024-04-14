@@ -19,8 +19,8 @@ const ProductContext = createContext<useProductsHook>({} as useProductsHook);
 type useProductsHook = {
   products: ProductType[] | undefined;
   formFactory: UseFormReturn<ProductFormType>;
-  onSubmit: SubmitHandler<ProductType>;
-  onSubmitEdit: SubmitHandler<ProductType>;
+  onSubmit: SubmitHandler<ProductFormType>;
+  onSubmitEdit: SubmitHandler<ProductFormType>;
   resetFormToDefault: () => void;
   onDeleteItem: (id: string) => void;
   urlFilters: {};
@@ -73,7 +73,7 @@ const useLogic = (
   }
   const products: ProductType[] | undefined = data?.data;
 
-  const onSubmit = async ({ _id, ...fields }: ProductType) => {
+  const onSubmit = async ({ _id, ...fields }: ProductFormType) => {
     try {
       await createProduct(fields);
       await refetch();
@@ -83,7 +83,7 @@ const useLogic = (
     }
   };
 
-  const onSubmitEdit = async ({ _id, ...fields }: ProductType) => {
+  const onSubmitEdit = async ({ _id, ...fields }: ProductFormType) => {
     try {
       await editProduct(_id as string, fields);
       await refetch();
