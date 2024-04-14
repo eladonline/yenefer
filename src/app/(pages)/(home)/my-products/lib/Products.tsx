@@ -29,7 +29,7 @@ const Products: FC = () => {
   const [modalConfigs, setModalConfigs] = useState<ModalProps>({});
 
   const {
-    formState: { isSubmitting },
+    formState: { isSubmitting, isValid },
     handleSubmit,
     reset,
   } = formFactory;
@@ -39,7 +39,9 @@ const Products: FC = () => {
       title: "Add Product",
       onOk: async () => {
         await handleSubmit(onSubmit)();
-        modalApi.close();
+        if (isValid) {
+          modalApi.close();
+        }
       },
       confirmLoading: isSubmitting,
       children: <ProductForm />,
@@ -54,7 +56,9 @@ const Products: FC = () => {
       title: "Edit Product",
       onOk: async () => {
         await handleSubmit(onSubmitEdit)();
-        modalApi.close();
+        if (isValid) {
+          modalApi.close();
+        }
       },
       confirmLoading: isSubmitting,
       children: <ProductForm />,
@@ -72,6 +76,7 @@ const Products: FC = () => {
           const query = filtersService.fromJsonToQuery(filters);
           router.push(`/my-products?${query}`);
         }
+
         modalApi.close();
       },
       children: (

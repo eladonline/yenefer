@@ -7,7 +7,7 @@ export type ProductType = {
   terms: {
     min_price: number;
     discount_each_buyer: number;
-    end_date: Date;
+    end_date: any;
     max_buyers: number;
   };
   _id?: string;

@@ -28,10 +28,15 @@ type useProductsHook = {
 
 const defaultValues = {
   name: "",
-  category: undefined,
+  category: "",
   description: "",
   price: 0,
-  terms: {},
+  terms: {
+    discount_each_buyer: 0,
+    max_buyers: 0,
+    min_price: 0,
+    end_date: 0,
+  },
   _id: "",
 };
 
@@ -56,7 +61,7 @@ const useLogic = (
     staleTime: Infinity,
   });
   const formFactory = useForm<ProductType>({
-    defaultValues,
+    defaultValues: { ...defaultValues },
   });
 
   useEffect(() => {
