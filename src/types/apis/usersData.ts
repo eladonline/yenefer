@@ -13,6 +13,20 @@ export type ProductType = {
   _id?: string;
 };
 
+export type ProductFormType = {
+  name: string | null;
+  category: string | null;
+  description: string | null;
+  price: number | null;
+  terms: {
+    min_price: number | null;
+    discount_each_buyer: number | null;
+    end_date: any | null;
+    max_buyers: number | null;
+  };
+  _id?: string | null;
+};
+
 export type UsersDataType = {
   products: ProductType[] | undefined;
   users_id: string;

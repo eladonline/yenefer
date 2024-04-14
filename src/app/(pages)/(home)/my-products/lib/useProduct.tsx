@@ -1,6 +1,6 @@
 "use client";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { ProductType } from "@/types/apis/usersData";
+import { ProductFormType, ProductType } from "@/types/apis/usersData";
 import {
   createProduct,
   editProduct,
@@ -18,7 +18,7 @@ const ProductContext = createContext<useProductsHook>({} as useProductsHook);
 
 type useProductsHook = {
   products: ProductType[] | undefined;
-  formFactory: UseFormReturn<ProductType>;
+  formFactory: UseFormReturn<ProductFormType>;
   onSubmit: SubmitHandler<ProductType>;
   onSubmitEdit: SubmitHandler<ProductType>;
   resetFormToDefault: () => void;
@@ -60,7 +60,7 @@ const useLogic = (
     initialData: { data: initialData },
     staleTime: Infinity,
   });
-  const formFactory = useForm<ProductType>({
+  const formFactory = useForm<ProductFormType>({
     defaultValues: { ...defaultValues },
   });
 
