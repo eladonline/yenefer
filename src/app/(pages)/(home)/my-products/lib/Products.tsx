@@ -20,6 +20,7 @@ const Products: FC = () => {
     resetFormToDefault,
     onSubmitEdit,
     onDeleteItem,
+    urlFilters,
   } = useProduct();
   const router = useRouter();
 
@@ -73,6 +74,7 @@ const Products: FC = () => {
       },
       children: (
         <Filters
+          defaultValues={urlFilters}
           onChange={(key: string, values: string[]) => {
             filters[key] = values.map((item) => item.toLowerCase()).join();
           }}

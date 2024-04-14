@@ -12,6 +12,7 @@ import { createContext, FC, ReactNode, useContext, useEffect } from "react";
 import { notification } from "antd/lib";
 import { NotificationInstance } from "antd/lib/notification/interface";
 import { useSearchParams } from "next/navigation";
+import filtersUtil from "@/utils/Filters";
 
 const ProductContext = createContext<useProductsHook>({} as useProductsHook);
 
@@ -22,6 +23,7 @@ type useProductsHook = {
   onSubmitEdit: SubmitHandler<ProductType>;
   resetFormToDefault: () => void;
   onDeleteItem: (id: string) => void;
+  urlFilters: {};
 };
 
 const defaultValues = {
@@ -94,7 +96,6 @@ const useLogic = (
       notificationApi.error({ message: err.message });
     }
   };
-
   return {
     products,
     formFactory,
@@ -102,6 +103,7 @@ const useLogic = (
     resetFormToDefault: () => formFactory.reset(defaultValues),
     onSubmitEdit,
     onDeleteItem,
+    urlFilters: filtersUtil.fromMapToJson(searchParams),
   };
 };
 
