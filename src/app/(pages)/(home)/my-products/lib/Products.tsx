@@ -11,7 +11,7 @@ import Filters from "@/app/components/bars/products/lib/Filters";
 import { useRouter } from "next/navigation";
 import _isEmpty from "lodash/isEmpty";
 import filtersService from "@/utils/Filters";
-import { ProductType } from "@/types/apis/usersData";
+import { ProductFormType } from "@/types/apis/usersData";
 
 const Products: FC = () => {
   const {
@@ -50,7 +50,7 @@ const Products: FC = () => {
     modalApi.open();
   };
 
-  const handleEditProductClick = (props: ProductType) => {
+  const handleEditProductClick = (props: ProductFormType) => {
     reset({ ...props });
     setModalConfigs({
       title: "Edit Product",
