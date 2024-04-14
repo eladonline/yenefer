@@ -27,17 +27,17 @@ type useProductsHook = {
 };
 
 const defaultValues = {
-  name: "",
-  category: "",
-  description: "",
-  price: 0,
+  name: null,
+  category: null,
+  description: null,
+  price: null,
   terms: {
-    discount_each_buyer: 0,
-    max_buyers: 0,
-    min_price: 0,
-    end_date: 0,
+    discount_each_buyer: null,
+    max_buyers: null,
+    min_price: null,
+    end_date: null,
   },
-  _id: "",
+  _id: null,
 };
 
 const useLogic = (
