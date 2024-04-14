@@ -27,11 +27,11 @@ type useProductsHook = {
 };
 
 const defaultValues = {
-  name: undefined,
-  category: undefined,
-  description: undefined,
+  name: "",
+  category: "",
+  description: "",
   price: 0,
-  _id: undefined,
+  _id: "",
 };
 
 const useLogic = (
@@ -71,7 +71,7 @@ const useLogic = (
     try {
       await createProduct(fields);
       await refetch();
-      formFactory.reset(defaultValues);
+      formFactory.reset({ ...defaultValues });
     } catch (err: any) {
       notificationApi.error({ message: err.message });
     }
@@ -81,7 +81,7 @@ const useLogic = (
     try {
       await editProduct(_id as string, fields);
       await refetch();
-      formFactory.reset(defaultValues);
+      formFactory.reset({ ...defaultValues });
     } catch (err: any) {
       notificationApi.error({ message: err.message });
     }
@@ -91,7 +91,7 @@ const useLogic = (
     try {
       await deleteProduct(_id);
       await refetch();
-      formFactory.reset(defaultValues);
+      formFactory.reset({ ...defaultValues });
     } catch (err: any) {
       notificationApi.error({ message: err.message });
     }
@@ -100,7 +100,10 @@ const useLogic = (
     products,
     formFactory,
     onSubmit,
-    resetFormToDefault: () => formFactory.reset(defaultValues),
+    resetFormToDefault: () => {
+      console.log("reset", defaultValues);
+      formFactory.reset({ ...defaultValues });
+    },
     onSubmitEdit,
     onDeleteItem,
     urlFilters: filtersUtil.fromMapToJson(searchParams),

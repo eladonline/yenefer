@@ -13,8 +13,7 @@ const categories = config.categories.map((id) => ({
   label: id,
 }));
 const ProductForm = () => {
-  const { control } = useFormContext();
-
+  const { control, getValues } = useFormContext();
   return (
     <div className={"flex flex-col gap-5"}>
       <div className={"grid grid-cols-[400px_400px] gap-5"}>

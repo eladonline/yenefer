@@ -11,6 +11,7 @@ import Filters from "@/app/components/bars/products/lib/Filters";
 import { useRouter } from "next/navigation";
 import _isEmpty from "lodash/isEmpty";
 import filtersService from "@/utils/Filters";
+import { ProductType } from "@/types/apis/usersData";
 
 const Products: FC = () => {
   const {
@@ -47,7 +48,8 @@ const Products: FC = () => {
     modalApi.open();
   };
 
-  const handleEditProductClick = () => {
+  const handleEditProductClick = (props: ProductType) => {
+    reset({ ...props });
     setModalConfigs({
       title: "Edit Product",
       onOk: async () => {
@@ -97,10 +99,7 @@ const Products: FC = () => {
           return (
             <ProductCard
               loading={isSubmitting}
-              onEdit={() => {
-                reset({ ...props });
-                handleEditProductClick();
-              }}
+              onEdit={() => handleEditProductClick(props)}
               onDelete={() => onDeleteItem(props._id as string)}
               key={props._id}
               {...props}
