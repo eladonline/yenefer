@@ -1,5 +1,5 @@
 "use client";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { ProductType } from "@/types/apis/usersData";
 import {
   createProduct,
@@ -8,9 +8,10 @@ import {
   deleteProduct,
 } from "@/app/services/products";
 import { SubmitHandler, useForm, UseFormReturn } from "react-hook-form";
-import { createContext, FC, ReactNode, useContext } from "react";
+import { createContext, FC, ReactNode, useContext, useEffect } from "react";
 import { notification } from "antd/lib";
 import { NotificationInstance } from "antd/lib/notification/interface";
+import { useSearchParams } from "next/navigation";
 
 const ProductContext = createContext<useProductsHook>({} as useProductsHook);
 
@@ -35,18 +36,29 @@ const useLogic = (
   initialData: ProductType[],
   notificationApi: NotificationInstance,
 ): useProductsHook => {
+  const searchParams = useSearchParams();
+  const queryClient = useQueryClient();
+
+  let query = "";
+  searchParams.forEach((value, key) => {
+    query += `${query ? "&" : "?"}` + `${key}=${value}`;
+  });
+
   const { data, error, refetch } = useQuery<{
     data: ProductType[];
   }>({
     queryKey: ["products"],
-    queryFn: getProducts,
+    queryFn: () => getProducts(query),
     initialData: { data: initialData },
     staleTime: Infinity,
   });
-
   const formFactory = useForm<ProductType>({
     defaultValues,
   });
+
+  useEffect(() => {
+    queryClient.setQueryData("products", { data: initialData });
+  }, [queryClient, initialData]);
 
   if (error) {
     notificationApi.error({ message: error as string });

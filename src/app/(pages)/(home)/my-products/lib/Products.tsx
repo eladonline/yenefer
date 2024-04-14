@@ -50,7 +50,7 @@ const Products: FC = () => {
     setModalConfigs({
       title: "Edit Product",
       onOk: async () => {
-        handleSubmit(onSubmitEdit);
+        await handleSubmit(onSubmitEdit)();
         modalApi.close();
       },
       confirmLoading: isSubmitting,
@@ -66,7 +66,7 @@ const Products: FC = () => {
       title: "Filters",
       onOk: async () => {
         if (!_isEmpty(filters)) {
-          const query = filtersService.filtersAsQuery(filters);
+          const query = filtersService.fromJsonToQuery(filters);
           router.push(`/my-products?${query}`);
         }
         modalApi.close();

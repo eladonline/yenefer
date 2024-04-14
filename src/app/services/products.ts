@@ -6,8 +6,10 @@ export const endpoints = {
   products: `/products`,
 };
 
-export function getProducts(): Promise<AxiosResponse> {
-  return api.http.get(endpoints.products);
+export function getProducts(query: string | undefined): Promise<AxiosResponse> {
+  let endpoint = endpoints.products;
+  if (query) endpoint += query;
+  return api.http.get(endpoint);
 }
 
 export function createProduct(body: ProductType): Promise<AxiosResponse> {

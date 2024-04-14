@@ -8,7 +8,6 @@ import ProductProvider from "@/app/(pages)/(home)/my-products/lib/useProduct";
 import ModalProvider from "@/utils/hooks/useModal/useModal";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import filtersService from "@/utils/Filters";
-import { NextPage } from "next";
 
 const Page = async ({
   searchParams,
@@ -17,7 +16,7 @@ const Page = async ({
 }) => {
   const serverApi = new ServerApi();
 
-  const query = filtersService.filtersAsQuery(
+  const query = filtersService.fromJsonToQuery(
     searchParams as { [key: string]: string },
   );
 

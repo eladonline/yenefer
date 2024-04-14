@@ -1,5 +1,5 @@
 class Filters {
-  filtersAsQuery(filters: { [key: string]: string }): string {
+  fromJsonToQuery(filters: { [key: string]: string }): string {
     let query = "";
     for (let key in filters) query += `${key}=${filters[key]}`;
     return query;

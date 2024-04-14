@@ -87,14 +87,23 @@ export const deleteProductController = async (
 
 export const getProductController = async (request: NextRequest) => {
   const searchParams = request.nextUrl.searchParams;
-  const query = searchParams.get("categories");
-  console.log(query);
   const id = request.headers.get("id");
+  const filters: { [key: string]: any } = { users_id: id };
+  const projection: { [key: string]: any } = {};
 
-  const data = await UserDataModel.findOne({
-    users_id: id,
-  }).select("products");
+  const categoriesFilter = searchParams.get("categories")?.split(",");
 
+  if (categoriesFilter) {
+    projection["products"] = {
+      $filter: {
+        input: "$products",
+        as: "products",
+        cond: { $in: ["$$products.category", categoriesFilter] },
+      },
+    };
+  }
+
+  const data = await UserDataModel.findOne(filters, projection);
   return NextResponse.json(data?.products || [], { status: 200 });
 };
 
