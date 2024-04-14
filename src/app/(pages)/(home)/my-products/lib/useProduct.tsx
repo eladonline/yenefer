@@ -22,7 +22,7 @@ type useProductsHook = {
   onSubmit: SubmitHandler<ProductFormType>;
   onSubmitEdit: SubmitHandler<ProductFormType>;
   resetFormToDefault: () => void;
-  onDeleteItem: (id: string) => void;
+  onDeleteItem: (id: string) => Promise<void>;
   urlFilters: {};
 };
 
@@ -73,7 +73,10 @@ const useLogic = (
   }
   const products: ProductType[] | undefined = data?.data;
 
-  const onSubmit = async ({ _id, ...fields }: ProductFormType) => {
+  const onSubmit = async ({
+    _id,
+    ...fields
+  }: ProductFormType): Promise<void> => {
     try {
       await createProduct(fields);
       await refetch();
@@ -93,13 +96,14 @@ const useLogic = (
     }
   };
 
-  const onDeleteItem = async (_id: string) => {
+  const onDeleteItem = async (_id: string): Promise<void> => {
     try {
       await deleteProduct(_id);
       await refetch();
       formFactory.reset({ ...defaultValues });
     } catch (err: any) {
       notificationApi.error({ message: err.message });
+      return Promise.reject();
     }
   };
   return {

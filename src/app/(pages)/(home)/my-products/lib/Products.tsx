@@ -1,5 +1,13 @@
 "use client";
-import React, { FC, useState } from "react";
+import React, {
+  FC,
+  MouseEventHandler,
+  ReactDOM,
+  ReactElement,
+  ReactEventHandler,
+  useRef,
+  useState,
+} from "react";
 import { useProduct } from "@/app/(pages)/(home)/my-products/lib/useProduct";
 import ProductsBar from "@/app/components/bars/products/ProductsBar";
 import { FormProvider } from "react-hook-form";
@@ -38,7 +46,7 @@ const Products: FC = () => {
     setModalConfigs({
       title: "Add Product",
       onOk: () => {
-        handleSubmit(onSubmit, () => Promise.reject())()
+        handleSubmit(onSubmit, Promise.reject)()
           .then(modalApi.close)
           .catch(() => formFactory.trigger());
       },
@@ -103,7 +111,13 @@ const Products: FC = () => {
               <ProductCard
                 loading={isSubmitting}
                 onEdit={() => handleEditProductClick(props)}
-                onDelete={() => onDeleteItem(props._id as string)}
+                onDelete={(e) => {
+                  let target = e.currentTarget;
+                  target.style.visibility = "hidden";
+                  onDeleteItem(props._id as string).catch(() => {
+                    target.style.visibility = "visible";
+                  });
+                }}
                 key={props._id}
                 {...props}
               />

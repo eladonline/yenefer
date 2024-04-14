@@ -5,7 +5,7 @@ import { DeleteFilled } from "@ant-design/icons";
 
 type ItemCardType = ProductType & {
   onEdit: () => void;
-  onDelete: () => void;
+  onDelete: (e: any) => void;
   loading: boolean;
 };
 
