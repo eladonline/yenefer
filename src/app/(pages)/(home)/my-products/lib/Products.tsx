@@ -50,7 +50,6 @@ const Products: FC = () => {
           .then(modalApi.close)
           .catch(() => formFactory.trigger());
       },
-      confirmLoading: isSubmitting,
       children: <ProductForm />,
       afterClose: resetFormToDefault,
     });
@@ -65,7 +64,6 @@ const Products: FC = () => {
           .then(modalApi.close)
           .catch(() => formFactory.trigger());
       },
-      confirmLoading: isSubmitting,
       children: <ProductForm />,
       afterClose: resetFormToDefault,
     });
