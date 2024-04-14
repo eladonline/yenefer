@@ -10,7 +10,7 @@ type FiltersType = {
 const Filters: FC<FiltersType> = ({ onChange, defaultValues = {} }) => {
   const initialValues = { ...productsConfig, ...defaultValues };
 
-  const UpperCaseFirstLetter = (word: string) => {
+  const UpperCaseFirstLetter = (word: string): string => {
     return word.charAt(0).toUpperCase() + word.slice(1);
   };
 
