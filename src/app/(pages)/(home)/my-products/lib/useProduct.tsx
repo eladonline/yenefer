@@ -100,10 +100,7 @@ const useLogic = (
     products,
     formFactory,
     onSubmit,
-    resetFormToDefault: () => {
-      console.log("reset", defaultValues);
-      formFactory.reset({ ...defaultValues });
-    },
+    resetFormToDefault: () => formFactory.reset({ ...defaultValues }),
     onSubmitEdit,
     onDeleteItem,
     urlFilters: filtersUtil.fromMapToJson(searchParams),
