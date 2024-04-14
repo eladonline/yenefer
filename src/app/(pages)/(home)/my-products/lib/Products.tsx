@@ -37,11 +37,10 @@ const Products: FC = () => {
   const handleAddProductClick = () => {
     setModalConfigs({
       title: "Add Product",
-      onOk: async () => {
-        await handleSubmit(onSubmit)();
-        if (isValid) {
-          modalApi.close();
-        }
+      onOk: () => {
+        handleSubmit(onSubmit, () => Promise.reject())()
+          .then(modalApi.close)
+          .catch(() => formFactory.trigger());
       },
       confirmLoading: isSubmitting,
       children: <ProductForm />,
@@ -49,16 +48,14 @@ const Products: FC = () => {
     });
     modalApi.open();
   };
-
   const handleEditProductClick = (props: ProductFormType) => {
     reset({ ...props });
     setModalConfigs({
       title: "Edit Product",
       onOk: async () => {
-        await handleSubmit(onSubmitEdit)();
-        if (isValid) {
-          modalApi.close();
-        }
+        await handleSubmit(onSubmitEdit, Promise.reject)()
+          .then(modalApi.close)
+          .catch(() => formFactory.trigger());
       },
       confirmLoading: isSubmitting,
       children: <ProductForm />,
