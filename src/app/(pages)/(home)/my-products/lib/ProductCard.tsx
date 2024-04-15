@@ -42,6 +42,27 @@ const ProductCard: FC<ItemCardType> = ({
           />
         </div>
       }
+      actions={[
+        <Tooltip key={"discount"} title={`Discount per Buyer`}>
+          <DollarTwoTone />{" "}
+          <Typography.Text>{discount_each_buyer}</Typography.Text>
+        </Tooltip>,
+
+        <Tooltip key={"MaxBuyers"} title={`Max Buyers`}>
+          <TeamOutlined /> <Typography.Text>{max_buyers}</Typography.Text>
+        </Tooltip>,
+
+        <Tooltip key={"MinPrice"} title={`Min Price`}>
+          <VerticalAlignBottomOutlined />{" "}
+          <Typography.Text>{min_price}</Typography.Text>
+        </Tooltip>,
+        <Tooltip
+          key={"EndDate"}
+          title={`End Date: ${dayjs(end_date).format("DD/MM/YY HH:mm")}`}
+        >
+          <ClockCircleFilled />
+        </Tooltip>,
+      ]}
       title={
         <Typography.Text
           className={"ovrd [&.ovrd]:max-w-[90%]"}
@@ -73,34 +94,6 @@ const ProductCard: FC<ItemCardType> = ({
           Price:
         </Typography.Title>
         <Typography.Text>{price}</Typography.Text>
-      </div>
-
-      <div className={"flex gap-4 mt-5"}>
-        <span>
-          <Tooltip title={`Discount per Buyer`}>
-            <DollarTwoTone />{" "}
-            <Typography.Text>{discount_each_buyer}</Typography.Text>
-          </Tooltip>
-        </span>
-        <span>
-          <Tooltip title={`Max Buyers`}>
-            <TeamOutlined /> <Typography.Text>{max_buyers}</Typography.Text>
-          </Tooltip>
-        </span>
-        <span>
-          <Tooltip title={`Min Price`}>
-            <VerticalAlignBottomOutlined />{" "}
-            <Typography.Text>{min_price}</Typography.Text>
-          </Tooltip>
-        </span>
-        <span>
-          <Tooltip title={`End Date`}>
-            <ClockCircleFilled />{" "}
-            <Typography.Text>
-              {dayjs(end_date).format("DD/MM/YY HH:mm")}
-            </Typography.Text>
-          </Tooltip>
-        </span>
       </div>
     </Card>
   );
