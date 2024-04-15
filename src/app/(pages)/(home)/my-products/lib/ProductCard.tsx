@@ -1,7 +1,7 @@
 import React, { FC } from "react";
-import { Card, Typography } from "antd/lib";
+import { Card, Tooltip, Typography } from "antd/lib";
 import { ProductType } from "@/types/apis/usersData";
-import { DeleteFilled } from "@ant-design/icons";
+import { DeleteFilled, ClockCircleFilled } from "@ant-design/icons";
 
 type ItemCardType = ProductType & {
   onEdit: () => void;
@@ -15,6 +15,7 @@ const ProductCard: FC<ItemCardType> = ({
   description,
   price,
   category,
+  terms: { discount_each_buyer, max_buyers, min_price, end_date },
 }) => {
   return (
     <Card
@@ -65,6 +66,17 @@ const ProductCard: FC<ItemCardType> = ({
           Price:
         </Typography.Title>
         <Typography.Text>{price}</Typography.Text>
+      </div>
+
+      <div className={"flex gap-4"}>
+        <span>{discount_each_buyer}</span>
+        <span>{max_buyers}</span>
+        <span>{min_price}</span>
+        <span>
+          <Tooltip title={end_date}>
+            <ClockCircleFilled />
+          </Tooltip>
+        </span>
       </div>
     </Card>
   );

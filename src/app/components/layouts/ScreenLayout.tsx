@@ -54,7 +54,7 @@ const ScreenLayout = ({ children }: { children: ReactElement }) => {
           />
         </Sider>
         <Layout>
-          <Content className={"bg-snow p-3"}>{children}</Content>
+          <Content className={"bg-snow p-3 overflow-auto"}>{children}</Content>
         </Layout>
       </Layout>
     </Layout>
