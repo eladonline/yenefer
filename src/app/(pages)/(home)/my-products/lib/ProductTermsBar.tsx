@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { UseFieldArrayProps, useFormContext } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import Field from "@/app/components/decorators/form/Field";
 import {
   ControlledDatePicker,
@@ -16,10 +16,19 @@ const ProductTermsBar: FC<{ disabled: boolean }> = ({ disabled }) => {
 
   return (
     <div className={"flex flex-col gap-2"}>
-      <div className={"flex gap-2"}>
+      <div className={"flex gap-3"}>
         <Field
           required
-          label={{ text: "Min Price", tooltip: { title: "explain" } }}
+          label={{
+            text: "Min Price",
+            tooltip: {
+              title:
+                "Minimum Price suggest the lowest price for the discount. In other words maximum discount (calculated by the (Price - Discount * Buyers))",
+            },
+          }}
+          error={{
+            text: _get(errors, "terms.min_price.message", "") as string,
+          }}
         >
           <ControlledInputNumber
             disabled={disabled}
@@ -37,7 +46,17 @@ const ProductTermsBar: FC<{ disabled: boolean }> = ({ disabled }) => {
           />
         </Field>
 
-        <Field required label={{ text: "Discount Per Buyer" }}>
+        <Field
+          required
+          label={{ text: "Discount Per Buyer" }}
+          error={{
+            text: _get(
+              errors,
+              "terms.discount_each_buyer.message",
+              "",
+            ) as string,
+          }}
+        >
           <ControlledInputNumber
             disabled={disabled}
             rules={{ required: "Field Required" }}
@@ -49,7 +68,13 @@ const ProductTermsBar: FC<{ disabled: boolean }> = ({ disabled }) => {
         </Field>
       </div>
       <div className={"flex gap-2"}>
-        <Field required label={{ text: "End Date" }}>
+        <Field
+          required
+          label={{ text: "End Date" }}
+          error={{
+            text: _get(errors, "terms.end_date.message", "") as string,
+          }}
+        >
           <ControlledDatePicker
             disabled={disabled}
             rules={{ required: "Field Required" }}
@@ -57,12 +82,18 @@ const ProductTermsBar: FC<{ disabled: boolean }> = ({ disabled }) => {
             minDate={dayjs()}
             control={control}
             showTime={{ format: "HH:mm" }}
-            defaultValue={dayjs().add(3, "days")}
             format="DD-MM-YYYY HH:mm"
+            status={_get(errors, "terms.end_date") && "error"}
           />
         </Field>
 
-        <Field required label={{ text: "Max Buyers Per Group" }}>
+        <Field
+          required
+          label={{ text: "Max Buyers Per Group" }}
+          error={{
+            text: _get(errors, "terms.max_buyers.message", "") as string,
+          }}
+        >
           <ControlledInputNumber
             disabled={disabled}
             rules={{ required: "Field Required" }}

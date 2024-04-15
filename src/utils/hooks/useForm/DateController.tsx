@@ -23,6 +23,12 @@ const DateController: FC<FieldValues> = ({
               (child: React.ReactHTMLElement<any>) => {
                 if (!React.isValidElement(child)) return child;
 
+                let nextValue = null;
+                if (child.props?.value || value || child.props?.defaultValue)
+                  nextValue = dayjs(
+                    child.props?.value ?? value ?? child.props?.defaultValue,
+                  );
+
                 const nextChildProps = {
                   name: childName,
                   onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,9 +42,7 @@ const DateController: FC<FieldValues> = ({
                     if (typeof child.props.onBlur === "function")
                       child.props.onBlur(e);
                   },
-                  value: dayjs(
-                    child.props?.value ?? value ?? child.props?.defaultValue,
-                  ),
+                  value: nextValue,
                 };
 
                 return React.cloneElement(child, nextChildProps);

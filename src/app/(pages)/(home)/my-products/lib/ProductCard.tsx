@@ -6,7 +6,6 @@ import { DeleteFilled } from "@ant-design/icons";
 type ItemCardType = ProductType & {
   onEdit: () => void;
   onDelete: (e: any) => void;
-  loading: boolean;
 };
 
 const ProductCard: FC<ItemCardType> = ({
@@ -16,27 +15,24 @@ const ProductCard: FC<ItemCardType> = ({
   description,
   price,
   category,
-  loading,
 }) => {
   return (
     <Card
       extra={
-        loading ? null : (
-          <div className={"flex gap-3"}>
-            <div
-              className={
-                "font-bold text-blue-500 hover:text-blue-300 cursor-pointer"
-              }
-              onClick={onEdit}
-            >
-              Edit
-            </div>
-            <DeleteFilled
-              onClick={onDelete}
-              className={"cursor-pointer hover:text-red-500"}
-            />
+        <div className={"flex gap-3"}>
+          <div
+            className={
+              "font-bold text-blue-500 hover:text-blue-300 cursor-pointer"
+            }
+            onClick={onEdit}
+          >
+            Edit
           </div>
-        )
+          <DeleteFilled
+            onClick={onDelete}
+            className={"cursor-pointer hover:text-red-500"}
+          />
+        </div>
       }
       title={
         <Typography.Text

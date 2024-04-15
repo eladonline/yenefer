@@ -29,7 +29,7 @@ const Products: FC = () => {
   const [modalConfigs, setModalConfigs] = useState<ModalProps>({});
 
   const {
-    formState: { isSubmitting, isValid },
+    formState: { errors },
     handleSubmit,
     reset,
   } = formFactory;
@@ -50,7 +50,7 @@ const Products: FC = () => {
     });
     modalApi.open();
   };
-
+  console.log(errors);
   const handleEditProductClick = (props: ProductFormType) => {
     reset({ ...props });
     setModalConfigs({
@@ -106,7 +106,6 @@ const Products: FC = () => {
           products.map(({ ...props }) => {
             return (
               <ProductCard
-                loading={isSubmitting}
                 onEdit={() => handleEditProductClick(props)}
                 onDelete={(e) => {
                   let target = e.currentTarget;

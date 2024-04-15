@@ -33,10 +33,12 @@ const Field: FC<FormFieldProps> = ({
           </Typography.Title>
         </label>
       )}
-      <div className={"gap-1"}>
+      <Tooltip
+        color={"#ffffff"}
+        title={error?.text && <PrimaryError text={error.text} />}
+      >
         {children}
-        {error?.text && <PrimaryError text={error.text} />}
-      </div>
+      </Tooltip>
     </div>
   );
 };
