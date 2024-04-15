@@ -26,7 +26,7 @@ type useProductsHook = {
   urlFilters: {};
 };
 
-const defaultValues = {
+export const productDefaultValues = {
   name: null,
   category: null,
   description: null,
@@ -61,7 +61,7 @@ const useLogic = (
     staleTime: Infinity,
   });
   const formFactory = useForm<ProductFormType>({
-    defaultValues: { ...defaultValues },
+    defaultValues: { ...productDefaultValues },
   });
 
   useEffect(() => {
@@ -80,7 +80,7 @@ const useLogic = (
     try {
       await createProduct(fields);
       await refetch();
-      formFactory.reset({ ...defaultValues });
+      formFactory.reset({ ...productDefaultValues });
     } catch (err: any) {
       notificationApi.error({ message: err.message });
     }
@@ -90,7 +90,7 @@ const useLogic = (
     try {
       await editProduct(_id as string, fields);
       await refetch();
-      formFactory.reset({ ...defaultValues });
+      formFactory.reset({ ...productDefaultValues });
     } catch (err: any) {
       notificationApi.error({ message: err.message });
     }
@@ -100,7 +100,7 @@ const useLogic = (
     try {
       await deleteProduct(_id);
       await refetch();
-      formFactory.reset({ ...defaultValues });
+      formFactory.reset({ ...productDefaultValues });
     } catch (err: any) {
       notificationApi.error({ message: err.message });
       return Promise.reject();
@@ -110,7 +110,7 @@ const useLogic = (
     products,
     formFactory,
     onSubmit,
-    resetFormToDefault: () => formFactory.reset({ ...defaultValues }),
+    resetFormToDefault: () => formFactory.reset({ ...productDefaultValues }),
     onSubmitEdit,
     onDeleteItem,
     urlFilters: filtersUtil.fromMapToJson(searchParams),

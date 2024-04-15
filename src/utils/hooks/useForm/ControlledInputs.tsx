@@ -7,9 +7,12 @@ import {
   InputProps,
   Select,
   SelectProps,
+  DatePicker,
+  DatePickerProps,
 } from "antd/lib";
 import { FieldValues } from "react-hook-form";
 import { TextAreaProps } from "antd/lib/input";
+import DateController from "@/utils/hooks/useForm/DateController";
 
 const { TextArea } = Input;
 
@@ -97,5 +100,27 @@ export const ControlledTextArea: FC<ControlledTextAreaType> = ({
     <Controller name={name} control={control} rules={rules}>
       <TextArea name={name} placeholder={placeholder} {...props} />
     </Controller>
+  );
+};
+
+type ControlledDatePickerType = {
+  name: string;
+  rules?: FieldValues;
+  control: FieldValues;
+  placeholder?: string;
+} & DatePickerProps &
+  ComponentPropsWithoutRef<any>;
+
+export const ControlledDatePicker: FC<ControlledDatePickerType> = ({
+  name,
+  rules,
+  control,
+  placeholder = "Select Date",
+  ...props
+}) => {
+  return (
+    <DateController name={name} control={control} rules={rules}>
+      <DatePicker name={name} placeholder={placeholder} {...props} />
+    </DateController>
   );
 };

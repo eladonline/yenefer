@@ -1,7 +1,8 @@
 import { Controller, FieldValues } from "react-hook-form";
 import React, { FC, ReactElement } from "react";
+import dayjs from "dayjs";
 
-const FormController: FC<FieldValues> = ({
+const DateController: FC<FieldValues> = ({
   name,
   rules,
   control,
@@ -35,8 +36,9 @@ const FormController: FC<FieldValues> = ({
                     if (typeof child.props.onBlur === "function")
                       child.props.onBlur(e);
                   },
-                  value:
+                  value: dayjs(
                     child.props?.value ?? value ?? child.props?.defaultValue,
+                  ),
                 };
 
                 return React.cloneElement(child, nextChildProps);
@@ -49,4 +51,4 @@ const FormController: FC<FieldValues> = ({
   );
 };
 
-export default FormController;
+export default DateController;

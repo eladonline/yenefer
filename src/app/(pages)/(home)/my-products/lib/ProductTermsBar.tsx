@@ -1,10 +1,14 @@
 import React, { FC } from "react";
 import { useFormContext } from "react-hook-form";
 import Field from "@/app/components/decorators/form/Field";
-import { ControlledInputNumber } from "@/utils/hooks/useForm/ControlledInputs";
+import {
+  ControlledDatePicker,
+  ControlledInputNumber,
+} from "@/utils/hooks/useForm/ControlledInputs";
 import _get from "lodash/get";
+import dayjs from "dayjs";
 
-const ProductTermsBar: FC = () => {
+const ProductTermsBar: FC<{ disabled: boolean }> = ({ disabled }) => {
   const {
     control,
     formState: { errors },
@@ -15,6 +19,7 @@ const ProductTermsBar: FC = () => {
       <div className={"flex gap-2"}>
         <Field required label={{ text: "Min Price" }}>
           <ControlledInputNumber
+            disabled={disabled}
             rules={{ required: "Field Required" }}
             name={"terms.min_price"}
             min={0}
@@ -25,6 +30,7 @@ const ProductTermsBar: FC = () => {
 
         <Field required label={{ text: "Discount Per Buyer" }}>
           <ControlledInputNumber
+            disabled={disabled}
             rules={{ required: "Field Required" }}
             name={"terms.discount_each_buyer"}
             min={0}
@@ -35,17 +41,20 @@ const ProductTermsBar: FC = () => {
       </div>
       <div className={"flex gap-2"}>
         <Field required label={{ text: "End Date" }}>
-          <ControlledInputNumber
+          <ControlledDatePicker
+            disabled={disabled}
             rules={{ required: "Field Required" }}
             name={"terms.end_date"}
-            min={0}
+            minDate={dayjs()}
             control={control}
-            status={_get(errors, "terms.end_date") && "error"}
+            showTime={{ format: "HH:mm" }}
+            format="DD-MM-YYYY HH:mm"
           />
         </Field>
 
         <Field required label={{ text: "Max Buyers Per Group" }}>
           <ControlledInputNumber
+            disabled={disabled}
             rules={{ required: "Field Required" }}
             name={"terms.max_buyers"}
             min={0}
