@@ -46,9 +46,12 @@ const Products: FC = () => {
     setModalConfigs({
       title: "Add Product",
       onOk: () => {
+        setModalConfigs((prev) => ({ ...prev, confirmLoading: true }));
         handleSubmit(onSubmit, Promise.reject)()
           .then(modalApi.close)
-          .catch(() => formFactory.trigger());
+          .catch(() => {
+            setModalConfigs((prev) => ({ ...prev, confirmLoading: false }));
+          });
       },
       children: <ProductForm />,
       afterClose: resetFormToDefault,
@@ -60,9 +63,12 @@ const Products: FC = () => {
     setModalConfigs({
       title: "Edit Product",
       onOk: async () => {
+        setModalConfigs((prev) => ({ ...prev, confirmLoading: true }));
         await handleSubmit(onSubmitEdit, Promise.reject)()
           .then(modalApi.close)
-          .catch(() => formFactory.trigger());
+          .catch(() => {
+            setModalConfigs((prev) => ({ ...prev, confirmLoading: false }));
+          });
       },
       children: <ProductForm />,
       afterClose: resetFormToDefault,
@@ -102,7 +108,7 @@ const Products: FC = () => {
         onFiltersClick={handleFiltersClick}
         onAddProductClick={handleAddProductClick}
       />
-      <ul className={"flex flex-wrap gap-3"}>
+      <ul className={"grid grid-cols-4 gap-2"}>
         {products?.length ? (
           products.map(({ ...props }) => {
             return (

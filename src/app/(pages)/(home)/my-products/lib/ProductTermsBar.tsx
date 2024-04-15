@@ -7,7 +7,7 @@ import _get from "lodash/get";
 const ProductTermsBar: FC = () => {
   const {
     control,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useFormContext();
 
   return (

@@ -46,7 +46,7 @@ const ProductCard: FC<ItemCardType> = ({
           {name}
         </Typography.Text>
       }
-      className={"flex flex-col gap-3 w-[25%] min-w-[250px] "}
+      className={"flex flex-col gap-3 min-w-[250px] "}
     >
       <div className={"flex gap-2"}>
         <Typography.Title className={"text-nowrap"} level={5}>
