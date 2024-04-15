@@ -101,7 +101,7 @@ const Products: FC = () => {
         onFiltersClick={handleFiltersClick}
         onAddProductClick={handleAddProductClick}
       />
-      <ul className={"grid grid-cols-4 gap-2"}>
+      <ul className={"grid grid-cols-2 xl:grid-cols-3  2xl:grid-cols-4 gap-2"}>
         {products?.length ? (
           products.map(({ ...props }) => {
             return (

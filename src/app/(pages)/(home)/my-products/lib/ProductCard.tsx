@@ -1,7 +1,14 @@
 import React, { FC } from "react";
 import { Card, Tooltip, Typography } from "antd/lib";
 import { ProductType } from "@/types/apis/usersData";
-import { DeleteFilled, ClockCircleFilled } from "@ant-design/icons";
+import {
+  DeleteFilled,
+  ClockCircleFilled,
+  TeamOutlined,
+  DollarTwoTone,
+  VerticalAlignBottomOutlined,
+} from "@ant-design/icons";
+import dayjs from "dayjs";
 
 type ItemCardType = ProductType & {
   onEdit: () => void;
@@ -43,7 +50,7 @@ const ProductCard: FC<ItemCardType> = ({
           {name}
         </Typography.Text>
       }
-      className={"flex flex-col gap-3 min-w-[250px] "}
+      className={"flex flex-col  min-w-[250px] "}
     >
       <div className={"flex gap-2"}>
         <Typography.Title className={"text-nowrap"} level={5}>
@@ -68,13 +75,30 @@ const ProductCard: FC<ItemCardType> = ({
         <Typography.Text>{price}</Typography.Text>
       </div>
 
-      <div className={"flex gap-4"}>
-        <span>{discount_each_buyer}</span>
-        <span>{max_buyers}</span>
-        <span>{min_price}</span>
+      <div className={"flex gap-4 mt-5"}>
         <span>
-          <Tooltip title={end_date}>
-            <ClockCircleFilled />
+          <Tooltip title={`Discount per Buyer`}>
+            <DollarTwoTone />{" "}
+            <Typography.Text>{discount_each_buyer}</Typography.Text>
+          </Tooltip>
+        </span>
+        <span>
+          <Tooltip title={`Max Buyers`}>
+            <TeamOutlined /> <Typography.Text>{max_buyers}</Typography.Text>
+          </Tooltip>
+        </span>
+        <span>
+          <Tooltip title={`Min Price`}>
+            <VerticalAlignBottomOutlined />{" "}
+            <Typography.Text>{min_price}</Typography.Text>
+          </Tooltip>
+        </span>
+        <span>
+          <Tooltip title={`End Date`}>
+            <ClockCircleFilled />{" "}
+            <Typography.Text>
+              {dayjs(end_date).format("DD/MM/YY HH:mm")}
+            </Typography.Text>
           </Tooltip>
         </span>
       </div>
