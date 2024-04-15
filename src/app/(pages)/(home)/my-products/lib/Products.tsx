@@ -1,13 +1,5 @@
 "use client";
-import React, {
-  FC,
-  MouseEventHandler,
-  ReactDOM,
-  ReactElement,
-  ReactEventHandler,
-  useRef,
-  useState,
-} from "react";
+import React, { FC, useState } from "react";
 import { useProduct } from "@/app/(pages)/(home)/my-products/lib/useProduct";
 import ProductsBar from "@/app/components/bars/products/ProductsBar";
 import { FormProvider } from "react-hook-form";
@@ -58,6 +50,7 @@ const Products: FC = () => {
     });
     modalApi.open();
   };
+
   const handleEditProductClick = (props: ProductFormType) => {
     reset({ ...props });
     setModalConfigs({

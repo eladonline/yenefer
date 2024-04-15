@@ -1,11 +1,12 @@
 import { FC, ReactElement } from "react";
 import PrimaryError from "@/app/components/errors/PrimaryError";
-import { Typography } from "antd/lib";
+import { Typography, TooltipProps, Tooltip } from "antd/lib";
+import { InfoCircleFilled } from "@ant-design/icons";
 
 type FormFieldProps = {
   children: ReactElement;
   required?: boolean;
-  label?: { text: string };
+  label?: { text: string; tooltip?: TooltipProps };
   error?: { text: string | undefined };
   className?: string;
 };
@@ -24,6 +25,11 @@ const Field: FC<FormFieldProps> = ({
           <Typography.Title level={5}>
             {label.text}
             {required && <span className={"ml-0.5 text-red-500"}>*</span>}
+            {label.tooltip && (
+              <Tooltip {...label.tooltip}>
+                <InfoCircleFilled className={"ml-1"} />
+              </Tooltip>
+            )}
           </Typography.Title>
         </label>
       )}

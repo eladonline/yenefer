@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { useFormContext } from "react-hook-form";
+import { UseFieldArrayProps, useFormContext } from "react-hook-form";
 import Field from "@/app/components/decorators/form/Field";
 import {
   ControlledDatePicker,
@@ -17,10 +17,19 @@ const ProductTermsBar: FC<{ disabled: boolean }> = ({ disabled }) => {
   return (
     <div className={"flex flex-col gap-2"}>
       <div className={"flex gap-2"}>
-        <Field required label={{ text: "Min Price" }}>
+        <Field
+          required
+          label={{ text: "Min Price", tooltip: { title: "explain" } }}
+        >
           <ControlledInputNumber
             disabled={disabled}
-            rules={{ required: "Field Required" }}
+            rules={{
+              required: "Field Required",
+              validate: (minPrice: number, { price }: { price: number }) => {
+                if (minPrice >= price)
+                  return "Minimum price should be lower then the price";
+              },
+            }}
             name={"terms.min_price"}
             min={0}
             control={control}
@@ -48,6 +57,7 @@ const ProductTermsBar: FC<{ disabled: boolean }> = ({ disabled }) => {
             minDate={dayjs()}
             control={control}
             showTime={{ format: "HH:mm" }}
+            defaultValue={dayjs().add(3, "days")}
             format="DD-MM-YYYY HH:mm"
           />
         </Field>
