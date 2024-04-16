@@ -20,7 +20,7 @@ const ProductTermsBar: FC<{ disabled: boolean }> = ({ disabled }) => {
     control,
     formState: { errors },
   } = useFormContext();
-
+  console.log(errors);
   return (
     <div className={"flex flex-col gap-2"}>
       <div className={"flex gap-4"}>
@@ -45,6 +45,7 @@ const ProductTermsBar: FC<{ disabled: boolean }> = ({ disabled }) => {
               status={_get(errors, "terms.discount_each_buyer") && "error"}
             />
             <ControlledRadioGroup
+              disabled={disabled}
               options={options}
               name={"terms.discount_each_buyer.unit"}
               control={control}

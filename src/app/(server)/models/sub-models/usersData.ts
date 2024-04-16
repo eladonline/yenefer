@@ -9,7 +9,10 @@ const productSchema = new Schema<ProductType>({
   created: { type: Date, default: Date.now() },
   terms: {
     min_price: { type: Number, required: true },
-    discount_each_buyer: { type: Number, required: true },
+    discount_each_buyer: {
+      type: { value: Number, unit: { type: String, default: "NIS" } },
+      required: true,
+    },
     end_date: { type: Date, required: true },
     max_buyers: { type: Number, required: true },
   },

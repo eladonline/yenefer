@@ -20,7 +20,7 @@ export type ProductFormType = {
   price: number | null;
   terms: {
     min_price: number | null;
-    discount_each_buyer: { value: number | null; unit: string | null };
+    discount_each_buyer: { value: number | null; unit: string };
     end_date: any | null;
     max_buyers: number | null;
   };

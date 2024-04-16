@@ -32,7 +32,7 @@ export const productDefaultValues = {
   description: null,
   price: null,
   terms: {
-    discount_each_buyer: null,
+    discount_each_buyer: { value: null, unit: "nis" },
     max_buyers: null,
     min_price: null,
     end_date: null,

@@ -45,7 +45,7 @@ const ProductCard: FC<ItemCardType> = ({
       actions={[
         <Tooltip key={"discount"} title={`Discount per Buyer`}>
           <DollarCircleOutlined style={{ fontSize: "14px" }} />{" "}
-          <Typography.Text>{discount_each_buyer}</Typography.Text>
+          <Typography.Text>{discount_each_buyer.value}</Typography.Text>
         </Tooltip>,
 
         <Tooltip key={"MaxBuyers"} title={`Max Buyers`}>

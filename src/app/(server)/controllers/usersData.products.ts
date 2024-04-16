@@ -104,8 +104,10 @@ export const getProductController = async (request: NextRequest) => {
       },
     };
   }
+  const data = await UserDataModel.findOne(filters, projection).select(
+    "-products.terms.discount_each_buyer._id",
+  );
 
-  const data = await UserDataModel.findOne(filters, projection);
   return NextResponse.json(data?.products || [], { status: 200 });
 };
 

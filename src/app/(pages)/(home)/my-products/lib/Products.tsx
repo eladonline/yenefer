@@ -27,7 +27,6 @@ const Products: FC = () => {
 
   const [ModalRoot, modalApi] = useModal();
   const [modalConfigs, setModalConfigs] = useState<ModalProps>({});
-
   const {
     formState: { errors },
     handleSubmit,
@@ -101,9 +100,11 @@ const Products: FC = () => {
         onFiltersClick={handleFiltersClick}
         onAddProductClick={handleAddProductClick}
       />
-      <ul className={"grid grid-cols-2 xl:grid-cols-3  2xl:grid-cols-4 gap-2"}>
-        {products?.length ? (
-          products.map(({ ...props }) => {
+      {products?.length ? (
+        <ul
+          className={"grid grid-cols-2 xl:grid-cols-3  2xl:grid-cols-4 gap-2"}
+        >
+          {products.map(({ ...props }) => {
             return (
               <ProductCard
                 onEdit={() => handleEditProductClick(props)}
@@ -118,13 +119,13 @@ const Products: FC = () => {
                 {...props}
               />
             );
-          })
-        ) : (
-          <div className={"flex flex-grow justify-center"}>
-            <Empty />
-          </div>
-        )}
-      </ul>
+          })}
+        </ul>
+      ) : (
+        <div className={"flex flex-grow justify-center"}>
+          <Empty />
+        </div>
+      )}
     </div>
   );
 };
