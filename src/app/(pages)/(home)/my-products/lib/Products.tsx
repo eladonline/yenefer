@@ -50,7 +50,7 @@ const Products: FC = () => {
     });
     modalApi.open();
   };
-  console.log(errors);
+
   const handleEditProductClick = (props: ProductFormType) => {
     reset({ ...props });
     setModalConfigs({

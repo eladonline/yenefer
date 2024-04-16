@@ -5,7 +5,7 @@ import {
   DeleteFilled,
   ClockCircleFilled,
   TeamOutlined,
-  DollarTwoTone,
+  DollarCircleOutlined,
   VerticalAlignBottomOutlined,
 } from "@ant-design/icons";
 import dayjs from "dayjs";
@@ -44,23 +44,24 @@ const ProductCard: FC<ItemCardType> = ({
       }
       actions={[
         <Tooltip key={"discount"} title={`Discount per Buyer`}>
-          <DollarTwoTone />{" "}
+          <DollarCircleOutlined style={{ fontSize: "14px" }} />{" "}
           <Typography.Text>{discount_each_buyer}</Typography.Text>
         </Tooltip>,
 
         <Tooltip key={"MaxBuyers"} title={`Max Buyers`}>
-          <TeamOutlined /> <Typography.Text>{max_buyers}</Typography.Text>
+          <TeamOutlined style={{ fontSize: "14px" }} />{" "}
+          <Typography.Text>{max_buyers}</Typography.Text>
         </Tooltip>,
 
         <Tooltip key={"MinPrice"} title={`Min Price`}>
-          <VerticalAlignBottomOutlined />{" "}
+          <VerticalAlignBottomOutlined style={{ fontSize: "14px" }} />{" "}
           <Typography.Text>{min_price}</Typography.Text>
         </Tooltip>,
         <Tooltip
           key={"EndDate"}
           title={`End Date: ${dayjs(end_date).format("DD/MM/YY HH:mm")}`}
         >
-          <ClockCircleFilled />
+          <ClockCircleFilled style={{ fontSize: "14px" }} />
         </Tooltip>,
       ]}
       title={
