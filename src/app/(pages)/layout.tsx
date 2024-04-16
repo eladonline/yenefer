@@ -19,6 +19,7 @@ export const metadata: Metadata = {
 export default function RootLayout(props: { children: ReactElement }) {
   const cookiesPayload = cookies();
   const token = cookiesPayload.get("token")?.value;
+
   const info = jwt.decode(token as string, { json: true });
 
   return (
@@ -26,7 +27,7 @@ export default function RootLayout(props: { children: ReactElement }) {
       <body className={"m-0 min-h-[100vh]"}>
         <AntdRegistry>
           <AntdProvider>
-            <AccessControlProvider license={info?.license || "guest"}>
+            <AccessControlProvider license={info?.license}>
               <QueryClientProvider>{props.children}</QueryClientProvider>
             </AccessControlProvider>
           </AntdProvider>

@@ -11,7 +11,7 @@ import dayjs from "dayjs";
 import { ProductFormType } from "@/types/apis/usersData";
 
 const options = [
-  { label: "%", value: "percent" },
+  { label: "%", value: "percentage" },
   { label: "NIS", value: "nis" },
 ];
 
@@ -20,7 +20,7 @@ const ProductTermsBar: FC<{ disabled: boolean }> = ({ disabled }) => {
     control,
     formState: { errors },
   } = useFormContext();
-  console.log(errors);
+
   return (
     <div className={"flex flex-col gap-2"}>
       <div className={"flex gap-4"}>
@@ -78,18 +78,35 @@ const ProductTermsBar: FC<{ disabled: boolean }> = ({ disabled }) => {
                   price,
                   terms: {
                     discount_each_buyer: {
-                      value: discount_each_buyer,
-                      unit: discount_each_buyerUnit,
+                      value: discountEachBuyerValue,
+                      unit: discountEachBuyerUnit,
                     },
+                    max_buyers,
                   },
                 }: ProductFormType,
               ) => {
-                if (!price || !discount_each_buyer) return;
-                if (minPrice % discount_each_buyer)
-                  return `Discount * Max group members cannot be equal to ${minPrice}`;
+                if (
+                  !price ||
+                  !discountEachBuyerValue ||
+                  !discountEachBuyerUnit ||
+                  !max_buyers
+                )
+                  return;
 
-                if (minPrice >= price)
-                  return `Minimum price should be lower then ${price}`;
+                if (discountEachBuyerUnit !== "percentage") {
+                  if (minPrice % discountEachBuyerValue)
+                    return `Discount * Max group members cannot be equal to ${minPrice}`;
+
+                  if (minPrice >= price)
+                    return `Minimum price should be lower then ${price}`;
+                }
+
+                if (discountEachBuyerUnit === "percentage") {
+                  const priceAfterDiscount =
+                    price - (100 - discountEachBuyerValue / 100) * max_buyers;
+                  if (priceAfterDiscount !== minPrice)
+                    return `Price after max discount does not equal to ${minPrice}`;
+                }
               },
             }}
             name={"terms.min_price"}
