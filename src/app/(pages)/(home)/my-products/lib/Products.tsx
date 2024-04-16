@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, useState } from "react";
+import React, { FC, useCallback, useMemo, useState } from "react";
 import { useProduct } from "@/app/(pages)/(home)/my-products/lib/useProduct";
 import ProductsBar from "@/app/components/bars/products/ProductsBar";
 import { FormProvider } from "react-hook-form";
@@ -50,7 +50,7 @@ const Products: FC = () => {
     modalApi.open();
   };
 
-  const handleEditProductClick = (props: ProductFormType) => {
+  const handleEditProductClick = useCallback((props: ProductFormType) => {
     reset({ ...props });
     setModalConfigs({
       title: "Edit Product",
@@ -66,7 +66,7 @@ const Products: FC = () => {
       afterClose: resetFormToDefault,
     });
     modalApi.open();
-  };
+  }, []);
 
   const handleFiltersClick = () => {
     let filters: { [key: string]: string } = {};
@@ -93,6 +93,25 @@ const Products: FC = () => {
     modalApi.open();
   };
 
+  const productsMemo = useMemo(() => {
+    return products?.map(({ ...props }) => {
+      return (
+        <ProductCard
+          onEdit={() => handleEditProductClick(props)}
+          onDelete={(e) => {
+            let target = e.currentTarget;
+            target.style.visibility = "hidden";
+            onDeleteItem(props._id as string).catch(() => {
+              target.style.visibility = "visible";
+            });
+          }}
+          key={props._id}
+          {...props}
+        />
+      );
+    });
+  }, [products, handleEditProductClick]);
+
   return (
     <div className={"grid grid-cols-1 gap-[20px]"}>
       <FormProvider {...formFactory}>{ModalRoot(modalConfigs)}</FormProvider>
@@ -104,22 +123,7 @@ const Products: FC = () => {
         <ul
           className={"grid grid-cols-2 xl:grid-cols-3  2xl:grid-cols-4 gap-2"}
         >
-          {products.map(({ ...props }) => {
-            return (
-              <ProductCard
-                onEdit={() => handleEditProductClick(props)}
-                onDelete={(e) => {
-                  let target = e.currentTarget;
-                  target.style.visibility = "hidden";
-                  onDeleteItem(props._id as string).catch(() => {
-                    target.style.visibility = "visible";
-                  });
-                }}
-                key={props._id}
-                {...props}
-              />
-            );
-          })}
+          {productsMemo}
         </ul>
       ) : (
         <div className={"flex flex-grow justify-center"}>

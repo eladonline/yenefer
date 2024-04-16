@@ -24,6 +24,8 @@ const ProductCard: FC<ItemCardType> = ({
   category,
   terms: { discount_each_buyer, quantity, min_price, end_date },
 }) => {
+  const isOutdated = dayjs(end_date).isBefore(dayjs());
+  console.log(isOutdated);
   return (
     <Card
       extra={
@@ -99,4 +101,5 @@ const ProductCard: FC<ItemCardType> = ({
     </Card>
   );
 };
+
 export default ProductCard;

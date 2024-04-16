@@ -6,7 +6,7 @@
     "react/no-children-prop": "off",
     "react/react-in-jsx-scope": "off",
     "space-before-blocks": "warn",
-    "no-unused-vars": "warn",
+    "no-unused-vars": "off",
     "no-undef": "warn",
     "no-var": "warn",
     "brace-style": "warn",
