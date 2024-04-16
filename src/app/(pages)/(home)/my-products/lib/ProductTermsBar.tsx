@@ -8,8 +8,6 @@ import {
 } from "@/utils/hooks/useForm/ControlledInputs";
 import _get from "lodash/get";
 import dayjs from "dayjs";
-import { ProductFormType } from "@/types/apis/usersData";
-import Decimal from "decimal.js";
 import { validateMinPrice } from "@/app/(pages)/(home)/my-products/lib/validations";
 
 const options = [
