@@ -11,6 +11,7 @@ import config from "./config.json";
 import ProductTermsBar from "@/app/(pages)/(home)/my-products/lib/ProductTermsBar";
 import _get from "lodash/get";
 import { productDefaultValues } from "@/app/(pages)/(home)/my-products/lib/useProduct";
+
 const categories = config.categories.map((id) => ({
   value: id.toLocaleLowerCase(),
   label: id,

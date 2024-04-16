@@ -6,7 +6,7 @@ export type ProductType = {
   created?: Date;
   terms: {
     min_price: number;
-    discount_each_buyer: number;
+    discount_each_buyer: { value: number; unit: string };
     end_date: any;
     max_buyers: number;
   };
@@ -20,7 +20,7 @@ export type ProductFormType = {
   price: number | null;
   terms: {
     min_price: number | null;
-    discount_each_buyer: number | null;
+    discount_each_buyer: { value: number | null; unit: string | null };
     end_date: any | null;
     max_buyers: number | null;
   };

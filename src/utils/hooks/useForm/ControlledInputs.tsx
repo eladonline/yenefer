@@ -9,6 +9,8 @@ import {
   SelectProps,
   DatePicker,
   DatePickerProps,
+  Radio,
+  RadioGroupProps,
 } from "antd/lib";
 import { FieldValues } from "react-hook-form";
 import { TextAreaProps } from "antd/lib/input";
@@ -122,5 +124,25 @@ export const ControlledDatePicker: FC<ControlledDatePickerType> = ({
     <DateController name={name} control={control} rules={rules}>
       <DatePicker name={name} placeholder={placeholder} {...props} />
     </DateController>
+  );
+};
+
+type ControlledRadioType = {
+  name: string;
+  rules?: FieldValues;
+  control: FieldValues;
+} & RadioGroupProps &
+  ComponentPropsWithoutRef<any>;
+
+export const ControlledRadioGroup: FC<ControlledRadioType> = ({
+  name,
+  rules,
+  control,
+  ...props
+}) => {
+  return (
+    <Controller name={name} control={control} rules={rules}>
+      <Radio.Group name={name} {...props} />
+    </Controller>
   );
 };

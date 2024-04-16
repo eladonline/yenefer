@@ -4,10 +4,16 @@ import Field from "@/app/components/decorators/form/Field";
 import {
   ControlledDatePicker,
   ControlledInputNumber,
+  ControlledRadioGroup,
 } from "@/utils/hooks/useForm/ControlledInputs";
 import _get from "lodash/get";
 import dayjs from "dayjs";
 import { ProductFormType } from "@/types/apis/usersData";
+
+const options = [
+  { label: "%", value: "percent" },
+  { label: "NIS", value: "nis" },
+];
 
 const ProductTermsBar: FC<{ disabled: boolean }> = ({ disabled }) => {
   const {
@@ -29,14 +35,23 @@ const ProductTermsBar: FC<{ disabled: boolean }> = ({ disabled }) => {
             ) as string,
           }}
         >
-          <ControlledInputNumber
-            disabled={disabled}
-            rules={{ required: "Field Required" }}
-            name={"terms.discount_each_buyer"}
-            min={0}
-            control={control}
-            status={_get(errors, "terms.discount_each_buyer") && "error"}
-          />
+          <div className={"flex items-center gap-3"}>
+            <ControlledInputNumber
+              disabled={disabled}
+              rules={{ required: "Field Required" }}
+              name={"terms.discount_each_buyer.value"}
+              min={0}
+              control={control}
+              status={_get(errors, "terms.discount_each_buyer") && "error"}
+            />
+            <ControlledRadioGroup
+              options={options}
+              name={"terms.discount_each_buyer.unit"}
+              control={control}
+              optionType="button"
+              size={"small"}
+            />
+          </div>
         </Field>
 
         <Field
@@ -58,7 +73,15 @@ const ProductTermsBar: FC<{ disabled: boolean }> = ({ disabled }) => {
               required: "Field Required",
               validate: (
                 minPrice: number,
-                { price, terms: { discount_each_buyer } }: ProductFormType,
+                {
+                  price,
+                  terms: {
+                    discount_each_buyer: {
+                      value: discount_each_buyer,
+                      unit: discount_each_buyerUnit,
+                    },
+                  },
+                }: ProductFormType,
               ) => {
                 if (!price || !discount_each_buyer) return;
                 if (minPrice % discount_each_buyer)
@@ -91,7 +114,13 @@ const ProductTermsBar: FC<{ disabled: boolean }> = ({ disabled }) => {
                 max_buyers: number,
                 {
                   price,
-                  terms: { min_price, discount_each_buyer },
+                  terms: {
+                    min_price,
+                    discount_each_buyer: {
+                      value: discount_each_buyer,
+                      unit: discount_each_buyerUnit,
+                    },
+                  },
                 }: ProductFormType,
               ) => {
                 if (!price || !discount_each_buyer || !min_price) return;
