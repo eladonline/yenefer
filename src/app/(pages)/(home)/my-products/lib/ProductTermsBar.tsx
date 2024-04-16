@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { useFormContext, useWatch } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import Field from "@/app/components/decorators/form/Field";
 import {
   ControlledDatePicker,
@@ -13,7 +13,7 @@ import Decimal from "decimal.js";
 
 const options = [
   { label: "%", value: "percentage" },
-  { label: "NIS", value: "nis" },
+  { label: "₪", value: "nis" },
 ];
 
 const ProductTermsBar: FC<{ disabled: boolean }> = ({ disabled }) => {
@@ -22,8 +22,6 @@ const ProductTermsBar: FC<{ disabled: boolean }> = ({ disabled }) => {
     formState: { errors },
   } = useFormContext();
 
-  const terms = useWatch({ control, name: "terms" });
-  console.log(terms);
   return (
     <div className={"flex flex-col gap-2"}>
       <div className={"flex gap-4"}>
