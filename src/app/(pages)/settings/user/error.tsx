@@ -8,8 +8,8 @@ type ErrorProps = {
   reset: () => void;
 };
 
+// @ts-ignore
 export default function Error({ error, reset }: ErrorProps) {
-  console.log(error);
   useEffect(() => {
     // Log the error to an error reporting service
     console.error(error);
