@@ -9,6 +9,7 @@ import {
 import _get from "lodash/get";
 import dayjs from "dayjs";
 import { ProductFormType } from "@/types/apis/usersData";
+import Decimal from "decimal.js";
 
 const options = [
   { label: "%", value: "percentage" },
@@ -102,10 +103,15 @@ const ProductTermsBar: FC<{ disabled: boolean }> = ({ disabled }) => {
                 }
 
                 if (discountEachBuyerUnit === "percentage") {
+                  const percentageOfPrice = new Decimal(
+                    discountEachBuyerValue / 100,
+                  );
                   const priceAfterDiscount =
-                    price - (100 - discountEachBuyerValue / 100) * max_buyers;
+                    price -
+                    Number(percentageOfPrice.times(max_buyers).times(price));
+
                   if (priceAfterDiscount !== minPrice)
-                    return `Price after max discount does not equal to ${minPrice}`;
+                    return `Price after max discount is ${priceAfterDiscount} it should equal to ${minPrice}`;
                 }
               },
             }}
