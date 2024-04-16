@@ -14,7 +14,7 @@ const productSchema = new Schema<ProductType>({
       required: true,
     },
     end_date: { type: Date, required: true },
-    max_buyers: { type: Number, required: true },
+    quantity: { type: Number, required: true },
   },
 });
 

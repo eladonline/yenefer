@@ -22,7 +22,7 @@ const ProductCard: FC<ItemCardType> = ({
   description,
   price,
   category,
-  terms: { discount_each_buyer, max_buyers, min_price, end_date },
+  terms: { discount_each_buyer, quantity, min_price, end_date },
 }) => {
   return (
     <Card
@@ -48,9 +48,9 @@ const ProductCard: FC<ItemCardType> = ({
           <Typography.Text>{discount_each_buyer.value}</Typography.Text>
         </Tooltip>,
 
-        <Tooltip key={"MaxBuyers"} title={`Max Buyers`}>
+        <Tooltip key={"MaxBuyers"} title={`Quantity`}>
           <TeamOutlined style={{ fontSize: "14px" }} />{" "}
-          <Typography.Text>{max_buyers}</Typography.Text>
+          <Typography.Text>{quantity}</Typography.Text>
         </Tooltip>,
 
         <Tooltip key={"MinPrice"} title={`Min Price`}>

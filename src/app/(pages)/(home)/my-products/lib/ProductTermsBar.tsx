@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { useFormContext } from "react-hook-form";
+import { useFormContext, useWatch } from "react-hook-form";
 import Field from "@/app/components/decorators/form/Field";
 import {
   ControlledDatePicker,
@@ -22,6 +22,8 @@ const ProductTermsBar: FC<{ disabled: boolean }> = ({ disabled }) => {
     formState: { errors },
   } = useFormContext();
 
+  const terms = useWatch({ control, name: "terms" });
+  console.log(terms);
   return (
     <div className={"flex flex-col gap-2"}>
       <div className={"flex gap-4"}>
@@ -62,7 +64,7 @@ const ProductTermsBar: FC<{ disabled: boolean }> = ({ disabled }) => {
             text: "Min Price",
             tooltip: {
               title:
-                "Minimum Price suggest the lowest price for the discount. In other words maximum discount (calculated by the (Price - Discount * Buyers))",
+                "Minimum Price suggest the lowest price after the discount. if Min price is exceeded and buyers keep sign to the group the price will not reduce.",
             },
           }}
           error={{
@@ -82,21 +84,18 @@ const ProductTermsBar: FC<{ disabled: boolean }> = ({ disabled }) => {
                       value: discountEachBuyerValue,
                       unit: discountEachBuyerUnit,
                     },
-                    max_buyers,
                   },
                 }: ProductFormType,
               ) => {
-                if (
-                  !price ||
-                  !discountEachBuyerValue ||
-                  !discountEachBuyerUnit ||
-                  !max_buyers
-                )
+                if (!price || !discountEachBuyerValue || !discountEachBuyerUnit)
                   return;
 
                 if (discountEachBuyerUnit !== "percentage") {
-                  if (minPrice % discountEachBuyerValue)
-                    return `Discount * Max group members cannot be equal to ${minPrice}`;
+                  const discount = new Decimal(discountEachBuyerValue);
+                  if (price - Number(discount) < minPrice)
+                    return `Price - Discount is lower then ${minPrice}`;
+                  if (minPrice % Number(discount))
+                    return `Price - Discount * Buyer will never equal to ${minPrice}`;
 
                   if (minPrice >= price)
                     return `Minimum price should be lower then ${price}`;
@@ -107,11 +106,12 @@ const ProductTermsBar: FC<{ disabled: boolean }> = ({ disabled }) => {
                     discountEachBuyerValue / 100,
                   );
                   const priceAfterDiscount =
-                    price -
-                    Number(percentageOfPrice.times(max_buyers).times(price));
+                    price - Number(percentageOfPrice.times(price));
 
-                  if (priceAfterDiscount !== minPrice)
-                    return `Price after max discount is ${priceAfterDiscount} it should equal to ${minPrice}`;
+                  if (priceAfterDiscount < minPrice)
+                    return `Price - Discount = ${priceAfterDiscount} it should be higher/equal then ${minPrice}`;
+                  if (minPrice % priceAfterDiscount)
+                    return `Price - Discount * Buyer will never equal to ${minPrice}`;
                 }
               },
             }}
@@ -125,37 +125,20 @@ const ProductTermsBar: FC<{ disabled: boolean }> = ({ disabled }) => {
       <div className={"flex gap-4"}>
         <Field
           required
-          label={{ text: "Max Buyers" }}
+          label={{ text: "Quantity" }}
           error={{
-            text: _get(errors, "terms.max_buyers.message", "") as string,
+            text: _get(errors, "terms.quantity.message", "") as string,
           }}
         >
           <ControlledInputNumber
             disabled={disabled}
             rules={{
               required: "Field Required",
-              validate: (
-                max_buyers: number,
-                {
-                  price,
-                  terms: {
-                    min_price,
-                    discount_each_buyer: {
-                      value: discount_each_buyer,
-                      unit: discount_each_buyerUnit,
-                    },
-                  },
-                }: ProductFormType,
-              ) => {
-                if (!price || !discount_each_buyer || !min_price) return;
-                if (price - max_buyers * discount_each_buyer > min_price)
-                  return `Discount * Max buyers will never reach to ${min_price}`;
-              },
             }}
-            name={"terms.max_buyers"}
+            name={"terms.quantity"}
             min={0}
             control={control}
-            status={_get(errors, "terms.max_buyers") && "error"}
+            status={_get(errors, "terms.quantity") && "error"}
           />
         </Field>
 

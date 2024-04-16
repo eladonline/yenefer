@@ -8,7 +8,7 @@ export type ProductType = {
     min_price: number;
     discount_each_buyer: { value: number; unit: string };
     end_date: any;
-    max_buyers: number;
+    quantity: number;
   };
   _id?: string;
 };
@@ -22,7 +22,7 @@ export type ProductFormType = {
     min_price: number | null;
     discount_each_buyer: { value: number | null; unit: string };
     end_date: any | null;
-    max_buyers: number | null;
+    quantity: number | null;
   };
   _id?: string | null;
 };
