@@ -1,8 +1,59 @@
 {
-  "extends": ["next/core-web-vitals","prettier"],
-  "plugins": ["prettier"],
+  "extends": ["next/core-web-vitals","prettier","eslint:recommended", "plugin:react/recommended"],
+  "plugins": ["prettier", "react"],
   "rules": {
     "prettier/prettier": ["error"],
-    "react/no-children-prop": "off"
+    "react/no-children-prop": "off",
+    "react/react-in-jsx-scope": "off",
+    "space-before-blocks": "warn",
+    "no-unused-vars": "warn",
+    "no-undef": "warn",
+    "no-var": "warn",
+    "brace-style": "warn",
+    "no-empty": "warn",
+    "react/prop-types": "off",
+    "padding-line-between-statements": [
+      "warn",
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": "function"
+      },
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": "block"
+      },
+      {
+        "blankLine": "always",
+        "prev": "block",
+        "next": "*"
+      },
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": "block-like"
+      },
+      {
+        "blankLine": "always",
+        "prev": "block-like",
+        "next": "*"
+      },
+      {
+        "blankLine": "always",
+        "prev": "block-like",
+        "next": "block-like"
+      },
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": "class"
+      },
+      {
+        "blankLine": "always",
+        "prev": "class",
+        "next": "*"
+      }
+    ]
   }
 }

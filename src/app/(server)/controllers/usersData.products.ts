@@ -30,6 +30,7 @@ export const createProductController = async (
   } else {
     userData.products.push(product);
   }
+
   await UserDataModel.replaceOne({ users_id: id }, userData);
 
   return NextResponse.json(
@@ -104,6 +105,7 @@ export const getProductController = async (request: NextRequest) => {
       },
     };
   }
+
   const data = await UserDataModel.findOne(filters, projection).select(
     "-products.terms.discount_each_buyer._id",
   );

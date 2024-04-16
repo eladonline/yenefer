@@ -13,6 +13,7 @@ type AccessControlType = {
 
 const AccessControl = ({ hide, children, access }: AccessControlType) => {
   const { accessLevel } = useAccessControl();
+
   if (AccessControlLevelsEnum[accessLevel] >= AccessControlLevelsEnum[access]) {
     return children;
   }
@@ -21,4 +22,5 @@ const AccessControl = ({ hide, children, access }: AccessControlType) => {
 
   return null;
 };
+
 export default AccessControl;

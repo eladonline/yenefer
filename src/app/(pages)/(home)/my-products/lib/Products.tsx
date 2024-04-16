@@ -129,4 +129,5 @@ const Products: FC = () => {
     </div>
   );
 };
+
 export default Products;

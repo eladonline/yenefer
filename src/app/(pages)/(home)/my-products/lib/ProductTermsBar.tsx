@@ -82,34 +82,66 @@ const ProductTermsBar: FC<{ disabled: boolean }> = ({ disabled }) => {
                       value: discountEachBuyerValue,
                       unit: discountEachBuyerUnit,
                     },
+                    quantity,
                   },
                 }: ProductFormType,
               ) => {
-                if (!price || !discountEachBuyerValue || !discountEachBuyerUnit)
+                if (
+                  !price ||
+                  !discountEachBuyerValue ||
+                  !discountEachBuyerUnit ||
+                  !quantity
+                )
                   return;
+                const priceDecimal = new Decimal(price);
+                const minPriceDecimal = new Decimal(minPrice);
 
                 if (discountEachBuyerUnit !== "percentage") {
-                  const discount = new Decimal(discountEachBuyerValue);
-                  if (price - Number(discount) < minPrice)
-                    return `Price - Discount is lower then ${minPrice}`;
-                  if (minPrice % Number(discount))
-                    return `Price - Discount * Buyer will never equal to ${minPrice}`;
+                  const discountDecimal = new Decimal(discountEachBuyerValue);
 
-                  if (minPrice >= price)
+                  if (
+                    priceDecimal
+                      .minus(discountDecimal)
+                      .lessThan(minPriceDecimal)
+                  )
+                    return `Price - Discount is lower/equal to ${priceDecimal.minus(discountDecimal)}`;
+
+                  if (!minPriceDecimal.modulo(discountDecimal).isZero())
+                    return `Price with Discount will never be ${minPrice}`;
+
+                  if (priceDecimal.lessThanOrEqualTo(minPriceDecimal))
                     return `Minimum price should be lower then ${price}`;
+
+                  if (
+                    priceDecimal
+                      .minus(discountDecimal.times(quantity))
+                      .gt(minPriceDecimal)
+                  )
+                    return `Price with Discount and quantity will never be ${minPrice}`;
                 }
 
                 if (discountEachBuyerUnit === "percentage") {
-                  const percentageOfPrice = new Decimal(
-                    discountEachBuyerValue / 100,
-                  );
-                  const priceAfterDiscount =
-                    price - Number(percentageOfPrice.times(price));
+                  const discountDecimal = new Decimal(discountEachBuyerValue);
 
-                  if (priceAfterDiscount < minPrice)
-                    return `Price - Discount = ${priceAfterDiscount} it should be higher/equal then ${minPrice}`;
-                  if (minPrice % priceAfterDiscount)
-                    return `Price - Discount * Buyer will never equal to ${minPrice}`;
+                  const discountAsInteger = new Decimal(
+                    discountDecimal.dividedBy(100).times(priceDecimal),
+                  );
+
+                  const priceAfterDiscount =
+                    priceDecimal.minus(discountAsInteger);
+
+                  if (priceAfterDiscount.lt(minPriceDecimal))
+                    return `Price - Discount should be higher/equal ${minPrice}`;
+
+                  if (!minPriceDecimal.modulo(discountAsInteger).isZero())
+                    return `Price - Discount * Buyers will never equal to ${minPrice}`;
+
+                  if (
+                    priceDecimal
+                      .minus(discountAsInteger.times(quantity))
+                      .gt(minPriceDecimal)
+                  )
+                    return `Price - Discount * Quantity will never be ${minPrice}`;
                 }
               },
             }}
@@ -135,6 +167,7 @@ const ProductTermsBar: FC<{ disabled: boolean }> = ({ disabled }) => {
             }}
             name={"terms.quantity"}
             min={0}
+            step={1}
             control={control}
             status={_get(errors, "terms.quantity") && "error"}
           />
@@ -162,4 +195,5 @@ const ProductTermsBar: FC<{ disabled: boolean }> = ({ disabled }) => {
     </div>
   );
 };
+
 export default ProductTermsBar;

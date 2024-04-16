@@ -71,6 +71,7 @@ const useLogic = (
   if (error) {
     notificationApi.error({ message: error.message });
   }
+
   const products: ProductType[] | undefined = data?.data;
 
   const onSubmit = async ({
@@ -106,6 +107,7 @@ const useLogic = (
       return Promise.reject();
     }
   };
+
   return {
     products,
     formFactory,
