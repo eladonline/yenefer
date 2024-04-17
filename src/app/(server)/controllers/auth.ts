@@ -5,11 +5,16 @@ import UserModel from "@/app/(server)/models/User";
 import Configurations from "@/app/(server)/models/Configurations";
 import errorHandler from "@/app/(server)/handlers/errorHandler";
 import UsersData from "@/app/(server)/models/UsersData";
+import {
+  AccessControlLevelsEnum,
+  AccessControlLevelType,
+} from "@/types/accessControl.def";
 
 async function signInController(req: NextRequest) {
   const { username, password } = await req.json();
 
   const userDoc = await UserModel.findOne({ email: username });
+
   if (!userDoc) {
     return NextResponse.json(
       { message: "User does not exists" },
@@ -41,7 +46,7 @@ async function signInController(req: NextRequest) {
 
 async function signUpController(req: NextRequest) {
   const { username: email, password } = await req.json();
-  const license = "basic";
+  const license: AccessControlLevelType = "seller";
 
   const alreadyExists = await UserModel.findOne({ email });
   if (alreadyExists)
@@ -72,6 +77,7 @@ async function signUpController(req: NextRequest) {
     usersDataModel.save(),
   ]);
   const isNotFulfilled = results.some(({ status }) => status !== "fulfilled");
+
   if (isNotFulfilled) {
     // @ts-ignore
     results.forEach(({ status, reason }: PromiseSettledResult<void>) => {
