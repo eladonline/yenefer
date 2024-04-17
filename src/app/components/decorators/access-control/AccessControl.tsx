@@ -13,13 +13,13 @@ type AccessControlType = {
 
 const AccessControl = ({ hide, children, access }: AccessControlType) => {
   const { accessLevel } = useAccessControl();
+  if (!accessLevel) return null;
 
   if (AccessControlLevelsEnum[accessLevel] >= AccessControlLevelsEnum[access]) {
     return children;
   }
 
   if (hide) return <div className={"invisible"}>{children}</div>;
-
   return null;
 };
 

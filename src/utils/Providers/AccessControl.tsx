@@ -2,13 +2,14 @@
 import { createContext, ReactElement, useContext } from "react";
 import Token from "@/utils/Token";
 import { AccessControlLevelType } from "@/types/accessControl.def";
+import jwt from "jsonwebtoken";
 
 type AccessControlType = {
-  accessLevel: AccessControlLevelType;
+  accessLevel: AccessControlLevelType | null;
 };
 
 const AccessControlContext = createContext<AccessControlType>({
-  accessLevel: "guest",
+  accessLevel: null,
 });
 
 const AccessControlProvider = ({
@@ -25,6 +26,17 @@ const AccessControlProvider = ({
   );
 };
 
-export const useAccessControl = () => useContext(AccessControlContext);
+export const useAccessControl = () => {
+  const { accessLevel } = useContext(AccessControlContext);
+  let nextAccessLevel = accessLevel;
+
+  if (!nextAccessLevel) {
+    const tokenService = new Token();
+    const jwtPayload = jwt.decode(tokenService.token as string, { json: true });
+    nextAccessLevel = jwtPayload?.license;
+  }
+
+  return { accessLevel: nextAccessLevel };
+};
 
 export default AccessControlProvider;
