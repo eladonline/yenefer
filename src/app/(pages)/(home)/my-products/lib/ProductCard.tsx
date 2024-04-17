@@ -71,15 +71,13 @@ const ProductCard: FC<ItemCardType> = ({
       title={
         <Typography.Title
           level={4}
-          className={`ovrd [&.ovrd]:max-w-[90%] ${isOutdated ? "[&.ovrd]:text-red-500" : "[&.ovrd]:text-blue-900"}`}
+          className={`ovrd [&.ovrd]:max-w-[90%] ${isOutdated ? "[&.ovrd]:text-red-700" : "[&.ovrd]:text-blue-900"}`}
           ellipsis={{ tooltip: { title: name } }}
         >
           {name}
         </Typography.Title>
       }
-      className={
-        "ovrd flex flex-col  min-w-[250px] [&.ovrd]:bg-zinc-200  [&.ovrd>ul]:bg-zinc-200"
-      }
+      className={`ovrd flex flex-col  min-w-[250px] ${isOutdated ? "[&.ovrd]:bg-zinc-200  [&.ovrd>ul]:bg-zinc-200" : ""} `}
     >
       <div className={"flex gap-2"}>
         <Typography.Title className={"text-nowrap"} level={5}>

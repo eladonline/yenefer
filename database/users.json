@@ -1,0 +1,82 @@
+[
+  {
+    "_id": {
+      "$oid": "661f858d3a2d584d1a1e6565"
+    },
+    "license": "buyer",
+    "password": "$2a$10$a5ZKgC8AZ31ok/5gyodijOSxbvVAJCEVIQcjvbeuf6ucKXkwLDtc6",
+    "email": "buyer1@e.com"
+  },
+  {
+    "_id": {
+      "$oid": "661f858d3a2d584d1a1e658e"
+    },
+    "license": "seller",
+    "password": "$2a$10$Ihc6Qhkinwkjotl4EWOC7eriD1tR25Y6EqhI1jF0R6NwRZJ.VG4.e",
+    "email": "seller2@e.com"
+  },
+  {
+    "_id": {
+      "$oid": "661f858d3a2d584d1a1e65b7"
+    },
+    "license": "admin",
+    "password": "$2a$10$OkGtsTV2zfsT0giH/V183uYkXyZ51XjWr.XuIhBtFoTW2os279xhi",
+    "email": "admin3@e.com"
+  },
+  {
+    "_id": {
+      "$oid": "661f858d3a2d584d1a1e65e0"
+    },
+    "license": "guest",
+    "password": "$2a$10$CJb5WJjPFyqkdoerCfOlpOcInnQ4z2EYYYfA90b61mHtzwUCO67rS",
+    "email": "guest4@e.com"
+  },
+  {
+    "_id": {
+      "$oid": "661f858d3a2d584d1a1e6609"
+    },
+    "license": "buyer",
+    "password": "$2a$10$be/wtjSDo3sjyaHbh4ibY.A2Pe/RWB7uc/Rtm4UX0WcnG5EIOaMvm",
+    "email": "buyer5@e.com"
+  },
+  {
+    "_id": {
+      "$oid": "661f858d3a2d584d1a1e6632"
+    },
+    "license": "seller",
+    "password": "$2a$10$nS4BHjmsLI5iD1aN9uVgKe7Qq1QhzNW2n.zJaCVpAckBQwwU7H5oC",
+    "email": "seller6@e.com"
+  },
+  {
+    "_id": {
+      "$oid": "661f858d3a2d584d1a1e665b"
+    },
+    "license": "admin",
+    "password": "$2a$10$7aeX8wXBgDWtZ4ergZlaK.efoQxxSo39pz1TCNLES7PKhycCHn.mS",
+    "email": "admin7@e.com"
+  },
+  {
+    "_id": {
+      "$oid": "661f858d3a2d584d1a1e6684"
+    },
+    "license": "guest",
+    "password": "$2a$10$tyWXG.3sZeelm9t3abuQI.wypfaraYOC3O8HheKlO041SSz/FI9va",
+    "email": "guest8@e.com"
+  },
+  {
+    "_id": {
+      "$oid": "661f858d3a2d584d1a1e66ad"
+    },
+    "license": "buyer",
+    "password": "$2a$10$OC1UAl9bh1EMv3KWTnVSnuLvqlBZOdqw6UXv9DC54dWltBKZ2Y4uu",
+    "email": "buyer9@e.com"
+  },
+  {
+    "_id": {
+      "$oid": "661f858d3a2d584d1a1e66d6"
+    },
+    "license": "seller",
+    "password": "$2a$10$toKkS79OhsXPOpiI30/MG..T90j1glw9W8grEd/XoiY.IQV96L3Wu",
+    "email": "seller10@e.com"
+  }
+]

@@ -1,0 +1,82 @@
+[
+  {
+    "users_id": "661f858d3a2d584d1a1e6565",
+    "settings": {
+      "user": {
+        "username": "buyer1@e.com"
+      }
+    }
+  },
+  {
+    "users_id": "661f858d3a2d584d1a1e658e",
+    "settings": {
+      "user": {
+        "username": "seller2@e.com"
+      }
+    }
+  },
+  {
+    "users_id": "661f858d3a2d584d1a1e65b7",
+    "settings": {
+      "user": {
+        "username": "admin3@e.com"
+      }
+    }
+  },
+  {
+    "users_id": "661f858d3a2d584d1a1e65e0",
+    "settings": {
+      "user": {
+        "username": "guest4@e.com"
+      }
+    }
+  },
+  {
+    "users_id": "661f858d3a2d584d1a1e6609",
+    "settings": {
+      "user": {
+        "username": "buyer5@e.com"
+      }
+    }
+  },
+  {
+    "users_id": "661f858d3a2d584d1a1e6632",
+    "settings": {
+      "user": {
+        "username": "seller6@e.com"
+      }
+    }
+  },
+  {
+    "users_id": "661f858d3a2d584d1a1e665b",
+    "settings": {
+      "user": {
+        "username": "admin7@e.com"
+      }
+    }
+  },
+  {
+    "users_id": "661f858d3a2d584d1a1e6684",
+    "settings": {
+      "user": {
+        "username": "guest8@e.com"
+      }
+    }
+  },
+  {
+    "users_id": "661f858d3a2d584d1a1e66ad",
+    "settings": {
+      "user": {
+        "username": "buyer9@e.com"
+      }
+    }
+  },
+  {
+    "users_id": "661f858d3a2d584d1a1e66d6",
+    "settings": {
+      "user": {
+        "username": "seller10@e.com"
+      }
+    }
+  }
+]
