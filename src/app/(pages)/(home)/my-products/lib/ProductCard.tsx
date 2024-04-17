@@ -12,11 +12,13 @@ import dayjs from "dayjs";
 
 type ItemCardType = ProductType & {
   onEdit: () => void;
+  onRenew: () => void;
   onDelete: (e: any) => void;
 };
 
 const ProductCard: FC<ItemCardType> = ({
   onEdit,
+  onRenew,
   onDelete,
   name,
   description,
@@ -25,7 +27,7 @@ const ProductCard: FC<ItemCardType> = ({
   terms: { discount_each_buyer, quantity, min_price, end_date },
 }) => {
   const isOutdated = dayjs(end_date).isBefore(dayjs());
-  console.log(isOutdated);
+
   return (
     <Card
       extra={
@@ -34,9 +36,9 @@ const ProductCard: FC<ItemCardType> = ({
             className={
               "font-bold text-blue-500 hover:text-blue-300 cursor-pointer"
             }
-            onClick={onEdit}
+            onClick={isOutdated ? onRenew : onEdit}
           >
-            Edit
+            {isOutdated ? "Renew" : "Edit"}
           </div>
           <DeleteFilled
             onClick={onDelete}
@@ -67,14 +69,17 @@ const ProductCard: FC<ItemCardType> = ({
         </Tooltip>,
       ]}
       title={
-        <Typography.Text
-          className={"ovrd [&.ovrd]:max-w-[90%]"}
+        <Typography.Title
+          level={4}
+          className={`ovrd [&.ovrd]:max-w-[90%] ${isOutdated ? "[&.ovrd]:text-red-500" : "[&.ovrd]:text-blue-900"}`}
           ellipsis={{ tooltip: { title: name } }}
         >
           {name}
-        </Typography.Text>
+        </Typography.Title>
       }
-      className={"flex flex-col  min-w-[250px] "}
+      className={
+        "ovrd flex flex-col  min-w-[250px] [&.ovrd]:bg-zinc-200  [&.ovrd>ul]:bg-zinc-200"
+      }
     >
       <div className={"flex gap-2"}>
         <Typography.Title className={"text-nowrap"} level={5}>

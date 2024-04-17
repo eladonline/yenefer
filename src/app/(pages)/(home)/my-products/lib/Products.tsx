@@ -50,23 +50,47 @@ const Products: FC = () => {
     modalApi.open();
   };
 
-  const handleEditProductClick = useCallback((props: ProductFormType) => {
-    reset({ ...props });
-    setModalConfigs({
-      title: "Edit Product",
-      onOk: async () => {
-        setModalConfigs((prev) => ({ ...prev, confirmLoading: true }));
-        await handleSubmit(onSubmitEdit, Promise.reject)()
-          .then(modalApi.close)
-          .catch(() => {
-            setModalConfigs((prev) => ({ ...prev, confirmLoading: false }));
-          });
-      },
-      children: <ProductForm />,
-      afterClose: resetFormToDefault,
-    });
-    modalApi.open();
-  }, []);
+  const handleEditProductClick = useCallback(
+    (props: ProductFormType) => {
+      reset({ ...props });
+      setModalConfigs({
+        title: "Edit Product",
+        onOk: async () => {
+          setModalConfigs((prev) => ({ ...prev, confirmLoading: true }));
+          await handleSubmit(onSubmitEdit, Promise.reject)()
+            .then(modalApi.close)
+            .catch(() => {
+              setModalConfigs((prev) => ({ ...prev, confirmLoading: false }));
+            });
+        },
+        children: <ProductForm />,
+        afterClose: resetFormToDefault,
+      });
+      modalApi.open();
+    },
+    [handleSubmit, modalApi, onSubmitEdit, reset, resetFormToDefault],
+  );
+
+  const handleRenewProductClick = useCallback(
+    (props: ProductFormType) => {
+      reset({ ...props, terms: { ...props.terms, end_date: null } });
+      setModalConfigs({
+        title: "Renew Product",
+        onOk: async () => {
+          setModalConfigs((prev) => ({ ...prev, confirmLoading: true }));
+          await handleSubmit(onSubmit, Promise.reject)()
+            .then(modalApi.close)
+            .catch(() => {
+              setModalConfigs((prev) => ({ ...prev, confirmLoading: false }));
+            });
+        },
+        children: <ProductForm />,
+        afterClose: resetFormToDefault,
+      });
+      modalApi.open();
+    },
+    [handleSubmit, modalApi, reset, resetFormToDefault, onSubmit],
+  );
 
   const handleFiltersClick = () => {
     let filters: { [key: string]: string } = {};
@@ -97,6 +121,7 @@ const Products: FC = () => {
     return products?.map(({ ...props }) => {
       return (
         <ProductCard
+          onRenew={() => handleRenewProductClick(props)}
           onEdit={() => handleEditProductClick(props)}
           onDelete={(e) => {
             let target = e.currentTarget;
