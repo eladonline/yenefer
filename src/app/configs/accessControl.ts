@@ -1,3 +1,3 @@
-const licenseTypes = ["guest", "buyer", "seller", "admin"];
+const licenseTypes = ["buyer", "seller", "admin"];
 
 module.exports = { licenseTypes };

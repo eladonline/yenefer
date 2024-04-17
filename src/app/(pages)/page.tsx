@@ -4,7 +4,7 @@ import api from "@/app/services/clientApi";
 
 export default function Page() {
   const handleClick = async () => {
-    const res = await api.http.post("/products", {});
+    const res = await api.http.get("/", {});
     console.log(res);
   };
 

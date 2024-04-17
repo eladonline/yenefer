@@ -31,11 +31,11 @@ const createProducts = (count) => {
         min_price: 2,
         discount_each_buyer: {
           value: 1,
-          unit: "ins",
+          unit: "nis",
           _id: { $oid: new mongoose.Types.ObjectId() },
         },
         end_date: dayjs().add(counter, "minutes"),
-        quantity: Number(count),
+        quantity: Number(count + 5),
       },
       _id: new mongoose.Types.ObjectId(),
     });
@@ -59,11 +59,12 @@ const createUsers = async (count) => {
     const salt = bcrypt.genSaltSync(SALT);
     const hash = await bcrypt.hash("e", salt);
     const userId = new mongoose.Types.ObjectId();
-    const email = `${accessControl.licenseTypes[licenseCounter]}${counter}@e.com`;
+    const license = accessControl.licenseTypes[licenseCounter];
+    const email = `${license}${counter}@e.com`;
 
     users.push({
       _id: { $oid: userId },
-      license: accessControl.licenseTypes[licenseCounter],
+      license: license,
       password: hash,
       email: email,
     });
@@ -75,10 +76,9 @@ const createUsers = async (count) => {
       },
     });
 
-    usersData.push({
-      users_id: userId,
-      products: createProducts(20),
-    });
+    const userData = { users_id: userId };
+    if (license === "seller") userData.products = createProducts(20);
+    usersData.push(userData);
   }
 
   return { users, configurations, usersData };
