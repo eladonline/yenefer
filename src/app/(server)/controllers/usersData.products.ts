@@ -53,20 +53,20 @@ export const createProductController = async (
 
   const dbImages = [];
 
-  for (let imageBuffer of images) {
-    try {
-      const uploadData = await cloudinaryService.api.upload(imageBuffer, {
-        folder: usr,
-      });
-      const { signature, public_id, secure_url, url, folder } = uploadData;
-      dbImages.push({
-        meta: { signature, public_id, folder },
-        src: { url, secure_url },
-      });
-    } catch (err) {
-      console.trace(err);
-    }
-  }
+  // for (let imageBuffer of images) {
+  //   try {
+  //     const uploadData = await cloudinaryService.api.upload(imageBuffer, {
+  //       folder: usr,
+  //     });
+  //     const { signature, public_id, secure_url, url, folder } = uploadData;
+  //     dbImages.push({
+  //       meta: { signature, public_id, folder },
+  //       src: { url, secure_url },
+  //     });
+  //   } catch (err) {
+  //     console.trace(err);
+  //   }
+  // }
 
   if (dbImages.length) product.images = dbImages;
 
@@ -96,20 +96,20 @@ export const patchProductController = async (
 
   const dbImages = [];
 
-  for (let imageBuffer of images) {
-    try {
-      const uploadData = await cloudinaryService.api.upload(imageBuffer, {
-        folder: usr,
-      });
-      const { signature, public_id, secure_url, url, folder } = uploadData;
-      dbImages.push({
-        meta: { signature, public_id, folder },
-        src: { url, secure_url },
-      });
-    } catch (err) {
-      console.trace(err);
-    }
-  }
+  // for (let imageBuffer of images) {
+  //   try {
+  //     const uploadData = await cloudinaryService.api.upload(imageBuffer, {
+  //       folder: usr,
+  //     });
+  //     const { signature, public_id, secure_url, url, folder } = uploadData;
+  //     dbImages.push({
+  //       meta: { signature, public_id, folder },
+  //       src: { url, secure_url },
+  //     });
+  //   } catch (err) {
+  //     console.trace(err);
+  //   }
+  // }
 
   await UserDataModel.findOneAndUpdate(
     {
@@ -184,7 +184,9 @@ export const createProduct = async (...args: any) =>
   );
 
 export const patchProduct = async (...args: any) =>
-  errorHandler(patchProductController, args);
+  errorHandler(
+    ...(tokenHandler(patchProductController, args) as [Function, []]),
+  );
 
 export const deleteProduct = async (...args: any) =>
   errorHandler(deleteProductController, args);
