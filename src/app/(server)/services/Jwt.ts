@@ -1,6 +1,6 @@
 import jwt, { Secret, SignOptions, JwtPayload } from "jsonwebtoken";
 
-type clientTokenProps = { usr: string; license: string; id: string };
+export type clientTokenProps = { usr: string; license: string; id: string };
 type serverTokenProps = { int: string };
 
 class Jwt {
@@ -19,6 +19,10 @@ class Jwt {
 
   verify(token: string): JwtPayload | string {
     return jwt.verify(token, this.secret);
+  }
+
+  decode(token: string): string | JwtPayload | null {
+    return jwt.decode(token);
   }
 }
 

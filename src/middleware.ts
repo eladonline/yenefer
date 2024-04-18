@@ -17,6 +17,7 @@ export async function middleware(request: NextRequest) {
     if (token) {
       let payload = await tokenDecrypt(token);
       isValidToken = Boolean(payload);
+
       if (payload) {
         headers.set("id", payload.id as string);
 
@@ -38,9 +39,11 @@ export async function middleware(request: NextRequest) {
   if (isApiRoute) {
     const authorization = request.headers.get("Authorization");
     const headers = new Headers(request.headers);
+
     if (authorization) {
       const [, token] = authorization.split(" ");
       let payload = await tokenDecrypt(token);
+
       if (payload) {
         if (!headers.get("id")) headers.set("id", payload.id as string);
 
@@ -55,6 +58,7 @@ export async function middleware(request: NextRequest) {
       { status: 417 },
     );
   }
+
   return NextResponse.next();
 }
 

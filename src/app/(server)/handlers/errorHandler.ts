@@ -8,10 +8,13 @@ const errorHandler = async <T>(
     return await callback(...args);
   } catch (err: ReturnType<typeof Error> | any) {
     console.log(err.stack);
-    return NextResponse.json(
-      { message: "Something went wrong" },
-      { status: 500 },
-    );
+    let status = 500;
+    let message = "Something went wrong";
+
+    if (err.statusCode) status = err.statusCode;
+    if (err.message) status = err.message;
+
+    return NextResponse.json({ message }, { status });
   }
 };
 

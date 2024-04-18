@@ -30,12 +30,13 @@ class ClientApi extends Document {
       (err) => {
         if (
           err?.response?.status === 417 &&
-          err?.response?.data === "Valid authorization expected"
+          err?.response?.data?.message === "Valid authorization expected"
         ) {
           const authUtility = new AuthUtility();
           authUtility.doLogout();
           window.location.replace("/login?reject");
         }
+
         const error: Error & { statusCode?: number } = new Error(
           err?.response?.data?.message || err?.message,
         );

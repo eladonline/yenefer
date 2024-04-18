@@ -3,17 +3,43 @@ import errorHandler from "@/app/(server)/handlers/errorHandler";
 import UserDataModel from "@/app/(server)/models/UsersData";
 import { ProductType, UsersDataType } from "@/types/apis/usersData";
 import { ErrorType } from "@/types/globalTypes";
+import cloudinaryService from "@/app/(server)/services/cloudinary";
+import Jwt, { clientTokenProps } from "@/app/(server)/services/Jwt";
+import tokenHandler from "@/app/(server)/handlers/tokenHandler";
+import { JwtPayload } from "jsonwebtoken";
 
 type UserDataProductsType = NextRequest & {
-  body: ProductType;
+  tokenPayload?: JwtPayload & clientTokenProps;
+  body: {
+    name: string;
+    category: string;
+    description: string;
+    price: number;
+    terms: {
+      min_price: number;
+      discount_each_buyer: { value: number; unit: string };
+      end_date: any;
+      quantity: number;
+    };
+    images: Buffer[];
+  };
 };
 
 export const createProductController = async (
   request: UserDataProductsType,
 ) => {
   const id = request.headers.get("id");
-  const { name, category, description, price, terms } = await request.json();
-  const product: ProductType = { name, category, description, price, terms };
+  const usr = request?.tokenPayload?.usr;
+
+  const { name, category, description, price, terms, images } =
+    await request.json();
+  const product: ProductType = {
+    name,
+    category,
+    description,
+    price,
+    terms,
+  };
   const userData: UsersDataType = await UserDataModel.findOne({
     users_id: id,
   });
@@ -25,10 +51,29 @@ export const createProductController = async (
     throw error;
   }
 
+  const dbImages = [];
+
+  for (let imageBuffer of images) {
+    try {
+      const uploadData = await cloudinaryService.api.upload(imageBuffer, {
+        folder: usr,
+      });
+      const { signature, public_id, secure_url, url, folder } = uploadData;
+      dbImages.push({
+        meta: { signature, public_id, folder },
+        src: { url, secure_url },
+      });
+    } catch (err) {
+      console.trace(err);
+    }
+  }
+
+  if (dbImages.length) product.images = dbImages;
+
   if (!userData.products) {
     userData.products = [product];
   } else {
-    userData.products.push(product);
+    userData.products.push({ ...product });
   }
 
   await UserDataModel.replaceOne({ users_id: id }, userData);
@@ -44,7 +89,27 @@ export const patchProductController = async (
   { params }: { params: { productId: string } },
 ) => {
   const id = request.headers.get("id");
-  const { name, category, description, price, terms } = await request.json();
+  const usr = request?.tokenPayload?.usr;
+
+  const { name, category, description, price, terms, images } =
+    await request.json();
+
+  const dbImages = [];
+
+  for (let imageBuffer of images) {
+    try {
+      const uploadData = await cloudinaryService.api.upload(imageBuffer, {
+        folder: usr,
+      });
+      const { signature, public_id, secure_url, url, folder } = uploadData;
+      dbImages.push({
+        meta: { signature, public_id, folder },
+        src: { url, secure_url },
+      });
+    } catch (err) {
+      console.trace(err);
+    }
+  }
 
   await UserDataModel.findOneAndUpdate(
     {
@@ -114,7 +179,9 @@ export const getProductController = async (request: NextRequest) => {
 };
 
 export const createProduct = async (...args: any) =>
-  errorHandler(createProductController, args);
+  errorHandler(
+    ...(tokenHandler(createProductController, args) as [Function, []]),
+  );
 
 export const patchProduct = async (...args: any) =>
   errorHandler(patchProductController, args);
