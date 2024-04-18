@@ -11,6 +11,7 @@ export type ProductType = {
     quantity: number;
   };
   _id?: string;
+  images?: string[];
 };
 
 export type ProductFormType = {

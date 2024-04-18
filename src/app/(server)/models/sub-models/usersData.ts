@@ -16,6 +16,7 @@ const productSchema = new Schema<ProductType>({
     end_date: { type: Date, required: true },
     quantity: { type: Number, required: true },
   },
+  images: { type: [{ type: String }], default: undefined },
 });
 
 export default productSchema;

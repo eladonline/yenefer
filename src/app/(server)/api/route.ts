@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import cloudinaryService from "@/app/services/cloudinary";
+import cloudinaryService from "@/app/(server)/services/cloudinary";
 
 export async function test(req: NextRequest) {
   try {
