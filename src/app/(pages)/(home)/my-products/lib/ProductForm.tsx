@@ -11,11 +11,13 @@ import config from "./config.json";
 import ProductTermsBar from "@/app/(pages)/(home)/my-products/lib/ProductTermsBar";
 import _get from "lodash/get";
 import { productDefaultValues } from "@/app/(pages)/(home)/my-products/lib/useProduct";
+import Upload from "@/app/components/Inputs/Upload";
 
 const categories = config.categories.map((id) => ({
   value: id.toLocaleLowerCase(),
   label: id,
 }));
+
 const ProductForm = () => {
   const {
     control,
@@ -49,6 +51,11 @@ const ProductForm = () => {
       <Field label={{ text: "Description" }}>
         <ControlledTextArea name={"description"} control={control} />
       </Field>
+
+      <Field label={{ text: "Images" }}>
+        <Upload name={"images"} control={control} />
+      </Field>
+
       <Field required label={{ text: "Price" }}>
         <ControlledInputNumber
           rules={{ required: "Field Required" }}
@@ -63,4 +70,5 @@ const ProductForm = () => {
     </div>
   );
 };
+
 export default ProductForm;

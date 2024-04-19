@@ -51,24 +51,27 @@ export const createProductController = async (
     throw error;
   }
 
-  const dbImages = [];
+  if (images) {
+    const dbImages = [];
 
-  // for (let imageBuffer of images) {
-  //   try {
-  //     const uploadData = await cloudinaryService.api.upload(imageBuffer, {
-  //       folder: usr,
-  //     });
-  //     const { signature, public_id, secure_url, url, folder } = uploadData;
-  //     dbImages.push({
-  //       meta: { signature, public_id, folder },
-  //       src: { url, secure_url },
-  //     });
-  //   } catch (err) {
-  //     console.trace(err);
-  //   }
-  // }
+    for (let image of images) {
+      try {
+        const uploadData = await cloudinaryService.api.upload(image.base64, {
+          folder: usr,
+          unique_filename: true,
+        });
+        const { signature, public_id, secure_url, url, folder } = uploadData;
+        dbImages.push({
+          meta: { signature, public_id, folder },
+          src: { url, secure_url },
+        });
+      } catch (err) {
+        console.trace(err);
+      }
+    }
 
-  if (dbImages.length) product.images = dbImages;
+    if (dbImages.length) product.images = dbImages;
+  }
 
   if (!userData.products) {
     userData.products = [product];

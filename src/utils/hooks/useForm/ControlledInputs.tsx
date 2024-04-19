@@ -11,6 +11,7 @@ import {
   DatePickerProps,
   Radio,
   RadioGroupProps,
+  UploadProps,
 } from "antd/lib";
 import { FieldValues } from "react-hook-form";
 import { TextAreaProps } from "antd/lib/input";

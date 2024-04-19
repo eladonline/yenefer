@@ -9,10 +9,11 @@ import {
 } from "@/app/services/products";
 import { SubmitHandler, useForm, UseFormReturn } from "react-hook-form";
 import { createContext, FC, ReactNode, useContext, useEffect } from "react";
-import { notification } from "antd/lib";
+import { notification, type UploadFile } from "antd/lib";
 import { NotificationInstance } from "antd/lib/notification/interface";
 import { useSearchParams } from "next/navigation";
 import filtersUtil from "@/utils/Filters";
+import { imageListHydration } from "@/app/components/Inputs/Upload";
 
 const ProductContext = createContext<useProductsHook>({} as useProductsHook);
 
@@ -37,6 +38,7 @@ export const productDefaultValues = {
     min_price: null,
     end_date: null,
   },
+  images: null,
   _id: null,
 };
 
@@ -79,7 +81,14 @@ const useLogic = (
     ...fields
   }: ProductFormType): Promise<void> => {
     try {
-      await createProduct(fields);
+      const { images } = fields;
+      const nextFields = { ...fields };
+
+      if (images?.length) {
+        nextFields.images = await imageListHydration(images as UploadFile[]);
+      }
+
+      await createProduct(nextFields);
       await refetch();
       formFactory.reset({ ...productDefaultValues });
     } catch (err: any) {
@@ -89,7 +98,14 @@ const useLogic = (
 
   const onSubmitEdit = async ({ _id, ...fields }: ProductFormType) => {
     try {
-      await editProduct(_id as string, fields);
+      const { images } = fields;
+      const nextFields = { ...fields };
+
+      if (images?.length) {
+        nextFields.images = await imageListHydration(images as UploadFile[]);
+      }
+
+      await editProduct(_id as string, nextFields);
       await refetch();
       formFactory.reset({ ...productDefaultValues });
     } catch (err: any) {

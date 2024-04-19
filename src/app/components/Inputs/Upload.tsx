@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 import { Image, Upload } from "antd/lib";
 import type { GetProp, UploadFile, UploadProps } from "antd/lib";
-
+import UploadController from "@/utils/hooks/useForm/UploadController";
+import { FieldValues } from "react-hook-form";
+import { ImageUploadPayload } from "@/types/globalTypes";
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 
 const getBase64 = (file: FileType): Promise<string> =>
@@ -12,16 +14,21 @@ const getBase64 = (file: FileType): Promise<string> =>
     reader.onload = () => resolve(reader.result as string);
     reader.onerror = (error) => reject(error);
   });
-//
-// {
-//   uid: "-1",
-//     name: "image.png",
-//   status: "done",
-//   url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-//
-// }
 
-const ImageUploadInput: React.FC = ({ setFileList, fileList }) => {
+export const imageListHydration = async (
+  imageList: UploadFile[],
+): Promise<ImageUploadPayload[]> => {
+  const nextImages = [];
+
+  for (let { size, name, type, originFileObj } of imageList) {
+    const base64 = await getBase64(originFileObj as FileType);
+    nextImages.push({ size, name, type, base64 });
+  }
+
+  return nextImages;
+};
+
+const ImageUploadInput: React.FC<FieldValues> = ({ control, name, rules }) => {
   const [previewOpen, setPreviewOpen] = useState<boolean>(false);
   const [previewImage, setPreviewImage] = useState<string>("");
 
@@ -42,14 +49,11 @@ const ImageUploadInput: React.FC = ({ setFileList, fileList }) => {
   );
   return (
     <>
-      <Upload
-        listType="picture-card"
-        fileList={fileList}
-        onPreview={handlePreview}
-        onChange={setFileList}
-      >
-        {fileList.length >= 8 ? null : uploadButton}
-      </Upload>
+      <UploadController control={control} name={name} rules={rules}>
+        <Upload listType="picture-card" onPreview={handlePreview}>
+          {uploadButton}
+        </Upload>
+      </UploadController>
       {previewImage && (
         <Image
           alt={"image"}
