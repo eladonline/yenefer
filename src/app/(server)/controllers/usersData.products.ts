@@ -175,7 +175,7 @@ export const getProductController = async (request: NextRequest) => {
   }
 
   const data = await UserDataModel.findOne(filters, projection).select(
-    "-products.terms.discount_each_buyer._id",
+    "-products.terms.discount_each_buyer._id -products.images.meta.folder -products.images._id",
   );
 
   return NextResponse.json(data?.products || [], { status: 200 });

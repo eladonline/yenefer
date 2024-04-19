@@ -6,12 +6,12 @@ import { FormProvider } from "react-hook-form";
 import ProductForm from "@/app/(pages)/(home)/my-products/lib/ProductForm";
 import { useModal } from "@/utils/hooks/useModal/useModal";
 import ProductCard from "@/app/(pages)/(home)/my-products/lib/ProductCard";
-import { ModalProps, Empty } from "antd/lib";
+import { ModalProps, Empty, type UploadFile } from "antd/lib";
 import Filters from "@/app/components/bars/products/lib/Filters";
 import { useRouter } from "next/navigation";
 import _isEmpty from "lodash/isEmpty";
 import filtersService from "@/utils/Filters";
-import { ProductFormType } from "@/types/apis/usersData";
+import { ProductFormType, ProductType } from "@/types/apis/usersData";
 
 const Products: FC = () => {
   const {
@@ -117,12 +117,33 @@ const Products: FC = () => {
     modalApi.open();
   };
 
+  const parseProductImages = (images: ProductType["images"] | null) => {
+    return (
+      images?.map(({ src: { url }, meta: { public_id } }) => ({
+        uid: public_id,
+        name: public_id,
+        status: "done",
+        url,
+      })) || null
+    );
+  };
+
   const productsMemo = useMemo(() => {
     return products?.map(({ ...props }) => {
       return (
         <ProductCard
-          onRenew={() => handleRenewProductClick(props)}
-          onEdit={() => handleEditProductClick(props)}
+          onRenew={() =>
+            handleRenewProductClick({
+              ...props,
+              images: parseProductImages(props.images) as UploadFile[],
+            })
+          }
+          onEdit={() =>
+            handleEditProductClick({
+              ...props,
+              images: parseProductImages(props.images) as UploadFile[],
+            })
+          }
           onDelete={(e) => {
             let target = e.currentTarget;
             target.style.visibility = "hidden";

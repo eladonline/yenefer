@@ -96,6 +96,8 @@ const useLogic = (
     }
   };
 
+  console.log(formFactory.getValues("images"));
+
   const onSubmitEdit = async ({ _id, ...fields }: ProductFormType) => {
     try {
       const { images } = fields;
