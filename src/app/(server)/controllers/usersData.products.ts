@@ -97,21 +97,26 @@ export const patchProductController = async (
   const { name, category, description, price, terms, images } =
     await request.json();
 
-  const dbImages = [];
-
-  // for (let imageBuffer of images) {
-  //   try {
-  //     const uploadData = await cloudinaryService.api.upload(imageBuffer, {
-  //       folder: usr,
-  //     });
-  //     const { signature, public_id, secure_url, url, folder } = uploadData;
-  //     dbImages.push({
-  //       meta: { signature, public_id, folder },
-  //       src: { url, secure_url },
-  //     });
-  //   } catch (err) {
-  //     console.trace(err);
+  // if (images) {
+  //   const dbImages = [];
+  //
+  //   for (let image of images) {
+  //     try {
+  //       const uploadData = await cloudinaryService.api.upload(image.base64, {
+  //         folder: usr,
+  //         unique_filename: true,
+  //       });
+  //       const { signature, public_id, secure_url, url, folder } = uploadData;
+  //       dbImages.push({
+  //         meta: { signature, public_id, folder },
+  //         src: { url, secure_url },
+  //       });
+  //     } catch (err) {
+  //       console.trace(err);
+  //     }
   //   }
+  //
+  //   if (dbImages.length) product.images = dbImages;
   // }
 
   await UserDataModel.findOneAndUpdate(

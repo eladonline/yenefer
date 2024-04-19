@@ -104,7 +104,7 @@ const useLogic = (
       const nextFields = { ...fields };
 
       if (images?.length) {
-        nextFields.images = await imageListHydration(images as UploadFile[]);
+        nextFields.images = images.map(({ name }) => name);
       }
 
       await editProduct(_id as string, nextFields);

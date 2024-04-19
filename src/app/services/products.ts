@@ -18,7 +18,7 @@ export function createProduct(body: ProductFormType): Promise<AxiosResponse> {
 
 export function editProduct(
   _id: string,
-  body: ProductFormType,
+  body: ProductFormType & { images: string[] },
 ): Promise<AxiosResponse> {
   return api.http.patch(`${endpoints.products}/${_id}`, body);
 }

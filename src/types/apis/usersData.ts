@@ -31,7 +31,7 @@ export type ProductFormType = {
     end_date: any | null;
     quantity: number | null;
   };
-  images?: UploadFile[] | ImageUploadPayload[] | null;
+  images?: UploadFile[] | ImageUploadPayload[] | null | string[];
   _id?: string | null;
 };
 
