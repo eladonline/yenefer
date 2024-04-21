@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import errorHandler from "@/app/(server)/handlers/errorHandler";
-import UserDataModel from "@/app/(server)/models/UsersData";
-import { ProductType, UsersDataType } from "@/types/apis/usersData";
-import { ErrorType } from "@/types/globalTypes";
+import { ProductType } from "@/types/apis/usersData";
 import cloudinaryService from "@/app/(server)/services/cloudinary";
 import { clientTokenProps } from "@/app/(server)/services/Jwt";
 import tokenHandler from "@/app/(server)/handlers/tokenHandler";
 import { JwtPayload } from "jsonwebtoken";
 import User, { UserType } from "@/app/(server)/models/User";
+import _set from "lodash/set";
+import products from "@/app/(pages)/(home)/my-products/lib/Products";
 
 type UserDataProductsType = NextRequest & {
   tokenPayload?: JwtPayload & clientTokenProps;
@@ -45,8 +45,6 @@ export const createProductController = async (
 
   if (!user) throw new Error("");
 
-  if (!user?.data) user.data = {};
-
   if (images) {
     const dbImages = [];
 
@@ -69,15 +67,10 @@ export const createProductController = async (
     if (dbImages.length) product.images = dbImages;
   }
 
-  if (!user.data.products) {
-    user.data.products = [product];
-  } else {
-    user.data.products.push({ ...product });
-  }
+  if (!user?.data?.products) _set(user, "data.products", [product]);
+  else user.data.products.push(product);
 
-  await User.findByIdAndUpdate(id, {
-    products: user.data.products,
-  });
+  await User.findByIdAndUpdate(id, user);
 
   return NextResponse.json(
     { message: "Product created successfully" },
@@ -143,7 +136,7 @@ export const deleteProductController = async (
   { params }: { params: { productId: string } },
 ) => {
   const id = request.headers.get("id");
-  await UserDataModel.findOneAndUpdate(
+  await User.findOneAndUpdate(
     {
       users_id: id,
       "products._id": params.productId,
@@ -162,26 +155,26 @@ export const deleteProductController = async (
 export const getProductController = async (request: NextRequest) => {
   const searchParams = request.nextUrl.searchParams;
   const id = request.headers.get("id");
-  const filters: { [key: string]: any } = { users_id: id };
+  const filters: { [key: string]: any } = { _id: id };
   const projection: { [key: string]: any } = {};
 
   const categoriesFilter = searchParams.get("categories")?.split(",");
 
   if (categoriesFilter) {
-    projection["products"] = {
+    _set(projection, "data.products", {
       $filter: {
         input: "$products",
         as: "products",
         cond: { $in: ["$$products.category", categoriesFilter] },
       },
-    };
+    });
   }
 
-  const data = await UserDataModel.findOne(filters, projection).select(
-    "-products.terms.discount_each_buyer._id -products.images.meta.folder -products.images._id",
+  const data = await User.findOne(filters, projection).select(
+    "-data.products.terms.discount_each_buyer._id -data.products.images.meta.folder -data.products.images._id",
   );
 
-  return NextResponse.json(data?.products || [], { status: 200 });
+  return NextResponse.json(data?.data?.products || [], { status: 200 });
 };
 
 export const createProduct = async (...args: any) =>

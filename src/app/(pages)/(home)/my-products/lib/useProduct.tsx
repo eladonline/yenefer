@@ -9,7 +9,7 @@ import {
 } from "@/app/services/products";
 import { SubmitHandler, useForm, UseFormReturn } from "react-hook-form";
 import { createContext, FC, ReactNode, useContext, useEffect } from "react";
-import { notification, type UploadFile } from "antd/lib";
+import { notification } from "antd/lib";
 import { NotificationInstance } from "antd/lib/notification/interface";
 import { useSearchParams } from "next/navigation";
 import filtersUtil from "@/utils/Filters";
