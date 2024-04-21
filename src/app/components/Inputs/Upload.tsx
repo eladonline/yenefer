@@ -4,7 +4,7 @@ import { Image, Upload } from "antd/lib";
 import type { GetProp, UploadFile, UploadProps } from "antd/lib";
 import UploadController from "@/utils/hooks/useForm/UploadController";
 import { FieldValues } from "react-hook-form";
-import { ImageUploadPayload } from "@/types/globalTypes";
+
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 
 const getBase64 = (file: FileType): Promise<string> =>
@@ -15,14 +15,14 @@ const getBase64 = (file: FileType): Promise<string> =>
     reader.onerror = (error) => reject(error);
   });
 
-export const imageListHydration = async (
+export const imageListPreparePayload = async (
   imageList: UploadFile[],
-): Promise<ImageUploadPayload[]> => {
+): Promise<UploadFile[]> => {
   const nextImages = [];
 
-  for (let { size, name, type, originFileObj } of imageList) {
+  for (let { size, name, type, originFileObj, uid } of imageList) {
     const base64 = await getBase64(originFileObj as FileType);
-    nextImages.push({ size, name, type, base64 });
+    nextImages.push({ size, name, type, thumbUrl: base64, uid });
   }
 
   return nextImages;

@@ -1,4 +1,3 @@
-import { ImageUploadPayload } from "@/types/globalTypes";
 import type { UploadFile } from "antd/lib";
 
 export type ProductType = {
@@ -31,7 +30,7 @@ export type ProductFormType = {
     end_date: any | null;
     quantity: number | null;
   };
-  images?: UploadFile[] | ImageUploadPayload[] | null | string[];
+  images?: UploadFile[] | null;
   _id?: string | null;
 };
 

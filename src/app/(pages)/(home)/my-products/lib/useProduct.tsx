@@ -13,7 +13,7 @@ import { notification, type UploadFile } from "antd/lib";
 import { NotificationInstance } from "antd/lib/notification/interface";
 import { useSearchParams } from "next/navigation";
 import filtersUtil from "@/utils/Filters";
-import { imageListHydration } from "@/app/components/Inputs/Upload";
+import { imageListPreparePayload } from "@/app/components/Inputs/Upload";
 
 const ProductContext = createContext<useProductsHook>({} as useProductsHook);
 
@@ -85,7 +85,7 @@ const useLogic = (
       const nextFields = { ...fields };
 
       if (images?.length) {
-        nextFields.images = await imageListHydration(images as UploadFile[]);
+        nextFields.images = await imageListPreparePayload(images);
       }
 
       await createProduct(nextFields);
@@ -96,16 +96,9 @@ const useLogic = (
     }
   };
 
-  console.log(formFactory.getValues("images"));
-
   const onSubmitEdit = async ({ _id, ...fields }: ProductFormType) => {
     try {
-      const { images } = fields;
       const nextFields = { ...fields };
-
-      if (images?.length) {
-        nextFields.images = images.map(({ name }) => name);
-      }
 
       await editProduct(_id as string, nextFields);
       await refetch();
