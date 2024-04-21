@@ -4,12 +4,12 @@ import Title from "antd/lib/typography/Title";
 import { headers } from "next/headers";
 import { endpoints } from "@/app/services/settings";
 import ServerApi from "@/app/services/ServerApi";
-import { SettingsUserType } from "@/types/apis/configurations";
+import { ConfigurationsType } from "@/types/apis/configurations";
 
 const Page = async () => {
   const serverApi = new ServerApi();
 
-  const data: SettingsUserType = await serverApi.get(endpoints.user, {
+  const data: ConfigurationsType = await serverApi.get(endpoints.user, {
     headers: {
       id: headers().get("id") as string,
     },
@@ -24,4 +24,5 @@ const Page = async () => {
     </div>
   );
 };
+
 export default Page;

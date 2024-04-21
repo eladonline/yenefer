@@ -1,5 +1,5 @@
 import { Schema } from "mongoose";
-import { ProductType } from "@/types/apis/usersData";
+import { ProductType, UsersDataType } from "@/types/apis/usersData";
 
 const productSchema = new Schema<ProductType>({
   name: { type: String, required: true },
@@ -27,4 +27,8 @@ const productSchema = new Schema<ProductType>({
   },
 });
 
-export default productSchema;
+const schema = new Schema<UsersDataType>({
+  products: { type: [productSchema], default: undefined },
+});
+
+export default schema;

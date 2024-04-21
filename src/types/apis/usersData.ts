@@ -35,6 +35,5 @@ export type ProductFormType = {
 };
 
 export type UsersDataType = {
-  products: ProductType[] | undefined;
-  users_id: string;
+  products?: ProductType[] | undefined;
 } | null;

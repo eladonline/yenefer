@@ -4,9 +4,10 @@ import UserDataModel from "@/app/(server)/models/UsersData";
 import { ProductType, UsersDataType } from "@/types/apis/usersData";
 import { ErrorType } from "@/types/globalTypes";
 import cloudinaryService from "@/app/(server)/services/cloudinary";
-import Jwt, { clientTokenProps } from "@/app/(server)/services/Jwt";
+import { clientTokenProps } from "@/app/(server)/services/Jwt";
 import tokenHandler from "@/app/(server)/handlers/tokenHandler";
 import { JwtPayload } from "jsonwebtoken";
+import User, { UserType } from "@/app/(server)/models/User";
 
 type UserDataProductsType = NextRequest & {
   tokenPayload?: JwtPayload & clientTokenProps;
@@ -40,16 +41,11 @@ export const createProductController = async (
     price,
     terms,
   };
-  const userData: UsersDataType = await UserDataModel.findOne({
-    users_id: id,
-  });
+  const user: UserType | null = await User.findById(id);
 
-  if (!userData) {
-    const error: ErrorType = new Error("User userData was not found");
+  if (!user) throw new Error("");
 
-    error.statusCode = 410;
-    throw error;
-  }
+  if (!user?.data) user.data = {};
 
   if (images) {
     const dbImages = [];
@@ -73,13 +69,15 @@ export const createProductController = async (
     if (dbImages.length) product.images = dbImages;
   }
 
-  if (!userData.products) {
-    userData.products = [product];
+  if (!user.data.products) {
+    user.data.products = [product];
   } else {
-    userData.products.push({ ...product });
+    user.data.products.push({ ...product });
   }
 
-  await UserDataModel.replaceOne({ users_id: id }, userData);
+  await User.findByIdAndUpdate(id, {
+    products: user.data.products,
+  });
 
   return NextResponse.json(
     { message: "Product created successfully" },
@@ -119,9 +117,9 @@ export const patchProductController = async (
   //   if (dbImages.length) product.images = dbImages;
   // }
 
-  await UserDataModel.findOneAndUpdate(
+  await User.findOneAndUpdate(
     {
-      users_id: id,
+      _id: id,
       "products._id": params.productId,
     },
     {

@@ -2,13 +2,8 @@ import bcrypt from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
 import Jwt from "@/app/(server)/services/Jwt";
 import UserModel from "@/app/(server)/models/User";
-import Configurations from "@/app/(server)/models/Configurations";
 import errorHandler from "@/app/(server)/handlers/errorHandler";
-import UsersData from "@/app/(server)/models/UsersData";
-import {
-  AccessControlLevelsEnum,
-  AccessControlLevelType,
-} from "@/types/accessControl.def";
+import { AccessControlLevelType } from "@/types/accessControl.def";
 
 async function signInController(req: NextRequest) {
   const { username, password } = await req.json();
@@ -58,36 +53,18 @@ async function signUpController(req: NextRequest) {
   const salt = bcrypt.genSaltSync(Number(process.env.SALT));
   const hash = await bcrypt.hash(password, salt);
 
-  const user = new UserModel({ email, password: hash, license });
-
-  const configurationsModel = new Configurations({
-    users_id: user._id,
-    settings: {
-      user: { username: email },
+  const user = new UserModel({
+    email,
+    password: hash,
+    license,
+    configurations: {
+      settings: {
+        user: { username: email },
+      },
     },
   });
 
-  const usersDataModel = new UsersData({
-    users_id: user._id,
-  });
-
-  const results = await Promise.allSettled([
-    user.save(),
-    configurationsModel.save(),
-    usersDataModel.save(),
-  ]);
-  const isNotFulfilled = results.some(({ status }) => status !== "fulfilled");
-
-  if (isNotFulfilled) {
-    // @ts-ignore
-    results.forEach(({ status, reason }: PromiseSettledResult<void>) => {
-      if (status === "rejected") console.error(reason);
-    });
-
-    await user.deleteOne();
-    await configurationsModel.deleteOne();
-    throw new Error("Creating one of the Collections failed");
-  }
+  await user.save();
 
   const jwtUtil = new Jwt();
   const token = jwtUtil.sign({ usr: email, license, id: user._id });
