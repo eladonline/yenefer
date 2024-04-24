@@ -1,10 +1,10 @@
 [
   {
     "_id": {
-      "$oid": "66289ac2ed0c82e1fca58e80"
+      "$oid": "6628a9d847f86f7aada63357"
     },
     "license": "seller",
-    "password": "$2a$10$lltwUlOG/2lPXd.Oj1iMhubP9bzHeSPkzTsI7yoystl/lEZe5JGK2",
+    "password": "$2a$10$ZBOrDVhdFuVu9HS1HMOQzOQJbcJDEQIljCHFAAgW6ARmKuoMtKk2u",
     "email": "seller@e.com",
     "configurations": {
       "settings": {
@@ -17,413 +17,413 @@
       "products": [
         {
           "name": "Product 1",
-          "category": "Computers",
+          "category": "computers",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 6,
-          "created": "2024-04-24T05:37:10.000Z",
+          "created": "2024-04-24T06:41:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e81"
+                "$oid": "6628a9d847f86f7aada63358"
               }
             },
-            "end_date": "2024-04-24T05:39:10.932Z",
+            "end_date": "2024-04-24T06:43:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e82"
+          "_id": "6628a9d847f86f7aada63359"
         },
         {
           "name": "Product 2",
-          "category": "Games",
+          "category": "games",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 7,
-          "created": "2024-04-24T05:36:10.000Z",
+          "created": "2024-04-24T06:40:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e83"
+                "$oid": "6628a9d847f86f7aada6335a"
               }
             },
-            "end_date": "2024-04-24T05:40:10.932Z",
+            "end_date": "2024-04-24T06:44:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e84"
+          "_id": "6628a9d847f86f7aada6335b"
         },
         {
           "name": "Product 3",
-          "category": "Clothes",
+          "category": "clothes",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 8,
-          "created": "2024-04-24T05:35:10.000Z",
+          "created": "2024-04-24T06:39:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e85"
+                "$oid": "6628a9d847f86f7aada6335c"
               }
             },
-            "end_date": "2024-04-24T05:41:10.932Z",
+            "end_date": "2024-04-24T06:45:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e86"
+          "_id": "6628a9d847f86f7aada6335d"
         },
         {
           "name": "Product 4",
-          "category": "Kitchen",
+          "category": "kitchen",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 9,
-          "created": "2024-04-24T05:34:10.000Z",
+          "created": "2024-04-24T06:38:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e87"
+                "$oid": "6628a9d847f86f7aada6335e"
               }
             },
-            "end_date": "2024-04-24T05:42:10.932Z",
+            "end_date": "2024-04-24T06:46:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e88"
+          "_id": "6628a9d847f86f7aada6335f"
         },
         {
           "name": "Product 5",
-          "category": "Furniture",
+          "category": "furniture",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 10,
-          "created": "2024-04-24T05:33:10.000Z",
+          "created": "2024-04-24T06:37:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e89"
+                "$oid": "6628a9d847f86f7aada63360"
               }
             },
-            "end_date": "2024-04-24T05:43:10.933Z",
+            "end_date": "2024-04-24T06:47:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e8a"
+          "_id": "6628a9d847f86f7aada63361"
         },
         {
           "name": "Product 6",
-          "category": "Computers",
+          "category": "computers",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 11,
-          "created": "2024-04-24T05:32:10.000Z",
+          "created": "2024-04-24T06:36:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e8b"
+                "$oid": "6628a9d847f86f7aada63362"
               }
             },
-            "end_date": "2024-04-24T05:44:10.933Z",
+            "end_date": "2024-04-24T06:48:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e8c"
+          "_id": "6628a9d847f86f7aada63363"
         },
         {
           "name": "Product 7",
-          "category": "Games",
+          "category": "games",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 12,
-          "created": "2024-04-24T05:31:10.000Z",
+          "created": "2024-04-24T06:35:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e8d"
+                "$oid": "6628a9d847f86f7aada63364"
               }
             },
-            "end_date": "2024-04-24T05:45:10.933Z",
+            "end_date": "2024-04-24T06:49:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e8e"
+          "_id": "6628a9d847f86f7aada63365"
         },
         {
           "name": "Product 8",
-          "category": "Clothes",
+          "category": "clothes",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 13,
-          "created": "2024-04-24T05:30:10.000Z",
+          "created": "2024-04-24T06:34:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e8f"
+                "$oid": "6628a9d847f86f7aada63366"
               }
             },
-            "end_date": "2024-04-24T05:46:10.933Z",
+            "end_date": "2024-04-24T06:50:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e90"
+          "_id": "6628a9d847f86f7aada63367"
         },
         {
           "name": "Product 9",
-          "category": "Kitchen",
+          "category": "kitchen",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 14,
-          "created": "2024-04-24T05:29:10.000Z",
+          "created": "2024-04-24T06:33:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e91"
+                "$oid": "6628a9d847f86f7aada63368"
               }
             },
-            "end_date": "2024-04-24T05:47:10.933Z",
+            "end_date": "2024-04-24T06:51:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e92"
+          "_id": "6628a9d847f86f7aada63369"
         },
         {
           "name": "Product 10",
-          "category": "Furniture",
+          "category": "furniture",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 15,
-          "created": "2024-04-24T05:28:10.000Z",
+          "created": "2024-04-24T06:32:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e93"
+                "$oid": "6628a9d847f86f7aada6336a"
               }
             },
-            "end_date": "2024-04-24T05:48:10.933Z",
+            "end_date": "2024-04-24T06:52:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e94"
+          "_id": "6628a9d847f86f7aada6336b"
         },
         {
           "name": "Product 11",
-          "category": "Computers",
+          "category": "computers",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 16,
-          "created": "2024-04-24T05:27:10.000Z",
+          "created": "2024-04-24T06:31:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e95"
+                "$oid": "6628a9d847f86f7aada6336c"
               }
             },
-            "end_date": "2024-04-24T05:49:10.933Z",
+            "end_date": "2024-04-24T06:53:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e96"
+          "_id": "6628a9d847f86f7aada6336d"
         },
         {
           "name": "Product 12",
-          "category": "Games",
+          "category": "games",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 17,
-          "created": "2024-04-24T05:26:10.000Z",
+          "created": "2024-04-24T06:30:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e97"
+                "$oid": "6628a9d847f86f7aada6336e"
               }
             },
-            "end_date": "2024-04-24T05:50:10.933Z",
+            "end_date": "2024-04-24T06:54:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e98"
+          "_id": "6628a9d847f86f7aada6336f"
         },
         {
           "name": "Product 13",
-          "category": "Clothes",
+          "category": "clothes",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 18,
-          "created": "2024-04-24T05:25:10.000Z",
+          "created": "2024-04-24T06:29:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e99"
+                "$oid": "6628a9d847f86f7aada63370"
               }
             },
-            "end_date": "2024-04-24T05:51:10.933Z",
+            "end_date": "2024-04-24T06:55:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e9a"
+          "_id": "6628a9d847f86f7aada63371"
         },
         {
           "name": "Product 14",
-          "category": "Kitchen",
+          "category": "kitchen",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 19,
-          "created": "2024-04-24T05:24:10.000Z",
+          "created": "2024-04-24T06:28:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e9b"
+                "$oid": "6628a9d847f86f7aada63372"
               }
             },
-            "end_date": "2024-04-24T05:52:10.933Z",
+            "end_date": "2024-04-24T06:56:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e9c"
+          "_id": "6628a9d847f86f7aada63373"
         },
         {
           "name": "Product 15",
-          "category": "Furniture",
+          "category": "furniture",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 20,
-          "created": "2024-04-24T05:23:10.000Z",
+          "created": "2024-04-24T06:27:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e9d"
+                "$oid": "6628a9d847f86f7aada63374"
               }
             },
-            "end_date": "2024-04-24T05:53:10.933Z",
+            "end_date": "2024-04-24T06:57:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e9e"
+          "_id": "6628a9d847f86f7aada63375"
         },
         {
           "name": "Product 16",
-          "category": "Computers",
+          "category": "computers",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 21,
-          "created": "2024-04-24T05:22:10.000Z",
+          "created": "2024-04-24T06:26:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e9f"
+                "$oid": "6628a9d847f86f7aada63376"
               }
             },
-            "end_date": "2024-04-24T05:54:10.933Z",
+            "end_date": "2024-04-24T06:58:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58ea0"
+          "_id": "6628a9d847f86f7aada63377"
         },
         {
           "name": "Product 17",
-          "category": "Games",
+          "category": "games",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 22,
-          "created": "2024-04-24T05:21:10.000Z",
+          "created": "2024-04-24T06:25:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58ea1"
+                "$oid": "6628a9d847f86f7aada63378"
               }
             },
-            "end_date": "2024-04-24T05:55:10.933Z",
+            "end_date": "2024-04-24T06:59:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58ea2"
+          "_id": "6628a9d847f86f7aada63379"
         },
         {
           "name": "Product 18",
-          "category": "Clothes",
+          "category": "clothes",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 23,
-          "created": "2024-04-24T05:20:10.000Z",
+          "created": "2024-04-24T06:24:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58ea3"
+                "$oid": "6628a9d847f86f7aada6337a"
               }
             },
-            "end_date": "2024-04-24T05:56:10.933Z",
+            "end_date": "2024-04-24T07:00:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58ea4"
+          "_id": "6628a9d847f86f7aada6337b"
         },
         {
           "name": "Product 19",
-          "category": "Kitchen",
+          "category": "kitchen",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 24,
-          "created": "2024-04-24T05:19:10.000Z",
+          "created": "2024-04-24T06:23:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58ea5"
+                "$oid": "6628a9d847f86f7aada6337c"
               }
             },
-            "end_date": "2024-04-24T05:57:10.933Z",
+            "end_date": "2024-04-24T07:01:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58ea6"
+          "_id": "6628a9d847f86f7aada6337d"
         },
         {
           "name": "Product 20",
-          "category": "Furniture",
+          "category": "furniture",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 25,
-          "created": "2024-04-24T05:18:10.000Z",
+          "created": "2024-04-24T06:22:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58ea7"
+                "$oid": "6628a9d847f86f7aada6337e"
               }
             },
-            "end_date": "2024-04-24T05:58:10.933Z",
+            "end_date": "2024-04-24T07:02:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58ea8"
+          "_id": "6628a9d847f86f7aada6337f"
         }
       ]
     }
   },
   {
     "_id": {
-      "$oid": "66289ac2ed0c82e1fca58ea9"
+      "$oid": "6628a9d847f86f7aada63380"
     },
     "license": "admin",
-    "password": "$2a$10$tW0TGTCnc3Da9orVsVLiIuPObNLpKrkfaQtnXQUrz/WsNhixUWoO.",
+    "password": "$2a$10$rX5mElgxFOQrIDFv6FlB0OGK/CNUbn8R0q2GluKTKVmllInlYbtOG",
     "email": "admin@e.com",
     "configurations": {
       "settings": {
@@ -436,413 +436,413 @@
       "products": [
         {
           "name": "Product 1",
-          "category": "Computers",
+          "category": "computers",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 6,
-          "created": "2024-04-24T05:37:10.000Z",
+          "created": "2024-04-24T06:41:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e81"
+                "$oid": "6628a9d847f86f7aada63358"
               }
             },
-            "end_date": "2024-04-24T05:39:10.932Z",
+            "end_date": "2024-04-24T06:43:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e82"
+          "_id": "6628a9d847f86f7aada63359"
         },
         {
           "name": "Product 2",
-          "category": "Games",
+          "category": "games",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 7,
-          "created": "2024-04-24T05:36:10.000Z",
+          "created": "2024-04-24T06:40:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e83"
+                "$oid": "6628a9d847f86f7aada6335a"
               }
             },
-            "end_date": "2024-04-24T05:40:10.932Z",
+            "end_date": "2024-04-24T06:44:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e84"
+          "_id": "6628a9d847f86f7aada6335b"
         },
         {
           "name": "Product 3",
-          "category": "Clothes",
+          "category": "clothes",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 8,
-          "created": "2024-04-24T05:35:10.000Z",
+          "created": "2024-04-24T06:39:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e85"
+                "$oid": "6628a9d847f86f7aada6335c"
               }
             },
-            "end_date": "2024-04-24T05:41:10.932Z",
+            "end_date": "2024-04-24T06:45:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e86"
+          "_id": "6628a9d847f86f7aada6335d"
         },
         {
           "name": "Product 4",
-          "category": "Kitchen",
+          "category": "kitchen",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 9,
-          "created": "2024-04-24T05:34:10.000Z",
+          "created": "2024-04-24T06:38:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e87"
+                "$oid": "6628a9d847f86f7aada6335e"
               }
             },
-            "end_date": "2024-04-24T05:42:10.932Z",
+            "end_date": "2024-04-24T06:46:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e88"
+          "_id": "6628a9d847f86f7aada6335f"
         },
         {
           "name": "Product 5",
-          "category": "Furniture",
+          "category": "furniture",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 10,
-          "created": "2024-04-24T05:33:10.000Z",
+          "created": "2024-04-24T06:37:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e89"
+                "$oid": "6628a9d847f86f7aada63360"
               }
             },
-            "end_date": "2024-04-24T05:43:10.933Z",
+            "end_date": "2024-04-24T06:47:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e8a"
+          "_id": "6628a9d847f86f7aada63361"
         },
         {
           "name": "Product 6",
-          "category": "Computers",
+          "category": "computers",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 11,
-          "created": "2024-04-24T05:32:10.000Z",
+          "created": "2024-04-24T06:36:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e8b"
+                "$oid": "6628a9d847f86f7aada63362"
               }
             },
-            "end_date": "2024-04-24T05:44:10.933Z",
+            "end_date": "2024-04-24T06:48:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e8c"
+          "_id": "6628a9d847f86f7aada63363"
         },
         {
           "name": "Product 7",
-          "category": "Games",
+          "category": "games",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 12,
-          "created": "2024-04-24T05:31:10.000Z",
+          "created": "2024-04-24T06:35:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e8d"
+                "$oid": "6628a9d847f86f7aada63364"
               }
             },
-            "end_date": "2024-04-24T05:45:10.933Z",
+            "end_date": "2024-04-24T06:49:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e8e"
+          "_id": "6628a9d847f86f7aada63365"
         },
         {
           "name": "Product 8",
-          "category": "Clothes",
+          "category": "clothes",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 13,
-          "created": "2024-04-24T05:30:10.000Z",
+          "created": "2024-04-24T06:34:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e8f"
+                "$oid": "6628a9d847f86f7aada63366"
               }
             },
-            "end_date": "2024-04-24T05:46:10.933Z",
+            "end_date": "2024-04-24T06:50:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e90"
+          "_id": "6628a9d847f86f7aada63367"
         },
         {
           "name": "Product 9",
-          "category": "Kitchen",
+          "category": "kitchen",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 14,
-          "created": "2024-04-24T05:29:10.000Z",
+          "created": "2024-04-24T06:33:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e91"
+                "$oid": "6628a9d847f86f7aada63368"
               }
             },
-            "end_date": "2024-04-24T05:47:10.933Z",
+            "end_date": "2024-04-24T06:51:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e92"
+          "_id": "6628a9d847f86f7aada63369"
         },
         {
           "name": "Product 10",
-          "category": "Furniture",
+          "category": "furniture",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 15,
-          "created": "2024-04-24T05:28:10.000Z",
+          "created": "2024-04-24T06:32:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e93"
+                "$oid": "6628a9d847f86f7aada6336a"
               }
             },
-            "end_date": "2024-04-24T05:48:10.933Z",
+            "end_date": "2024-04-24T06:52:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e94"
+          "_id": "6628a9d847f86f7aada6336b"
         },
         {
           "name": "Product 11",
-          "category": "Computers",
+          "category": "computers",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 16,
-          "created": "2024-04-24T05:27:10.000Z",
+          "created": "2024-04-24T06:31:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e95"
+                "$oid": "6628a9d847f86f7aada6336c"
               }
             },
-            "end_date": "2024-04-24T05:49:10.933Z",
+            "end_date": "2024-04-24T06:53:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e96"
+          "_id": "6628a9d847f86f7aada6336d"
         },
         {
           "name": "Product 12",
-          "category": "Games",
+          "category": "games",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 17,
-          "created": "2024-04-24T05:26:10.000Z",
+          "created": "2024-04-24T06:30:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e97"
+                "$oid": "6628a9d847f86f7aada6336e"
               }
             },
-            "end_date": "2024-04-24T05:50:10.933Z",
+            "end_date": "2024-04-24T06:54:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e98"
+          "_id": "6628a9d847f86f7aada6336f"
         },
         {
           "name": "Product 13",
-          "category": "Clothes",
+          "category": "clothes",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 18,
-          "created": "2024-04-24T05:25:10.000Z",
+          "created": "2024-04-24T06:29:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e99"
+                "$oid": "6628a9d847f86f7aada63370"
               }
             },
-            "end_date": "2024-04-24T05:51:10.933Z",
+            "end_date": "2024-04-24T06:55:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e9a"
+          "_id": "6628a9d847f86f7aada63371"
         },
         {
           "name": "Product 14",
-          "category": "Kitchen",
+          "category": "kitchen",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 19,
-          "created": "2024-04-24T05:24:10.000Z",
+          "created": "2024-04-24T06:28:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e9b"
+                "$oid": "6628a9d847f86f7aada63372"
               }
             },
-            "end_date": "2024-04-24T05:52:10.933Z",
+            "end_date": "2024-04-24T06:56:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e9c"
+          "_id": "6628a9d847f86f7aada63373"
         },
         {
           "name": "Product 15",
-          "category": "Furniture",
+          "category": "furniture",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 20,
-          "created": "2024-04-24T05:23:10.000Z",
+          "created": "2024-04-24T06:27:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e9d"
+                "$oid": "6628a9d847f86f7aada63374"
               }
             },
-            "end_date": "2024-04-24T05:53:10.933Z",
+            "end_date": "2024-04-24T06:57:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e9e"
+          "_id": "6628a9d847f86f7aada63375"
         },
         {
           "name": "Product 16",
-          "category": "Computers",
+          "category": "computers",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 21,
-          "created": "2024-04-24T05:22:10.000Z",
+          "created": "2024-04-24T06:26:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e9f"
+                "$oid": "6628a9d847f86f7aada63376"
               }
             },
-            "end_date": "2024-04-24T05:54:10.933Z",
+            "end_date": "2024-04-24T06:58:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58ea0"
+          "_id": "6628a9d847f86f7aada63377"
         },
         {
           "name": "Product 17",
-          "category": "Games",
+          "category": "games",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 22,
-          "created": "2024-04-24T05:21:10.000Z",
+          "created": "2024-04-24T06:25:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58ea1"
+                "$oid": "6628a9d847f86f7aada63378"
               }
             },
-            "end_date": "2024-04-24T05:55:10.933Z",
+            "end_date": "2024-04-24T06:59:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58ea2"
+          "_id": "6628a9d847f86f7aada63379"
         },
         {
           "name": "Product 18",
-          "category": "Clothes",
+          "category": "clothes",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 23,
-          "created": "2024-04-24T05:20:10.000Z",
+          "created": "2024-04-24T06:24:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58ea3"
+                "$oid": "6628a9d847f86f7aada6337a"
               }
             },
-            "end_date": "2024-04-24T05:56:10.933Z",
+            "end_date": "2024-04-24T07:00:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58ea4"
+          "_id": "6628a9d847f86f7aada6337b"
         },
         {
           "name": "Product 19",
-          "category": "Kitchen",
+          "category": "kitchen",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 24,
-          "created": "2024-04-24T05:19:10.000Z",
+          "created": "2024-04-24T06:23:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58ea5"
+                "$oid": "6628a9d847f86f7aada6337c"
               }
             },
-            "end_date": "2024-04-24T05:57:10.933Z",
+            "end_date": "2024-04-24T07:01:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58ea6"
+          "_id": "6628a9d847f86f7aada6337d"
         },
         {
           "name": "Product 20",
-          "category": "Furniture",
+          "category": "furniture",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 25,
-          "created": "2024-04-24T05:18:10.000Z",
+          "created": "2024-04-24T06:22:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58ea7"
+                "$oid": "6628a9d847f86f7aada6337e"
               }
             },
-            "end_date": "2024-04-24T05:58:10.933Z",
+            "end_date": "2024-04-24T07:02:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58ea8"
+          "_id": "6628a9d847f86f7aada6337f"
         }
       ]
     }
   },
   {
     "_id": {
-      "$oid": "66289ac3ed0c82e1fca58eaa"
+      "$oid": "6628a9d847f86f7aada63381"
     },
     "license": "buyer",
-    "password": "$2a$10$YZAJcBBhPxCgBTq/fm4O..z.1YmdIqUSRoEJaXeU1z/sYXH2Eieye",
+    "password": "$2a$10$kh4IlOKH3/tGBs.99YIeW.zI7vdocJfr4rvLJ.QyC8S3ID5PC48IK",
     "email": "buyer@e.com",
     "configurations": {
       "settings": {
@@ -855,403 +855,403 @@
       "products": [
         {
           "name": "Product 1",
-          "category": "Computers",
+          "category": "computers",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 6,
-          "created": "2024-04-24T05:37:10.000Z",
+          "created": "2024-04-24T06:41:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e81"
+                "$oid": "6628a9d847f86f7aada63358"
               }
             },
-            "end_date": "2024-04-24T05:39:10.932Z",
+            "end_date": "2024-04-24T06:43:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e82"
+          "_id": "6628a9d847f86f7aada63359"
         },
         {
           "name": "Product 2",
-          "category": "Games",
+          "category": "games",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 7,
-          "created": "2024-04-24T05:36:10.000Z",
+          "created": "2024-04-24T06:40:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e83"
+                "$oid": "6628a9d847f86f7aada6335a"
               }
             },
-            "end_date": "2024-04-24T05:40:10.932Z",
+            "end_date": "2024-04-24T06:44:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e84"
+          "_id": "6628a9d847f86f7aada6335b"
         },
         {
           "name": "Product 3",
-          "category": "Clothes",
+          "category": "clothes",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 8,
-          "created": "2024-04-24T05:35:10.000Z",
+          "created": "2024-04-24T06:39:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e85"
+                "$oid": "6628a9d847f86f7aada6335c"
               }
             },
-            "end_date": "2024-04-24T05:41:10.932Z",
+            "end_date": "2024-04-24T06:45:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e86"
+          "_id": "6628a9d847f86f7aada6335d"
         },
         {
           "name": "Product 4",
-          "category": "Kitchen",
+          "category": "kitchen",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 9,
-          "created": "2024-04-24T05:34:10.000Z",
+          "created": "2024-04-24T06:38:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e87"
+                "$oid": "6628a9d847f86f7aada6335e"
               }
             },
-            "end_date": "2024-04-24T05:42:10.932Z",
+            "end_date": "2024-04-24T06:46:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e88"
+          "_id": "6628a9d847f86f7aada6335f"
         },
         {
           "name": "Product 5",
-          "category": "Furniture",
+          "category": "furniture",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 10,
-          "created": "2024-04-24T05:33:10.000Z",
+          "created": "2024-04-24T06:37:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e89"
+                "$oid": "6628a9d847f86f7aada63360"
               }
             },
-            "end_date": "2024-04-24T05:43:10.933Z",
+            "end_date": "2024-04-24T06:47:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e8a"
+          "_id": "6628a9d847f86f7aada63361"
         },
         {
           "name": "Product 6",
-          "category": "Computers",
+          "category": "computers",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 11,
-          "created": "2024-04-24T05:32:10.000Z",
+          "created": "2024-04-24T06:36:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e8b"
+                "$oid": "6628a9d847f86f7aada63362"
               }
             },
-            "end_date": "2024-04-24T05:44:10.933Z",
+            "end_date": "2024-04-24T06:48:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e8c"
+          "_id": "6628a9d847f86f7aada63363"
         },
         {
           "name": "Product 7",
-          "category": "Games",
+          "category": "games",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 12,
-          "created": "2024-04-24T05:31:10.000Z",
+          "created": "2024-04-24T06:35:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e8d"
+                "$oid": "6628a9d847f86f7aada63364"
               }
             },
-            "end_date": "2024-04-24T05:45:10.933Z",
+            "end_date": "2024-04-24T06:49:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e8e"
+          "_id": "6628a9d847f86f7aada63365"
         },
         {
           "name": "Product 8",
-          "category": "Clothes",
+          "category": "clothes",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 13,
-          "created": "2024-04-24T05:30:10.000Z",
+          "created": "2024-04-24T06:34:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e8f"
+                "$oid": "6628a9d847f86f7aada63366"
               }
             },
-            "end_date": "2024-04-24T05:46:10.933Z",
+            "end_date": "2024-04-24T06:50:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e90"
+          "_id": "6628a9d847f86f7aada63367"
         },
         {
           "name": "Product 9",
-          "category": "Kitchen",
+          "category": "kitchen",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 14,
-          "created": "2024-04-24T05:29:10.000Z",
+          "created": "2024-04-24T06:33:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e91"
+                "$oid": "6628a9d847f86f7aada63368"
               }
             },
-            "end_date": "2024-04-24T05:47:10.933Z",
+            "end_date": "2024-04-24T06:51:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e92"
+          "_id": "6628a9d847f86f7aada63369"
         },
         {
           "name": "Product 10",
-          "category": "Furniture",
+          "category": "furniture",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 15,
-          "created": "2024-04-24T05:28:10.000Z",
+          "created": "2024-04-24T06:32:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e93"
+                "$oid": "6628a9d847f86f7aada6336a"
               }
             },
-            "end_date": "2024-04-24T05:48:10.933Z",
+            "end_date": "2024-04-24T06:52:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e94"
+          "_id": "6628a9d847f86f7aada6336b"
         },
         {
           "name": "Product 11",
-          "category": "Computers",
+          "category": "computers",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 16,
-          "created": "2024-04-24T05:27:10.000Z",
+          "created": "2024-04-24T06:31:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e95"
+                "$oid": "6628a9d847f86f7aada6336c"
               }
             },
-            "end_date": "2024-04-24T05:49:10.933Z",
+            "end_date": "2024-04-24T06:53:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e96"
+          "_id": "6628a9d847f86f7aada6336d"
         },
         {
           "name": "Product 12",
-          "category": "Games",
+          "category": "games",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 17,
-          "created": "2024-04-24T05:26:10.000Z",
+          "created": "2024-04-24T06:30:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e97"
+                "$oid": "6628a9d847f86f7aada6336e"
               }
             },
-            "end_date": "2024-04-24T05:50:10.933Z",
+            "end_date": "2024-04-24T06:54:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e98"
+          "_id": "6628a9d847f86f7aada6336f"
         },
         {
           "name": "Product 13",
-          "category": "Clothes",
+          "category": "clothes",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 18,
-          "created": "2024-04-24T05:25:10.000Z",
+          "created": "2024-04-24T06:29:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e99"
+                "$oid": "6628a9d847f86f7aada63370"
               }
             },
-            "end_date": "2024-04-24T05:51:10.933Z",
+            "end_date": "2024-04-24T06:55:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e9a"
+          "_id": "6628a9d847f86f7aada63371"
         },
         {
           "name": "Product 14",
-          "category": "Kitchen",
+          "category": "kitchen",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 19,
-          "created": "2024-04-24T05:24:10.000Z",
+          "created": "2024-04-24T06:28:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e9b"
+                "$oid": "6628a9d847f86f7aada63372"
               }
             },
-            "end_date": "2024-04-24T05:52:10.933Z",
+            "end_date": "2024-04-24T06:56:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e9c"
+          "_id": "6628a9d847f86f7aada63373"
         },
         {
           "name": "Product 15",
-          "category": "Furniture",
+          "category": "furniture",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 20,
-          "created": "2024-04-24T05:23:10.000Z",
+          "created": "2024-04-24T06:27:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e9d"
+                "$oid": "6628a9d847f86f7aada63374"
               }
             },
-            "end_date": "2024-04-24T05:53:10.933Z",
+            "end_date": "2024-04-24T06:57:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58e9e"
+          "_id": "6628a9d847f86f7aada63375"
         },
         {
           "name": "Product 16",
-          "category": "Computers",
+          "category": "computers",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 21,
-          "created": "2024-04-24T05:22:10.000Z",
+          "created": "2024-04-24T06:26:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58e9f"
+                "$oid": "6628a9d847f86f7aada63376"
               }
             },
-            "end_date": "2024-04-24T05:54:10.933Z",
+            "end_date": "2024-04-24T06:58:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58ea0"
+          "_id": "6628a9d847f86f7aada63377"
         },
         {
           "name": "Product 17",
-          "category": "Games",
+          "category": "games",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 22,
-          "created": "2024-04-24T05:21:10.000Z",
+          "created": "2024-04-24T06:25:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58ea1"
+                "$oid": "6628a9d847f86f7aada63378"
               }
             },
-            "end_date": "2024-04-24T05:55:10.933Z",
+            "end_date": "2024-04-24T06:59:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58ea2"
+          "_id": "6628a9d847f86f7aada63379"
         },
         {
           "name": "Product 18",
-          "category": "Clothes",
+          "category": "clothes",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 23,
-          "created": "2024-04-24T05:20:10.000Z",
+          "created": "2024-04-24T06:24:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58ea3"
+                "$oid": "6628a9d847f86f7aada6337a"
               }
             },
-            "end_date": "2024-04-24T05:56:10.933Z",
+            "end_date": "2024-04-24T07:00:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58ea4"
+          "_id": "6628a9d847f86f7aada6337b"
         },
         {
           "name": "Product 19",
-          "category": "Kitchen",
+          "category": "kitchen",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 24,
-          "created": "2024-04-24T05:19:10.000Z",
+          "created": "2024-04-24T06:23:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58ea5"
+                "$oid": "6628a9d847f86f7aada6337c"
               }
             },
-            "end_date": "2024-04-24T05:57:10.933Z",
+            "end_date": "2024-04-24T07:01:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58ea6"
+          "_id": "6628a9d847f86f7aada6337d"
         },
         {
           "name": "Product 20",
-          "category": "Furniture",
+          "category": "furniture",
           "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
           "price": 25,
-          "created": "2024-04-24T05:18:10.000Z",
+          "created": "2024-04-24T06:22:32.000Z",
           "terms": {
             "min_price": 2,
             "discount_each_buyer": {
               "value": 1,
               "unit": "nis",
               "_id": {
-                "$oid": "66289ac2ed0c82e1fca58ea7"
+                "$oid": "6628a9d847f86f7aada6337e"
               }
             },
-            "end_date": "2024-04-24T05:58:10.933Z",
+            "end_date": "2024-04-24T07:02:32.700Z",
             "quantity": 25
           },
-          "_id": "66289ac2ed0c82e1fca58ea8"
+          "_id": "6628a9d847f86f7aada6337f"
         }
       ]
     }

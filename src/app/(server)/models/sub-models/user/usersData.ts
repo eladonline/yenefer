@@ -3,7 +3,7 @@ import { ProductType, UsersDataType } from "@/types/apis/usersData";
 
 const productSchema = new Schema<ProductType>({
   name: { type: String, required: true },
-  category: { type: String, required: true },
+  category: { type: String, required: true, lowercase: true },
   description: String,
   price: { type: Number, default: 0 },
   created: { type: Date, default: Date.now() },

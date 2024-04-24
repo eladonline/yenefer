@@ -22,7 +22,7 @@ const createProducts = (count) => {
 
     mocks.push({
       name: `Product ${counter}`,
-      category: ProductConfig.categories[categoriesCounter],
+      category: ProductConfig.categories[categoriesCounter].toLowerCase(),
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt metus vel metus imperdiet molestie. Proin ac lacinia neque. Maecenas ut mauris est. Curabitur quis orci porta, placerat justo vel, rhoncus est. Pellentesque maximus, leo vel vestibulum blandit, massa arcu pharetra lectus, sit amet sollicitudin purus orci quis ante. Integer faucibus ac mauris at hendrerit. Phasellus sed lacus nec risus aliquet hendrerit. Maecenas ut risus id sapien tincidunt ultrices vitae ac dui.",
       price: counter + 5,

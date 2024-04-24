@@ -156,25 +156,22 @@ export const getProductController = async (request: NextRequest) => {
   const searchParams = request.nextUrl.searchParams;
   const id = request.headers.get("id");
   const filters: { [key: string]: any } = { _id: id };
-  const projection: { [key: string]: any } = {};
+  const projection: { [key: string]: any } = { data: 1 };
 
-  const categoriesFilter = searchParams.get("categories")?.split(",");
+  if (searchParams.get("categories")) {
+    const categoriesFilter = searchParams.get("categories")?.split(",");
 
-  if (categoriesFilter) {
     _set(projection, "data.products", {
       $filter: {
-        input: "$products",
-        as: "products",
-        cond: { $in: ["$$products.category", categoriesFilter] },
+        input: "$data.products",
+        as: "product",
+        cond: { $in: ["$$product.category", categoriesFilter] },
       },
     });
   }
 
-  const data = await User.findOne(filters, projection).select(
-    "-data.products.terms.discount_each_buyer._id -data.products.images.meta.folder -data.products.images._id",
-  );
-
-  return NextResponse.json(data?.data?.products || [], { status: 200 });
+  const userPayload = await User.findOne(filters, projection);
+  return NextResponse.json(userPayload?.data?.products || [], { status: 200 });
 };
 
 export const createProduct = async (...args: any) =>
