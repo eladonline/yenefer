@@ -52,21 +52,26 @@ const ProductForm = () => {
         <ControlledTextArea name={"description"} control={control} />
       </Field>
 
-      <Field label={{ text: "Images" }}>
-        <Upload name={"images"} control={control} />
-      </Field>
-
-      <Field required label={{ text: "Price" }}>
-        <ControlledInputNumber
-          rules={{ required: "Field Required" }}
-          min={0}
-          name={"price"}
-          control={control}
-          status={_get(errors, "price") && "error"}
-          onChange={() => setValue("terms", productDefaultValues.terms)}
-        />
-      </Field>
-      <ProductTermsBar disabled={price < 1} />
+      <div className={"flex gap-5 "}>
+        <div className={"flex flex-cold gap-5 min-w-[406px]"}>
+          <Field required label={{ text: "Price" }}>
+            <ControlledInputNumber
+              rules={{ required: "Field Required" }}
+              min={0}
+              name={"price"}
+              control={control}
+              status={_get(errors, "price") && "error"}
+              onChange={() => setValue("terms", productDefaultValues.terms)}
+            />
+          </Field>
+          <ProductTermsBar disabled={price < 1} />
+        </div>
+        <div className={"w-[400px]"}>
+          <Field label={{ text: "Images" }}>
+            <Upload name={"images"} control={control} />
+          </Field>
+        </div>
+      </div>
     </div>
   );
 };
