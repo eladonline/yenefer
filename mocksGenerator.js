@@ -48,8 +48,7 @@ const createUsers = async (count) => {
   let counter = 0;
   let licenseCounter = 0;
   const users = [];
-  const configurations = [];
-  const usersData = [];
+  const userData = {};
 
   while (counter < Number(count)) {
     counter++;
@@ -60,28 +59,25 @@ const createUsers = async (count) => {
     const hash = await bcrypt.hash("e", salt);
     const userId = new mongoose.Types.ObjectId();
     const license = accessControl.licenseTypes[licenseCounter];
-    const email = `${license}${counter}@e.com`;
+    const email = `${license}@e.com`;
+
+    if (license === "seller") userData.products = createProducts(20);
 
     users.push({
       _id: { $oid: userId },
       license: license,
       password: hash,
       email: email,
-    });
-
-    configurations.push({
-      users_id: userId,
-      settings: {
-        user: { username: email },
+      configurations: {
+        settings: {
+          user: { username: email },
+        },
       },
+      data: userData,
     });
-
-    const userData = { users_id: userId };
-    if (license === "seller") userData.products = createProducts(20);
-    usersData.push(userData);
   }
 
-  return { users, configurations, usersData };
+  return { users };
 };
 
 createUsers(Number(count)).then((collections) => {
