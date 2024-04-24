@@ -6,6 +6,8 @@ import { FieldValues, useFormContext, useFormState } from "react-hook-form";
 import { Button } from "antd/lib";
 import _get from "lodash/get";
 import { Credentials } from "./useLogin";
+import { Simulate } from "react-dom/test-utils";
+import error = Simulate.error;
 
 type FormType = {
   onSubmit: (
@@ -28,6 +30,7 @@ const Form: FC<FormType> = ({ onSubmit }) => {
           control={control}
           rules={{ required: "Required" }}
           name={"username"}
+          status={formState?.errors?.username && "error"}
           onChange={() => formError && clearErrors("formError")}
         />
       </Field>
@@ -39,6 +42,7 @@ const Form: FC<FormType> = ({ onSubmit }) => {
           rules={{ required: "Required" }}
           control={control}
           name={"password"}
+          status={formState?.errors?.password && "error"}
           onChange={() => formError && clearErrors("formError")}
         />
       </Field>

@@ -32,6 +32,7 @@ const Form: React.FC<FormType> = ({ onSubmit }) => {
               message: "Invalid email",
             },
           }}
+          status={formState?.errors?.username && "error"}
           name={"username"}
           onChange={() => formError && clearErrors("formError")}
         />
@@ -47,6 +48,7 @@ const Form: React.FC<FormType> = ({ onSubmit }) => {
             required: "Required",
             deps: ["confirm"],
           }}
+          status={formState?.errors?.password && "error"}
           name={"password"}
           onChange={() => formError && clearErrors("formError")}
         />
