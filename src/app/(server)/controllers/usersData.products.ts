@@ -157,10 +157,10 @@ export const getProductController = async (request: NextRequest) => {
   const id = request.headers.get("id");
   const filters: { [key: string]: any } = { _id: id };
   const projection: { [key: string]: any } = { data: 1 };
+  const categoriesFilter = searchParams.get("categories")?.split(",");
+  console.log(categoriesFilter);
 
-  if (searchParams.get("categories")) {
-    const categoriesFilter = searchParams.get("categories")?.split(",");
-
+  if (categoriesFilter) {
     _set(projection, "data.products", {
       $filter: {
         input: "$data.products",
