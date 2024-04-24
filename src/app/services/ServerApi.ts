@@ -5,20 +5,23 @@ type Config = {
 };
 
 class ServerApi {
-  baseURL: string | undefined;
+  baseURL: string;
   Authorization: string;
-  timeout: number;
+  timeout: string;
 
   constructor() {
-    this.baseURL = process.env.BASE_API_URI;
+    this.baseURL = process.env.BASE_API_URI as string;
     this.Authorization = `Bearer ${process.env.SERVER_TOKEN}`;
-    this.timeout = 3000;
+    this.timeout = process.env.SERVER_API_TIMEOUT as string;
   }
 
   async get(url: string, config: Config) {
     _set(config, "headers.Authorization", this.Authorization);
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), this.timeout);
+    const timeoutId = setTimeout(
+      () => controller.abort(),
+      Number(this.timeout),
+    );
 
     const res = await fetch(this.baseURL + url, {
       ...config,

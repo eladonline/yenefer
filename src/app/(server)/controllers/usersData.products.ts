@@ -8,6 +8,7 @@ import { JwtPayload } from "jsonwebtoken";
 import User, { UserType } from "@/app/(server)/models/User";
 import _set from "lodash/set";
 import products from "@/app/(pages)/(home)/my-products/lib/Products";
+import type { UploadFile } from "antd/lib";
 
 type UserDataProductsType = NextRequest & {
   tokenPayload?: JwtPayload & clientTokenProps;
@@ -22,7 +23,7 @@ type UserDataProductsType = NextRequest & {
       end_date: any;
       quantity: number;
     };
-    images: Buffer[];
+    images: UploadFile[];
   };
 };
 
@@ -50,8 +51,8 @@ export const createProductController = async (
 
     for (let image of images) {
       try {
-        const uploadData = await cloudinaryService.api.upload(image.base64, {
-          folder: usr,
+        const uploadData = await cloudinaryService.api.upload(image.thumbUrl, {
+          folder: `${usr}/${name}`,
           unique_filename: true,
         });
         const { signature, public_id, secure_url, url, folder } = uploadData;
@@ -84,47 +85,58 @@ export const patchProductController = async (
 ) => {
   const id = request.headers.get("id");
   const usr = request?.tokenPayload?.usr;
+  const productQuery = {
+    _id: id,
+    "data.products._id": params.productId,
+  };
 
   const { name, category, description, price, terms, images } =
     await request.json();
 
-  // if (images) {
-  //   const dbImages = [];
-  //
-  //   for (let image of images) {
-  //     try {
-  //       const uploadData = await cloudinaryService.api.upload(image.base64, {
-  //         folder: usr,
-  //         public_id: image.public_id,
-  //       });
-  //       // const { signature, public_id, secure_url, url, folder } = uploadData;
-  //       // dbImages.push({
-  //       //   meta: { signature, public_id, folder },
-  //       //   src: { url, secure_url },
-  //       // });
-  //     } catch (err) {
-  //       console.trace(err);
-  //     }
-  //   }
-  //
-  //   // if (dbImages.length) product.images = dbImages;
-  // }
+  const nextProductSet: { [key: string]: any } = {
+    "data.products.$.name": name,
+    "data.products.$.category": category,
+    "data.products.$.description": description,
+    "data.products.$.price": price,
+    "data.products.$.terms": terms,
+  };
 
-  await User.findOneAndUpdate(
-    {
-      _id: id,
-      "data.products._id": params.productId,
-    },
-    {
-      $set: {
-        "data.products.$.name": name,
-        "data.products.$.category": category,
-        "data.products.$.description": description,
-        "data.products.$.price": price,
-        "data.products.$.terms": terms,
-      },
-    },
-  );
+  if (images) {
+    let dbImages = [];
+
+    for (let image of images) {
+      if (image.thumbUrl) {
+        try {
+          const uploadData = await cloudinaryService.api.upload(
+            image.thumbUrl,
+            {
+              folder: `${usr}/${name}`,
+              unique_filename: true,
+            },
+          );
+          const { signature, public_id, secure_url, url, folder } = uploadData;
+          dbImages.push({
+            meta: { signature, public_id, folder },
+            src: { url, secure_url },
+          });
+        } catch (err) {
+          console.trace(err);
+        }
+      } else {
+        dbImages.push(image);
+      }
+
+      const user = await User.findOne(productQuery).select("data.products");
+      if (user?.data?.products?.[0]?.images)
+        dbImages = [...dbImages, ...user.data.products[0].images];
+
+      if (dbImages.length) nextProductSet["data.products.$.images"] = dbImages;
+    }
+  }
+
+  await User.findOneAndUpdate(productQuery, {
+    $set: nextProductSet,
+  });
   return NextResponse.json(
     { message: "Product updated successfully" },
     { status: 200 },
@@ -137,12 +149,14 @@ export const deleteProductController = async (
 ) => {
   const id = request.headers.get("id");
 
-  await User.findOneAndUpdate(
+  const res = await User.findOneAndUpdate(
     { _id: id },
     {
       $pull: { "data.products": { _id: params.productId } },
     },
+    { lean: true },
   );
+  console.log(res);
 
   return NextResponse.json(
     { message: "Product Deleted successfully" },

@@ -15,7 +15,7 @@ const getBase64 = (file: FileType): Promise<string> =>
     reader.onerror = (error) => reject(error);
   });
 
-export const imageListPreparePayload = async (
+export const imageListToPayload = async (
   imageList: UploadFile[],
 ): Promise<UploadFile[]> => {
   const nextImages = [];

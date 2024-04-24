@@ -117,7 +117,7 @@ const Products: FC = () => {
     modalApi.open();
   };
 
-  const parseProductImages = (images: ProductType["images"] | null) => {
+  const parseServerProductImages = (images: ProductType["images"] | null) => {
     return (
       images?.map(({ src: { url }, meta: { public_id } }) => ({
         uid: public_id,
@@ -135,13 +135,13 @@ const Products: FC = () => {
           onRenew={() =>
             handleRenewProductClick({
               ...props,
-              images: parseProductImages(props.images) as UploadFile[],
+              images: parseServerProductImages(props.images) as UploadFile[],
             })
           }
           onEdit={() =>
             handleEditProductClick({
               ...props,
-              images: parseProductImages(props.images) as UploadFile[],
+              images: parseServerProductImages(props.images) as UploadFile[],
             })
           }
           onDelete={(e) => {

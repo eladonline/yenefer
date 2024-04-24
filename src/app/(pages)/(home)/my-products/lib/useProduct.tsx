@@ -9,11 +9,11 @@ import {
 } from "@/app/services/products";
 import { SubmitHandler, useForm, UseFormReturn } from "react-hook-form";
 import { createContext, FC, ReactNode, useContext, useEffect } from "react";
-import { notification } from "antd/lib";
+import { notification, UploadFile } from "antd/lib";
 import { NotificationInstance } from "antd/lib/notification/interface";
 import { useSearchParams } from "next/navigation";
 import filtersUtil from "@/utils/Filters";
-import { imageListPreparePayload } from "@/app/components/Inputs/Upload";
+import { imageListToPayload } from "@/app/components/Inputs/Upload";
 
 const ProductContext = createContext<useProductsHook>({} as useProductsHook);
 
@@ -85,7 +85,7 @@ const useLogic = (
       const nextFields = { ...fields };
 
       if (images?.length) {
-        nextFields.images = await imageListPreparePayload(images);
+        nextFields.images = await imageListToPayload(images);
       }
 
       await createProduct(nextFields);
@@ -98,7 +98,19 @@ const useLogic = (
 
   const onSubmitEdit = async ({ _id, ...fields }: ProductFormType) => {
     try {
+      const { images } = fields;
       const nextFields = { ...fields };
+
+      if (images?.length) {
+        const nextImages: UploadFile[] = [];
+
+        for (let image of images) {
+          if (image.url) continue;
+          nextImages.push(...(await imageListToPayload([image])));
+        }
+
+        nextFields.images = nextImages;
+      }
 
       await editProduct(_id as string, nextFields);
       await refetch();

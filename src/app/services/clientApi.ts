@@ -11,7 +11,7 @@ class ClientApi extends Document {
     super();
     this.defaults = {
       baseURL: process.env.BASE_API_URI,
-      timeout: 3000,
+      timeout: process.env.CLIENT_API_TIMEOUT,
       headers: {
         "Cache-Control": "no-cache",
       },
