@@ -88,40 +88,40 @@ export const patchProductController = async (
   const { name, category, description, price, terms, images } =
     await request.json();
 
-  if (images) {
-    const dbImages = [];
-
-    for (let image of images) {
-      try {
-        const uploadData = await cloudinaryService.api.upload(image.base64, {
-          folder: usr,
-          public_id: image.public_id,
-        });
-        // const { signature, public_id, secure_url, url, folder } = uploadData;
-        // dbImages.push({
-        //   meta: { signature, public_id, folder },
-        //   src: { url, secure_url },
-        // });
-      } catch (err) {
-        console.trace(err);
-      }
-    }
-
-    // if (dbImages.length) product.images = dbImages;
-  }
+  // if (images) {
+  //   const dbImages = [];
+  //
+  //   for (let image of images) {
+  //     try {
+  //       const uploadData = await cloudinaryService.api.upload(image.base64, {
+  //         folder: usr,
+  //         public_id: image.public_id,
+  //       });
+  //       // const { signature, public_id, secure_url, url, folder } = uploadData;
+  //       // dbImages.push({
+  //       //   meta: { signature, public_id, folder },
+  //       //   src: { url, secure_url },
+  //       // });
+  //     } catch (err) {
+  //       console.trace(err);
+  //     }
+  //   }
+  //
+  //   // if (dbImages.length) product.images = dbImages;
+  // }
 
   await User.findOneAndUpdate(
     {
       _id: id,
-      "products._id": params.productId,
+      "data.products._id": params.productId,
     },
     {
       $set: {
-        "products.$.name": name,
-        "products.$.category": category,
-        "products.$.description": description,
-        "products.$.price": price,
-        "products.$.terms": terms,
+        "data.products.$.name": name,
+        "data.products.$.category": category,
+        "data.products.$.description": description,
+        "data.products.$.price": price,
+        "data.products.$.terms": terms,
       },
     },
   );
