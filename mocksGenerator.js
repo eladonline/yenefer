@@ -37,7 +37,7 @@ const createProducts = (count) => {
         end_date: dayjs().add(counter, "minutes"),
         quantity: Number(count + 5),
       },
-      _id: new mongoose.Types.ObjectId(),
+      _id: { $oid: new mongoose.Types.ObjectId() },
     });
   }
 

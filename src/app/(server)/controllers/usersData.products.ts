@@ -88,27 +88,27 @@ export const patchProductController = async (
   const { name, category, description, price, terms, images } =
     await request.json();
 
-  // if (images) {
-  //   const dbImages = [];
-  //
-  //   for (let image of images) {
-  //     try {
-  //       const uploadData = await cloudinaryService.api.upload(image.base64, {
-  //         folder: usr,
-  //         unique_filename: true,
-  //       });
-  //       const { signature, public_id, secure_url, url, folder } = uploadData;
-  //       dbImages.push({
-  //         meta: { signature, public_id, folder },
-  //         src: { url, secure_url },
-  //       });
-  //     } catch (err) {
-  //       console.trace(err);
-  //     }
-  //   }
-  //
-  //   if (dbImages.length) product.images = dbImages;
-  // }
+  if (images) {
+    const dbImages = [];
+
+    for (let image of images) {
+      try {
+        const uploadData = await cloudinaryService.api.upload(image.base64, {
+          folder: usr,
+          public_id: image.public_id,
+        });
+        // const { signature, public_id, secure_url, url, folder } = uploadData;
+        // dbImages.push({
+        //   meta: { signature, public_id, folder },
+        //   src: { url, secure_url },
+        // });
+      } catch (err) {
+        console.trace(err);
+      }
+    }
+
+    // if (dbImages.length) product.images = dbImages;
+  }
 
   await User.findOneAndUpdate(
     {
@@ -136,13 +136,11 @@ export const deleteProductController = async (
   { params }: { params: { productId: string } },
 ) => {
   const id = request.headers.get("id");
+
   await User.findOneAndUpdate(
+    { _id: id },
     {
-      users_id: id,
-      "products._id": params.productId,
-    },
-    {
-      $pull: { products: { _id: params.productId } },
+      $pull: { "data.products": { _id: params.productId } },
     },
   );
 
@@ -158,7 +156,6 @@ export const getProductController = async (request: NextRequest) => {
   const filters: { [key: string]: any } = { _id: id };
   const projection: { [key: string]: any } = { data: 1 };
   const categoriesFilter = searchParams.get("categories")?.split(",");
-  console.log(categoriesFilter);
 
   if (categoriesFilter) {
     _set(projection, "data.products", {
