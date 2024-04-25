@@ -10,8 +10,11 @@ cloudinary.config({
 });
 
 class Cloudinary {
-  get api() {
+  get uploader() {
     return cloudinary.uploader;
+  }
+  get api() {
+    return cloudinary.api;
   }
 }
 

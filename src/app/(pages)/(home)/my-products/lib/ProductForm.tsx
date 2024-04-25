@@ -5,7 +5,7 @@ import {
   ControlledSelect,
   ControlledTextArea,
 } from "@/utils/hooks/useForm/ControlledInputs";
-import { useFormContext, useWatch } from "react-hook-form";
+import { useFieldArray, useFormContext, useWatch } from "react-hook-form";
 import Field from "@/app/components/decorators/form/Field";
 import config from "./config.json";
 import ProductTermsBar from "@/app/(pages)/(home)/my-products/lib/ProductTermsBar";
@@ -25,6 +25,7 @@ const ProductForm = () => {
     setValue,
   } = useFormContext();
   const price = useWatch({ control, name: "price" });
+  const { append } = useFieldArray({ control, name: "imagesToRemove" });
 
   return (
     <div className={"flex flex-col gap-5"}>
@@ -68,7 +69,11 @@ const ProductForm = () => {
         </div>
         <div className={"w-[400px]"}>
           <Field label={{ text: "Images" }}>
-            <Upload name={"images"} control={control} />
+            <Upload
+              name={"images"}
+              control={control}
+              onRemove={({ name }: { name: string }) => append(name)}
+            />
           </Field>
         </div>
       </div>

@@ -7,7 +7,6 @@ import tokenHandler from "@/app/(server)/handlers/tokenHandler";
 import { JwtPayload } from "jsonwebtoken";
 import User, { UserType } from "@/app/(server)/models/User";
 import _set from "lodash/set";
-import products from "@/app/(pages)/(home)/my-products/lib/Products";
 import type { UploadFile } from "antd/lib";
 
 type UserDataProductsType = NextRequest & {
@@ -51,10 +50,13 @@ export const createProductController = async (
 
     for (let image of images) {
       try {
-        const uploadData = await cloudinaryService.api.upload(image.thumbUrl, {
-          folder: `${usr}/${name}`,
-          unique_filename: true,
-        });
+        const uploadData = await cloudinaryService.uploader.upload(
+          image.thumbUrl,
+          {
+            folder: `${usr}/${name}`,
+            unique_filename: true,
+          },
+        );
         const { signature, public_id, secure_url, url, folder } = uploadData;
         dbImages.push({
           meta: { signature, public_id, folder },
@@ -90,7 +92,7 @@ export const patchProductController = async (
     "data.products._id": params.productId,
   };
 
-  const { name, category, description, price, terms, images } =
+  const { name, category, description, price, terms, images, imagesToRemove } =
     await request.json();
 
   const nextProductSet: { [key: string]: any } = {
@@ -101,36 +103,47 @@ export const patchProductController = async (
     "data.products.$.terms": terms,
   };
 
-  if (images) {
-    let dbImages = [];
+  const user = await User.findOne(productQuery).select("data.products");
+
+  if (imagesToRemove) {
+    const filteredImages = user.data.products[0].images.filter(
+      ({ meta: { public_id } }: { meta: { public_id: string } }) =>
+        !imagesToRemove.includes(public_id),
+    );
+    nextProductSet["data.products.$.images"] = filteredImages;
+    _set(user, "data.products.0.images", filteredImages);
+
+    for (let imagePublicId of imagesToRemove) {
+      await cloudinaryService.uploader.destroy(imagePublicId);
+    }
+  }
+
+  if (images.length) {
+    const nextImages = [];
 
     for (let image of images) {
-      if (image.thumbUrl) {
-        try {
-          const uploadData = await cloudinaryService.api.upload(
-            image.thumbUrl,
-            {
-              folder: `${usr}/${name}`,
-              unique_filename: true,
-            },
-          );
-          const { signature, public_id, secure_url, url, folder } = uploadData;
-          dbImages.push({
-            meta: { signature, public_id, folder },
-            src: { url, secure_url },
-          });
-        } catch (err) {
-          console.trace(err);
-        }
-      } else {
-        dbImages.push(image);
+      try {
+        const uploadData = await cloudinaryService.uploader.upload(
+          image.thumbUrl,
+          {
+            folder: `${usr}/${name}`,
+            unique_filename: true,
+          },
+        );
+        const { signature, public_id, secure_url, url, folder } = uploadData;
+        nextImages.push({
+          meta: { signature, public_id, folder },
+          src: { url, secure_url },
+        });
+      } catch (err) {
+        console.trace(err);
       }
 
-      const user = await User.findOne(productQuery).select("data.products");
-      if (user?.data?.products?.[0]?.images)
-        dbImages = [...dbImages, ...user.data.products[0].images];
+      if (user?.data?.products?.[0]?.images?.length)
+        nextImages.push([...nextImages, ...user.data.products[0].images]);
 
-      if (dbImages.length) nextProductSet["data.products.$.images"] = dbImages;
+      if (nextImages.length)
+        nextProductSet["data.products.$.images"] = nextImages;
     }
   }
 
@@ -148,6 +161,7 @@ export const deleteProductController = async (
   { params }: { params: { productId: string } },
 ) => {
   const id = request.headers.get("id");
+  const usr = request?.tokenPayload?.usr;
 
   const res = await User.findOneAndUpdate(
     { _id: id },
@@ -156,7 +170,12 @@ export const deleteProductController = async (
     },
     { lean: true },
   );
-  console.log(res);
+
+  if (res) {
+    const name = res?.data?.products?.[0].name;
+    await cloudinaryService.api.delete_resources_by_prefix(`${usr}/${name}`);
+    await cloudinaryService.api.delete_folder(`${usr}/${name}`);
+  }
 
   return NextResponse.json(
     { message: "Product Deleted successfully" },
@@ -196,7 +215,9 @@ export const patchProduct = async (...args: any) =>
   );
 
 export const deleteProduct = async (...args: any) =>
-  errorHandler(deleteProductController, args);
+  errorHandler(
+    ...(tokenHandler(deleteProductController, args) as [Function, []]),
+  );
 
 export const getProduct = async (...args: any) =>
   errorHandler(getProductController, args);

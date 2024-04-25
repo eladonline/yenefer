@@ -28,7 +28,12 @@ export const imageListToPayload = async (
   return nextImages;
 };
 
-const ImageUploadInput: React.FC<FieldValues> = ({ control, name, rules }) => {
+const ImageUploadInput: React.FC<FieldValues> = ({
+  control,
+  name,
+  rules,
+  ...props
+}) => {
   const [previewOpen, setPreviewOpen] = useState<boolean>(false);
   const [previewImage, setPreviewImage] = useState<string>("");
 
@@ -50,7 +55,7 @@ const ImageUploadInput: React.FC<FieldValues> = ({ control, name, rules }) => {
   return (
     <>
       <UploadController control={control} name={name} rules={rules}>
-        <Upload listType="picture-card" onPreview={handlePreview}>
+        <Upload listType="picture-card" onPreview={handlePreview} {...props}>
           {uploadButton}
         </Upload>
       </UploadController>

@@ -39,6 +39,7 @@ export const productDefaultValues = {
     end_date: null,
   },
   images: null,
+  imagesToRemove: null,
   _id: null,
 };
 

@@ -31,6 +31,7 @@ export type ProductFormType = {
     quantity: number | null;
   };
   images?: UploadFile[] | null;
+  imagesToRemove?: string[] | null;
   _id?: string | null;
 };
 
