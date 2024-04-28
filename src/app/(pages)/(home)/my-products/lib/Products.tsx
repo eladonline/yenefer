@@ -45,26 +45,33 @@ const Products: FC = () => {
           });
       },
       children: <ProductForm />,
-      afterClose: resetFormToDefault,
+      afterClose: () => {
+        setModalConfigs({});
+        resetFormToDefault();
+      },
     });
     modalApi.open();
   };
 
   const handleEditProductClick = useCallback(
-    (props: ProductFormType) => {
-      reset({ ...props });
+    (props: ProductType) => {
+      const images = parseServerProductImages(props.images);
+      reset({ ...props, images });
       setModalConfigs({
         title: "Edit Product",
         onOk: async () => {
           setModalConfigs((prev) => ({ ...prev, confirmLoading: true }));
           await handleSubmit(onSubmitEdit, Promise.reject)()
             .then(modalApi.close)
-            .catch(() => {
+            .finally(() => {
               setModalConfigs((prev) => ({ ...prev, confirmLoading: false }));
             });
         },
         children: <ProductForm />,
-        afterClose: resetFormToDefault,
+        afterClose: () => {
+          setModalConfigs({});
+          resetFormToDefault();
+        },
       });
       modalApi.open();
     },
@@ -72,20 +79,25 @@ const Products: FC = () => {
   );
 
   const handleRenewProductClick = useCallback(
-    (props: ProductFormType) => {
-      reset({ ...props, terms: { ...props.terms, end_date: null } });
+    (props: ProductType) => {
+      const images = parseServerProductImages(props.images);
+
+      reset({ ...props, images, terms: { ...props.terms, end_date: null } });
       setModalConfigs({
         title: "Renew Product",
         onOk: async () => {
           setModalConfigs((prev) => ({ ...prev, confirmLoading: true }));
           await handleSubmit(onSubmit, Promise.reject)()
             .then(modalApi.close)
-            .catch(() => {
+            .finally(() => {
               setModalConfigs((prev) => ({ ...prev, confirmLoading: false }));
             });
         },
         children: <ProductForm />,
-        afterClose: resetFormToDefault,
+        afterClose: () => {
+          setModalConfigs({});
+          resetFormToDefault();
+        },
       });
       modalApi.open();
     },
@@ -112,12 +124,18 @@ const Products: FC = () => {
           }}
         />
       ),
+      afterClose: () => {
+        setModalConfigs({});
+        resetFormToDefault();
+      },
       width: 600,
     });
     modalApi.open();
   };
 
-  const parseServerProductImages = (images: ProductType["images"] | null) => {
+  const parseServerProductImages = (
+    images: ProductType["images"],
+  ): UploadFile[] | null => {
     return (
       images?.map(({ src: { url }, meta: { public_id } }) => ({
         uid: public_id,
@@ -132,18 +150,8 @@ const Products: FC = () => {
     return products?.map(({ ...props }) => {
       return (
         <ProductCard
-          onRenew={() =>
-            handleRenewProductClick({
-              ...props,
-              images: parseServerProductImages(props.images) as UploadFile[],
-            })
-          }
-          onEdit={() =>
-            handleEditProductClick({
-              ...props,
-              images: parseServerProductImages(props.images) as UploadFile[],
-            })
-          }
+          onRenew={() => handleRenewProductClick(props)}
+          onEdit={() => handleEditProductClick(props)}
           onDelete={(e) => {
             let target = e.currentTarget;
             target.style.visibility = "hidden";
