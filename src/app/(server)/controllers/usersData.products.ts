@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import errorHandler from "@/app/(server)/handlers/errorHandler";
-import { ProductType } from "@/types/apis/usersData";
+import {
+  ProductFormType,
+  ProductType,
+  UsersDataType,
+} from "@/types/apis/usersData";
 import cloudinaryService from "@/app/(server)/services/cloudinary";
 import { clientTokenProps } from "@/app/(server)/services/Jwt";
 import tokenHandler from "@/app/(server)/handlers/tokenHandler";
@@ -104,14 +108,15 @@ export const patchProductController = async (
   };
 
   const user = await User.findOne(productQuery).select("data.products");
+  let userImages: ProductType["images"] | null =
+    user?.data?.products?.[0]?.images;
 
   if (imagesToRemove) {
-    const filteredImages = user.data.products[0].images.filter(
+    userImages = userImages?.filter(
       ({ meta: { public_id } }: { meta: { public_id: string } }) =>
         !imagesToRemove.includes(public_id),
     );
-    nextProductSet["data.products.$.images"] = filteredImages;
-    _set(user, "data.products.0.images", filteredImages);
+    nextProductSet["data.products.$.images"] = userImages;
 
     for (let imagePublicId of imagesToRemove) {
       await cloudinaryService.uploader.destroy(imagePublicId);
@@ -139,8 +144,7 @@ export const patchProductController = async (
         console.trace(err);
       }
 
-      if (user?.data?.products?.[0]?.images?.length)
-        nextImages.push([...nextImages, ...user.data.products[0].images]);
+      if (userImages?.length) nextImages.push([...nextImages, ...userImages]);
 
       if (nextImages.length)
         nextProductSet["data.products.$.images"] = nextImages;
@@ -163,16 +167,16 @@ export const deleteProductController = async (
   const id = request.headers.get("id");
   const usr = request?.tokenPayload?.usr;
 
-  const res = await User.findOneAndUpdate(
+  const res = (await User.findOneAndUpdate(
     { _id: id },
     {
       $pull: { "data.products": { _id: params.productId } },
     },
     { lean: true },
-  );
+  )) as UserType | null;
 
   if (res) {
-    const name = res?.data?.products?.[0].name;
+    const name = res?.data?.products?.[0]?.name;
     await cloudinaryService.api.delete_resources_by_prefix(`${usr}/${name}`);
     await cloudinaryService.api.delete_folder(`${usr}/${name}`);
   }
