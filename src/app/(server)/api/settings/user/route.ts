@@ -1,3 +1,3 @@
-import { user } from "@/app/(server)/controllers/configurations.user";
+import { user } from "@/app/(server)/controllers/user/configurations.user";
 
 export { user as GET };
