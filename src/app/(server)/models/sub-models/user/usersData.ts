@@ -16,6 +16,8 @@ const productSchema = new Schema<ProductType>({
     end_date: { type: Date, required: true },
     quantity: { type: Number, required: true },
   },
+  lastUpdated: { type: Date },
+  lastPublished: { type: Date },
   images: {
     type: [
       {

@@ -27,7 +27,7 @@ type useProductsHook = {
   urlFilters: {};
 };
 
-export const productDefaultValues = {
+export const productDefaultValues: ProductFormType = {
   name: null,
   category: null,
   description: null,
@@ -38,6 +38,8 @@ export const productDefaultValues = {
     min_price: null,
     end_date: null,
   },
+  lastUpdated: null,
+  lastPublished: null,
   images: null,
   imagesToRemove: null,
   _id: null,

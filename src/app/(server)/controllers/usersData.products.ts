@@ -105,6 +105,7 @@ export const patchProductController = async (
     "data.products.$.description": description,
     "data.products.$.price": price,
     "data.products.$.terms": terms,
+    "data.products.$.lastUpdated": new Date(),
   };
 
   const user = await User.findOne(productQuery).select("data.products");

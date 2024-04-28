@@ -9,9 +9,11 @@ export type ProductType = {
   terms: {
     min_price: number;
     discount_each_buyer: { value: number; unit: string };
-    end_date: any;
+    end_date: Date;
     quantity: number;
   };
+  lastUpdated?: number | null;
+  lastPublished?: number | null;
   _id?: string;
   images?: {
     meta: { signature: string; public_id: string; folder: string };
@@ -27,9 +29,11 @@ export type ProductFormType = {
   terms: {
     min_price: number | null;
     discount_each_buyer: { value: number | null; unit: string };
-    end_date: any | null;
+    end_date: Date | null;
     quantity: number | null;
   };
+  lastUpdated?: Date | null;
+  lastPublished?: Date | null;
   images?: UploadFile[] | null;
   imagesToRemove?: string[] | null;
   _id?: string | null;

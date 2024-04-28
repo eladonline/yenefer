@@ -46,7 +46,7 @@ const Products: FC = () => {
       },
       children: <ProductForm />,
       afterClose: () => {
-        setModalConfigs({});
+        setModalConfigs({ children: null });
         resetFormToDefault();
       },
     });
@@ -69,7 +69,7 @@ const Products: FC = () => {
         },
         children: <ProductForm />,
         afterClose: () => {
-          setModalConfigs({});
+          setModalConfigs({ children: null });
           resetFormToDefault();
         },
       });
@@ -95,7 +95,7 @@ const Products: FC = () => {
         },
         children: <ProductForm />,
         afterClose: () => {
-          setModalConfigs({});
+          setModalConfigs({ children: null });
           resetFormToDefault();
         },
       });
@@ -125,7 +125,7 @@ const Products: FC = () => {
         />
       ),
       afterClose: () => {
-        setModalConfigs({});
+        setModalConfigs({ children: null });
         resetFormToDefault();
       },
       width: 600,

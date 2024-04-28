@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Card, Tooltip, Typography } from "antd/lib";
+import { Button, Card, Tooltip, Typography } from "antd/lib";
 import { ProductType } from "@/types/apis/usersData";
 import {
   DeleteFilled,
@@ -25,8 +25,12 @@ const ProductCard: FC<ItemCardType> = ({
   price,
   category,
   terms: { discount_each_buyer, quantity, min_price, end_date },
+  lastPublished,
+  lastUpdated,
 }) => {
   const isOutdated = dayjs(end_date).isBefore(dayjs());
+  const isPublishedDisabled =
+    lastPublished && dayjs(lastPublished).isAfter(lastUpdated);
 
   return (
     <Card
@@ -101,6 +105,13 @@ const ProductCard: FC<ItemCardType> = ({
         </Typography.Title>
         <Typography.Text>{price}</Typography.Text>
       </div>
+
+      <Button
+        disabled={isPublishedDisabled as boolean}
+        className={"ovrrd [&.ovrrd]:rounded-2xl mt-4 w-[100%]"}
+      >
+        Publish
+      </Button>
     </Card>
   );
 };
