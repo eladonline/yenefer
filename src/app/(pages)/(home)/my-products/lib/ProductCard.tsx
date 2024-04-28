@@ -25,12 +25,12 @@ const ProductCard: FC<ItemCardType> = ({
   price,
   category,
   terms: { discount_each_buyer, quantity, min_price, end_date },
-  lastPublished,
-  lastUpdated,
+  last_published,
+  last_updated,
 }) => {
   const isOutdated = dayjs(end_date).isBefore(dayjs());
   const isPublishedDisabled =
-    lastPublished && dayjs(lastPublished).isAfter(lastUpdated);
+    last_published && dayjs(last_published).isAfter(last_updated);
 
   return (
     <Card

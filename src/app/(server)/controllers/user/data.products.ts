@@ -1,10 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import errorHandler from "@/app/(server)/handlers/errorHandler";
-import {
-  ProductFormType,
-  ProductType,
-  UsersDataType,
-} from "@/types/apis/user/data";
+import { ProductType } from "@/types/apis/user/data";
 import cloudinaryService from "@/app/(server)/services/cloudinary";
 import { clientTokenProps } from "@/app/(server)/services/Jwt";
 import tokenHandler from "@/app/(server)/handlers/tokenHandler";
@@ -12,6 +8,7 @@ import { JwtPayload } from "jsonwebtoken";
 import User, { UserType } from "@/app/(server)/models/User";
 import _set from "lodash/set";
 import type { UploadFile } from "antd/lib";
+import Publish from "@/app/(server)/models/Publish";
 
 type RequestPayloadType = NextRequest & {
   tokenPayload?: JwtPayload & clientTokenProps;
@@ -103,7 +100,7 @@ export const patchProductController = async (
     "data.products.$.description": description,
     "data.products.$.price": price,
     "data.products.$.terms": terms,
-    "data.products.$.lastUpdated": new Date(),
+    "data.products.$.last_updated": new Date(),
   };
 
   const user = await User.findOne(productQuery).select("data.products");
@@ -222,12 +219,22 @@ export const publishProductController = async (
   const user = await User.findOneAndUpdate(
     productQuery,
     {
-      $set: { "data.product.$.lastPublish": publishDate },
+      $set: { "data.product.$.last_publish": publishDate },
     },
     { lean: true },
   );
+  console.log(JSON.stringify(user, null, 2));
 
-  // TODO create product and publish at the publish collection
+  const publishedProduct = await Publish.findOneAndUpdate(
+    {
+      "products.publisher_id": id,
+    },
+    { $set: { "products.$.last_publish": publishDate } },
+  );
+  // // TODO create product and publish at the publish collection
+  // const publishDoc = new Publish({
+  //   products:
+  // })
 
   return NextResponse.json(
     { message: "Publish successfully" },

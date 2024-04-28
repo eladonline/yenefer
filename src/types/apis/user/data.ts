@@ -12,8 +12,8 @@ export type ProductType = {
     end_date: Date;
     quantity: number;
   };
-  lastUpdated?: number | null;
-  lastPublished?: number | null;
+  last_updated?: Date | null;
+  last_published?: Date | null;
   _id?: string;
   images?: {
     meta: { signature: string; public_id: string; folder: string };
