@@ -115,8 +115,9 @@ const ProductTermsBar: FC<{ disabled: boolean }> = ({ disabled }) => {
             name={"terms.end_date"}
             minDate={dayjs()}
             control={control}
-            showTime={{ format: "HH:mm" }}
-            format="DD-MM-YYYY HH:mm"
+            showTime={{ format: "HH" }}
+            format="DD-MM-YYYY h:00"
+            placeholder={"Select Date and time"}
             status={_get(errors, "terms.end_date") && "error"}
           />
         </Field>
