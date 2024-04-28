@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Button, Card, Tooltip, Typography } from "antd/lib";
-import { ProductType } from "@/types/apis/usersData";
+import { ProductType } from "@/types/apis/user/data";
 import {
   DeleteFilled,
   ClockCircleFilled,

@@ -4,7 +4,7 @@ import Title from "antd/lib/typography/Title";
 import { headers } from "next/headers";
 import { endpoints } from "@/app/services/settings";
 import ServerApi from "@/app/services/ServerApi";
-import { ConfigurationsType } from "@/types/apis/configurations";
+import { ConfigurationsType } from "@/types/apis/user/configurations";
 
 const Page = async () => {
   const serverApi = new ServerApi();

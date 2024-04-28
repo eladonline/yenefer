@@ -1,7 +1,7 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
 import { userSettings } from "@/app/services/settings";
-import { SettingsUserType } from "@/types/apis/configurations";
+import { SettingsUserType } from "@/types/apis/user/configurations";
 
 type UseSettingsHook = {
   isLoading: boolean;
@@ -14,6 +14,7 @@ const useSettings = (initialData: SettingsUserType): UseSettingsHook => {
     queryFn: userSettings,
     initialData: { data: initialData },
   });
+
   if (error) {
     throw error;
   }

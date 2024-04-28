@@ -4,7 +4,7 @@ import {
   ProductFormType,
   ProductType,
   UsersDataType,
-} from "@/types/apis/usersData";
+} from "@/types/apis/user/data";
 import cloudinaryService from "@/app/(server)/services/cloudinary";
 import { clientTokenProps } from "@/app/(server)/services/Jwt";
 import tokenHandler from "@/app/(server)/handlers/tokenHandler";
@@ -13,7 +13,7 @@ import User, { UserType } from "@/app/(server)/models/User";
 import _set from "lodash/set";
 import type { UploadFile } from "antd/lib";
 
-type UserDataProductsType = NextRequest & {
+type RequestPayloadType = NextRequest & {
   tokenPayload?: JwtPayload & clientTokenProps;
   body: {
     name: string;
@@ -30,9 +30,7 @@ type UserDataProductsType = NextRequest & {
   };
 };
 
-export const createProductController = async (
-  request: UserDataProductsType,
-) => {
+export const createProductController = async (request: RequestPayloadType) => {
   const id = request.headers.get("id");
   const usr = request?.tokenPayload?.usr;
 
@@ -86,7 +84,7 @@ export const createProductController = async (
 };
 
 export const patchProductController = async (
-  request: UserDataProductsType,
+  request: RequestPayloadType,
   { params }: { params: { productId: string } },
 ) => {
   const id = request.headers.get("id");
@@ -162,13 +160,13 @@ export const patchProductController = async (
 };
 
 export const deleteProductController = async (
-  request: UserDataProductsType,
+  request: RequestPayloadType,
   { params }: { params: { productId: string } },
 ) => {
   const id = request.headers.get("id");
   const usr = request?.tokenPayload?.usr;
 
-  const res = (await User.findOneAndUpdate(
+  const user = (await User.findOneAndUpdate(
     { _id: id },
     {
       $pull: { "data.products": { _id: params.productId } },
@@ -176,8 +174,8 @@ export const deleteProductController = async (
     { lean: true },
   )) as UserType | null;
 
-  if (res) {
-    const name = res?.data?.products?.[0]?.name;
+  if (user) {
+    const name = user?.data?.products?.[0]?.name;
     await cloudinaryService.api.delete_resources_by_prefix(`${usr}/${name}`);
     await cloudinaryService.api.delete_folder(`${usr}/${name}`);
   }
@@ -209,6 +207,34 @@ export const getProductController = async (request: NextRequest) => {
   return NextResponse.json(userPayload?.data?.products || [], { status: 200 });
 };
 
+// PUBLISH at api/products/publish
+export const publishProductController = async (
+  request: NextRequest,
+  { params }: { params: { productId: string } },
+) => {
+  const id = request.headers.get("id");
+  const productQuery: { [key: string]: any } = {
+    _id: id,
+    "data.products._id": params.productId,
+  };
+  const publishDate = new Date();
+
+  const user = await User.findOneAndUpdate(
+    productQuery,
+    {
+      $set: { "data.product.$.lastPublish": publishDate },
+    },
+    { lean: true },
+  );
+
+  // TODO create product and publish at the publish collection
+
+  return NextResponse.json(
+    { message: "Publish successfully" },
+    { status: 200 },
+  );
+};
+
 export const createProduct = async (...args: any) =>
   errorHandler(
     ...(tokenHandler(createProductController, args) as [Function, []]),
@@ -226,3 +252,6 @@ export const deleteProduct = async (...args: any) =>
 
 export const getProduct = async (...args: any) =>
   errorHandler(getProductController, args);
+
+export const publishProduct = async (...args: any) =>
+  errorHandler(publishProductController, args);

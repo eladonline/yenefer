@@ -1,6 +1,6 @@
 "use client";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { ProductFormType, ProductType } from "@/types/apis/usersData";
+import { ProductFormType, ProductType } from "@/types/apis/user/data";
 import {
   createProduct,
   editProduct,

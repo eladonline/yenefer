@@ -11,7 +11,7 @@ import Filters from "@/app/components/bars/products/lib/Filters";
 import { useRouter } from "next/navigation";
 import _isEmpty from "lodash/isEmpty";
 import filtersService from "@/utils/Filters";
-import { ProductFormType, ProductType } from "@/types/apis/usersData";
+import { ProductFormType, ProductType } from "@/types/apis/user/data";
 
 const Products: FC = () => {
   const {

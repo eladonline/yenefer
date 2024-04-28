@@ -1,4 +1,4 @@
-import { ProductFormType } from "@/types/apis/usersData";
+import { ProductFormType } from "@/types/apis/user/data";
 import Decimal from "decimal.js";
 
 export const validateMinPrice = (

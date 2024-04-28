@@ -1,5 +1,5 @@
 import { Schema } from "mongoose";
-import { ConfigurationsType } from "@/types/apis/configurations";
+import { ConfigurationsType } from "@/types/apis/user/configurations";
 
 const schema = new Schema<ConfigurationsType>({
   settings: {

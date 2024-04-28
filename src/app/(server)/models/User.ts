@@ -1,8 +1,8 @@
 import { Schema, model, models } from "mongoose";
 import configurationsSchema from "@/app/(server)/models/sub-models/user/configurations";
 import userDataSchema from "@/app/(server)/models/sub-models/user/usersData";
-import { UsersDataType } from "@/types/apis/usersData";
-import { ConfigurationsType } from "@/types/apis/configurations";
+import { UsersDataType } from "@/types/apis/user/data";
+import { ConfigurationsType } from "@/types/apis/user/configurations";
 
 export type UserType = {
   email: string;

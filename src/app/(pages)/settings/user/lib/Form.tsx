@@ -4,7 +4,7 @@ import QueryClientProvider from "@/utils/Providers/QueryClientProvider";
 import useSettings from "@/app/(pages)/settings/user/lib/useSettings";
 import Text from "antd/lib/typography/Text";
 import { Skeleton } from "antd/lib";
-import { SettingsUserType } from "@/types/apis/configurations";
+import { SettingsUserType } from "@/types/apis/user/configurations";
 
 type FormProps = {
   data: SettingsUserType;
@@ -50,4 +50,5 @@ const Form: React.FC<FormProps> = ({ data }) => {
     </div>
   );
 };
+
 export default Form;

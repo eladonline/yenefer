@@ -1,5 +1,5 @@
 import { Schema } from "mongoose";
-import { ProductType, UsersDataType } from "@/types/apis/usersData";
+import { ProductType, UsersDataType } from "@/types/apis/user/data";
 
 const productSchema = new Schema<ProductType>({
   name: { type: String, required: true },
