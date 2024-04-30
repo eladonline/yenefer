@@ -36,10 +36,6 @@ type useProductsHook = {
     payload: PublishProductPayloadType,
   ) => Promise<void>;
   urlFilters: {};
-  currentlyInPublishRequest: string | null;
-  setCurrentlyInPublishRequest: (
-    name: useProductsHook["currentlyInPublishRequest"],
-  ) => void;
   parseServerProductImages: (
     images: ProductType["images"],
   ) => UploadFile[] | null;
@@ -68,9 +64,6 @@ const useLogic = (
   initialData: ProductType[],
   notificationApi: NotificationInstance,
 ): useProductsHook => {
-  const [currentlyInPublishRequest, setCurrentlyInPublishRequest] = useState<
-    string | null
-  >(null);
   const searchParams = useSearchParams();
   const queryClient = useQueryClient();
 
@@ -183,8 +176,6 @@ const useLogic = (
     onSubmitEdit,
     onDeleteItem,
     onPublishProduct,
-    currentlyInPublishRequest,
-    setCurrentlyInPublishRequest,
     urlFilters: filtersUtil.fromMapToJson(searchParams),
     parseServerProductImages,
     productDefaultValues,

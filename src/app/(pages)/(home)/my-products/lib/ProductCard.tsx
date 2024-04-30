@@ -112,7 +112,7 @@ const ProductCard: FC<ItemCardType> = ({
         <Typography.Text>{price}</Typography.Text>
       </div>
       <PublishProduct
-        disabled={isPublishedDisabled as boolean}
+        disabled={(isPublishedDisabled as boolean) || isOutdated}
         payload={payload as PublishProductPayloadType}
         id={_id as string}
       />
@@ -120,13 +120,13 @@ const ProductCard: FC<ItemCardType> = ({
   );
 };
 
-type PublishProduct = {
+type PublishProductType = {
   id: string;
   payload: PublishProductPayloadType;
   disabled: boolean;
 };
 
-const PublishProduct = ({ id, payload, disabled }: PublishProduct) => {
+const PublishProduct = ({ id, payload, disabled }: PublishProductType) => {
   const [isPublishing, setIsPublishing] = useState<boolean>(false);
   const { onPublishProduct } = useProduct();
 
