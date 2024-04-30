@@ -6,18 +6,12 @@ import ProductCard from "@/app/(pages)/(home)/my-products/lib/ProductCard";
 import { Empty } from "antd/lib";
 
 const Products: FC = () => {
-  const { products, onDeleteItem } = useProduct();
+  const { products } = useProduct();
 
   const Products = (
     <ul className={"grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-2"}>
       {products?.map((props) => {
-        return (
-          <ProductCard
-            onDelete={() => onDeleteItem(props._id as string)}
-            key={props._id}
-            {...props}
-          />
-        );
+        return <ProductCard key={props._id} {...props} />;
       })}
     </ul>
   );

@@ -30,7 +30,7 @@ type useProductsHook = {
   products: ProductType[] | undefined;
   onSubmit: SubmitHandler<ProductFormType>;
   onSubmitEdit: SubmitHandler<ProductFormType>;
-  onDeleteItem: (id: string) => Promise<void>;
+  onDeleteProduct: (id: string) => Promise<void>;
   onPublishProduct: (
     id: string,
     payload: PublishProductPayloadType,
@@ -137,7 +137,7 @@ const useLogic = (
     }
   };
 
-  const onDeleteItem = async (_id: string): Promise<void> => {
+  const onDeleteProduct = async (_id: string): Promise<void> => {
     try {
       await deleteProduct(_id);
       await refetch();
@@ -174,7 +174,7 @@ const useLogic = (
     products,
     onSubmit,
     onSubmitEdit,
-    onDeleteItem,
+    onDeleteProduct,
     onPublishProduct,
     urlFilters: filtersUtil.fromMapToJson(searchParams),
     parseServerProductImages,

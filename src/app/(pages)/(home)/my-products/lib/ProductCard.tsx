@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import { Button, Card, Tooltip, Typography } from "antd/lib";
+import { Button, Card, Spin, Tooltip, Typography } from "antd/lib";
 import { ProductType } from "@/types/apis/user/data";
 import {
   DeleteFilled,
@@ -13,12 +13,7 @@ import { EditOrRenewModal } from "@/app/(pages)/(home)/my-products/lib/Modals";
 import { useProduct } from "@/app/(pages)/(home)/my-products/lib/useProduct";
 import { PublishProductPayloadType } from "@/types/apis/publish/publish.products";
 
-type ItemCardType = ProductType & {
-  onDelete: (e: any) => void;
-};
-
-const ProductCard: FC<ItemCardType> = ({
-  onDelete,
+const ProductCard: FC<ProductType> = ({
   name,
   description,
   price,
@@ -51,10 +46,7 @@ const ProductCard: FC<ItemCardType> = ({
           <EditOrRenewModal payload={payload}>
             {isOutdated ? "Renew" : "Edit"}
           </EditOrRenewModal>
-          <DeleteFilled
-            onClick={onDelete}
-            className={"cursor-pointer hover:text-red-500"}
-          />
+          <DeleteProduct id={_id as string} />
         </div>
       }
       actions={[
@@ -118,6 +110,25 @@ const ProductCard: FC<ItemCardType> = ({
         id={_id as string}
       />
     </Card>
+  );
+};
+
+const DeleteProduct = ({ id }: { id: string }) => {
+  const { onDeleteProduct } = useProduct();
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
+
+  const handleDelete = async () => {
+    setIsDeleting(true);
+    await onDeleteProduct(id);
+    setIsDeleting(false);
+  };
+
+  if (isDeleting) return <Spin size={"small"} />;
+  return (
+    <DeleteFilled
+      onClick={handleDelete}
+      className={"cursor-pointer hover:text-red-500"}
+    />
   );
 };
 
