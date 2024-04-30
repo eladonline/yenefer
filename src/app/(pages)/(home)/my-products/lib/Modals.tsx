@@ -1,25 +1,27 @@
 import { Modal } from "antd/lib";
 import React, { FC, PropsWithChildren, useEffect, useState } from "react";
 import ProductForm from "@/app/(pages)/(home)/my-products/lib/ProductForm";
-import { useProduct } from "@/app/(pages)/(home)/my-products/lib/useProduct";
+import {
+  productDefaultValues,
+  useProduct,
+} from "@/app/(pages)/(home)/my-products/lib/useProduct";
 import { ProductFormType, ProductType } from "@/types/apis/user/data";
 import _isEmpty from "lodash/isEmpty";
 import filtersService from "@/utils/Filters";
 import { useRouter } from "next/navigation";
 import Filters from "@/app/components/bars/products/lib/Filters";
+import { FormProvider, useForm } from "react-hook-form";
 
 export const EditOrRenewModal: FC<{
   payload: ProductType;
   children: string;
 }> = ({ payload, children }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const {
-    resetFormToDefault,
-    formFactory,
-    onSubmitEdit,
-    onSubmit,
-    parseServerProductImages,
-  } = useProduct();
+  const { onSubmitEdit, onSubmit, parseServerProductImages } = useProduct();
+
+  const formFactory = useForm<ProductFormType>({
+    defaultValues: { ...productDefaultValues },
+  });
   const { handleSubmit, reset, formState } = formFactory;
   const isRenewMode = children === "Renew";
 
@@ -52,7 +54,7 @@ export const EditOrRenewModal: FC<{
         title={`${children} Product`}
         open={isOpen}
         afterClose={() => {
-          resetFormToDefault();
+          formFactory.reset({ ...productDefaultValues });
         }}
         onOk={async () => {
           await handleSubmit(isRenewMode ? onSubmit : onSubmitEdit)();
@@ -61,7 +63,9 @@ export const EditOrRenewModal: FC<{
         width={"max-content"}
         confirmLoading={formState.isSubmitting}
       >
-        <ProductForm />
+        <FormProvider {...formFactory}>
+          <ProductForm />
+        </FormProvider>
       </Modal>
       <div
         className={"font-bold text-blue-500 hover:text-blue-300 cursor-pointer"}
@@ -75,7 +79,10 @@ export const EditOrRenewModal: FC<{
 
 export const NewProductModal: FC<PropsWithChildren> = ({ children }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { resetFormToDefault, formFactory, onSubmit } = useProduct();
+  const { onSubmit, productDefaultValues } = useProduct();
+  const formFactory = useForm<ProductFormType>({
+    defaultValues: { ...productDefaultValues },
+  });
   const { handleSubmit, formState } = formFactory;
 
   useEffect(() => {
@@ -88,7 +95,7 @@ export const NewProductModal: FC<PropsWithChildren> = ({ children }) => {
         title={`Add New Product`}
         open={isOpen}
         afterClose={() => {
-          resetFormToDefault();
+          formFactory.reset({ ...productDefaultValues });
         }}
         onOk={async () => {
           await handleSubmit(onSubmit)();
@@ -97,7 +104,9 @@ export const NewProductModal: FC<PropsWithChildren> = ({ children }) => {
         width={"max-content"}
         confirmLoading={formState.isSubmitting}
       >
-        <ProductForm />
+        <FormProvider {...formFactory}>
+          <ProductForm />
+        </FormProvider>
       </Modal>
       <div onClick={() => setIsOpen(true)}>{children}</div>
     </>

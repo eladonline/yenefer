@@ -13,7 +13,6 @@ import {
   createContext,
   FC,
   ReactNode,
-  useCallback,
   useContext,
   useEffect,
   useState,
@@ -29,10 +28,8 @@ const ProductContext = createContext<useProductsHook>({} as useProductsHook);
 
 type useProductsHook = {
   products: ProductType[] | undefined;
-  formFactory: UseFormReturn<ProductFormType>;
   onSubmit: SubmitHandler<ProductFormType>;
   onSubmitEdit: SubmitHandler<ProductFormType>;
-  resetFormToDefault: () => void;
   onDeleteItem: (id: string) => Promise<void>;
   onPublishProduct: (
     id: string,
@@ -46,6 +43,7 @@ type useProductsHook = {
   parseServerProductImages: (
     images: ProductType["images"],
   ) => UploadFile[] | null;
+  productDefaultValues: ProductFormType;
 };
 
 export const productDefaultValues: ProductFormType = {
@@ -89,9 +87,6 @@ const useLogic = (
     initialData: { data: initialData },
     staleTime: Infinity,
   });
-  const formFactory = useForm<ProductFormType>({
-    defaultValues: { ...productDefaultValues },
-  });
 
   useEffect(() => {
     queryClient.setQueryData(["products"], { data: initialData });
@@ -117,7 +112,6 @@ const useLogic = (
 
       await createProduct(nextFields);
       await refetch();
-      formFactory.reset({ ...productDefaultValues });
     } catch (err: any) {
       notificationApi.error({ message: err.message });
       return Promise.reject(err);
@@ -145,26 +139,19 @@ const useLogic = (
 
       await editProduct(_id as string, nextFields);
       await refetch();
-      formFactory.reset({ ...productDefaultValues });
     } catch (err: any) {
       notificationApi.error({ message: err.message });
-      return Promise.reject(err);
     }
   };
 
-  const onDeleteItem = useCallback(
-    async (_id: string): Promise<void> => {
-      try {
-        await deleteProduct(_id);
-        await refetch();
-        formFactory.reset({ ...productDefaultValues });
-      } catch (err: any) {
-        notificationApi.error({ message: err.message });
-        return Promise.reject();
-      }
-    },
-    [refetch, formFactory, notificationApi],
-  );
+  const onDeleteItem = async (_id: string): Promise<void> => {
+    try {
+      await deleteProduct(_id);
+      await refetch();
+    } catch (err: any) {
+      notificationApi.error({ message: err.message });
+    }
+  };
 
   const onPublishProduct: useProductsHook["onPublishProduct"] = async (
     _id,
@@ -172,7 +159,10 @@ const useLogic = (
   ) => {
     try {
       await publishProduct(_id, payload);
-    } catch (err) {}
+      await refetch();
+    } catch (err: any) {
+      notificationApi.error({ message: err.message });
+    }
   };
 
   const parseServerProductImages: useProductsHook["parseServerProductImages"] =
@@ -189,9 +179,7 @@ const useLogic = (
 
   return {
     products,
-    formFactory,
     onSubmit,
-    resetFormToDefault: () => formFactory.reset({ ...productDefaultValues }),
     onSubmitEdit,
     onDeleteItem,
     onPublishProduct,
@@ -199,6 +187,7 @@ const useLogic = (
     setCurrentlyInPublishRequest,
     urlFilters: filtersUtil.fromMapToJson(searchParams),
     parseServerProductImages,
+    productDefaultValues,
   };
 };
 

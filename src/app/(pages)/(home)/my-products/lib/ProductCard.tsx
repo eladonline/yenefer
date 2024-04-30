@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { Button, Card, Tooltip, Typography } from "antd/lib";
 import { ProductType } from "@/types/apis/user/data";
 import {
@@ -10,16 +10,15 @@ import {
 } from "@ant-design/icons";
 import dayjs from "dayjs";
 import { EditOrRenewModal } from "@/app/(pages)/(home)/my-products/lib/Modals";
+import { useProduct } from "@/app/(pages)/(home)/my-products/lib/useProduct";
+import { PublishProductPayloadType } from "@/types/apis/publish/publish.products";
 
 type ItemCardType = ProductType & {
   onDelete: (e: any) => void;
-  onPublish: (e: any) => void;
-  isPublishLoading: boolean;
 };
 
 const ProductCard: FC<ItemCardType> = ({
   onDelete,
-  onPublish,
   name,
   description,
   price,
@@ -28,7 +27,6 @@ const ProductCard: FC<ItemCardType> = ({
   images,
   last_published,
   last_updated,
-  isPublishLoading,
   _id,
 }) => {
   const isOutdated = dayjs(end_date).isBefore(dayjs());
@@ -113,16 +111,40 @@ const ProductCard: FC<ItemCardType> = ({
         </Typography.Title>
         <Typography.Text>{price}</Typography.Text>
       </div>
-
-      <Button
+      <PublishProduct
         disabled={isPublishedDisabled as boolean}
-        className={"ovrrd [&.ovrrd]:rounded-2xl mt-4 w-[100%]"}
-        onClick={onPublish}
-        loading={isPublishLoading}
-      >
-        Publish
-      </Button>
+        payload={payload as PublishProductPayloadType}
+        id={_id as string}
+      />
     </Card>
+  );
+};
+
+type PublishProduct = {
+  id: string;
+  payload: PublishProductPayloadType;
+  disabled: boolean;
+};
+
+const PublishProduct = ({ id, payload, disabled }: PublishProduct) => {
+  const [isPublishing, setIsPublishing] = useState<boolean>(false);
+  const { onPublishProduct } = useProduct();
+
+  const handlePublish = async () => {
+    setIsPublishing(true);
+    await onPublishProduct(id, payload);
+    setIsPublishing(false);
+  };
+
+  return (
+    <Button
+      disabled={disabled}
+      className={"ovrrd [&.ovrrd]:rounded-2xl mt-4 w-[100%]"}
+      onClick={handlePublish}
+      loading={isPublishing}
+    >
+      Publish
+    </Button>
   );
 };
 
