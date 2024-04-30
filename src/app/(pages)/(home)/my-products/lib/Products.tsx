@@ -25,6 +25,7 @@ const Products: FC = () => {
     onPublishProduct,
     currentlyInPublishRequest,
     setCurrentlyInPublishRequest,
+    parseServerProductImages,
   } = useProduct();
   const router = useRouter();
 
@@ -55,57 +56,6 @@ const Products: FC = () => {
     });
     modalApi.open();
   };
-
-  const handleEditProductClick = useCallback(
-    (props: ProductType) => {
-      const images = parseServerProductImages(props.images);
-      reset({ ...props, images });
-      setModalConfigs({
-        title: "Edit Product",
-        onOk: async () => {
-          setModalConfigs((prev) => ({ ...prev, confirmLoading: true }));
-          await handleSubmit(onSubmitEdit, Promise.reject)()
-            .then(modalApi.close)
-            .finally(() => {
-              setModalConfigs((prev) => ({ ...prev, confirmLoading: false }));
-            });
-        },
-        children: <ProductForm />,
-        afterClose: () => {
-          setModalConfigs({ children: null });
-          resetFormToDefault();
-        },
-      });
-      modalApi.open();
-    },
-    [handleSubmit, modalApi, onSubmitEdit, reset, resetFormToDefault],
-  );
-
-  const handleRenewProductClick = useCallback(
-    (props: ProductType) => {
-      const images = parseServerProductImages(props.images);
-
-      reset({ ...props, images, terms: { ...props.terms, end_date: null } });
-      setModalConfigs({
-        title: "Renew Product",
-        onOk: async () => {
-          setModalConfigs((prev) => ({ ...prev, confirmLoading: true }));
-          await handleSubmit(onSubmit, Promise.reject)()
-            .then(modalApi.close)
-            .finally(() => {
-              setModalConfigs((prev) => ({ ...prev, confirmLoading: false }));
-            });
-        },
-        children: <ProductForm />,
-        afterClose: () => {
-          setModalConfigs({ children: null });
-          resetFormToDefault();
-        },
-      });
-      modalApi.open();
-    },
-    [handleSubmit, modalApi, reset, resetFormToDefault, onSubmit],
-  );
 
   const handlePublishProductClick = useCallback(
     (props: ProductType) => {
@@ -151,25 +101,10 @@ const Products: FC = () => {
     modalApi.open();
   };
 
-  const parseServerProductImages = (
-    images: ProductType["images"],
-  ): UploadFile[] | null => {
-    return (
-      images?.map(({ src: { url }, meta: { public_id } }) => ({
-        uid: public_id,
-        name: public_id,
-        status: "done",
-        url,
-      })) || null
-    );
-  };
-
   const productsMemo = useMemo(() => {
     return products?.map(({ ...props }) => {
       return (
         <ProductCard
-          onRenew={() => handleRenewProductClick(props)}
-          onEdit={() => handleEditProductClick(props)}
           onPublish={() => handlePublishProductClick(props)}
           onDelete={() => onDeleteItem(props._id as string)}
           key={props._id}
@@ -181,30 +116,30 @@ const Products: FC = () => {
   }, [
     products,
     currentlyInPublishRequest,
-    handleRenewProductClick,
-    handleEditProductClick,
     handlePublishProductClick,
     onDeleteItem,
   ]);
 
   return (
     <div className={"grid grid-cols-1 gap-[20px]"}>
-      <FormProvider {...formFactory}>{ModalRoot(modalConfigs)}</FormProvider>
-      <ProductsBar
-        onFiltersClick={handleFiltersClick}
-        onAddProductClick={handleAddProductClick}
-      />
-      {products?.length ? (
-        <ul
-          className={"grid grid-cols-2 xl:grid-cols-3  2xl:grid-cols-4 gap-2"}
-        >
-          {productsMemo}
-        </ul>
-      ) : (
-        <div className={"flex flex-grow justify-center"}>
-          <Empty />
-        </div>
-      )}
+      <FormProvider {...formFactory}>
+        {ModalRoot(modalConfigs)}
+        <ProductsBar
+          onFiltersClick={handleFiltersClick}
+          onAddProductClick={handleAddProductClick}
+        />
+        {products?.length ? (
+          <ul
+            className={"grid grid-cols-2 xl:grid-cols-3  2xl:grid-cols-4 gap-2"}
+          >
+            {productsMemo}
+          </ul>
+        ) : (
+          <div className={"flex flex-grow justify-center"}>
+            <Empty />
+          </div>
+        )}
+      </FormProvider>
     </div>
   );
 };

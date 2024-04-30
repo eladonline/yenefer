@@ -43,6 +43,9 @@ type useProductsHook = {
   setCurrentlyInPublishRequest: (
     name: useProductsHook["currentlyInPublishRequest"],
   ) => void;
+  parseServerProductImages: (
+    images: ProductType["images"],
+  ) => UploadFile[] | null;
 };
 
 export const productDefaultValues: ProductFormType = {
@@ -105,8 +108,8 @@ const useLogic = (
     ...fields
   }: ProductFormType): Promise<void> => {
     try {
-      const { images } = fields;
-      const nextFields = { ...fields };
+      const { images, ...restFields } = fields;
+      const nextFields: ProductFormType = { ...restFields };
 
       if (images?.length) {
         nextFields.images = await imageListToPayload(images);
@@ -117,13 +120,17 @@ const useLogic = (
       formFactory.reset({ ...productDefaultValues });
     } catch (err: any) {
       notificationApi.error({ message: err.message });
+      return Promise.reject(err);
     }
   };
 
-  const onSubmitEdit = async ({ _id, ...fields }: ProductFormType) => {
+  const onSubmitEdit = async ({
+    _id,
+    ...fields
+  }: ProductFormType): Promise<void> => {
     try {
-      const { images } = fields;
-      const nextFields = { ...fields };
+      const { images, ...restFields } = fields;
+      const nextFields: ProductFormType = { ...restFields };
 
       if (images?.length) {
         const nextImages: UploadFile[] = [];
@@ -141,6 +148,7 @@ const useLogic = (
       formFactory.reset({ ...productDefaultValues });
     } catch (err: any) {
       notificationApi.error({ message: err.message });
+      return Promise.reject(err);
     }
   };
 
@@ -167,6 +175,18 @@ const useLogic = (
     } catch (err) {}
   };
 
+  const parseServerProductImages: useProductsHook["parseServerProductImages"] =
+    (images) => {
+      return (
+        images?.map(({ src: { url }, meta: { public_id } }) => ({
+          uid: public_id,
+          name: public_id,
+          status: "done",
+          url,
+        })) || null
+      );
+    };
+
   return {
     products,
     formFactory,
@@ -178,6 +198,7 @@ const useLogic = (
     currentlyInPublishRequest,
     setCurrentlyInPublishRequest,
     urlFilters: filtersUtil.fromMapToJson(searchParams),
+    parseServerProductImages,
   };
 };
 

@@ -46,7 +46,7 @@ const useLogic = (): useModalType => {
   ];
 };
 
-const ModalProvider = ({ children }: { children: ReactElement }) => {
+const ModalProvider = ({ children }: { children: ReactElement[] }) => {
   const value = useLogic();
 
   return (

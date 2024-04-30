@@ -119,7 +119,7 @@ export const patchProductController = async (
     }
   }
 
-  if (images.length) {
+  if (images?.length) {
     const nextImages = [];
 
     for (let image of images) {

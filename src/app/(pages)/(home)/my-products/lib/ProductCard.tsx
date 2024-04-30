@@ -9,18 +9,15 @@ import {
   VerticalAlignBottomOutlined,
 } from "@ant-design/icons";
 import dayjs from "dayjs";
+import { EditOrRenewModal } from "@/app/(pages)/(home)/my-products/lib/Modals";
 
 type ItemCardType = ProductType & {
-  onEdit: () => void;
-  onRenew: () => void;
   onDelete: (e: any) => void;
   onPublish: (e: any) => void;
   isPublishLoading: boolean;
 };
 
 const ProductCard: FC<ItemCardType> = ({
-  onEdit,
-  onRenew,
   onDelete,
   onPublish,
   name,
@@ -28,26 +25,33 @@ const ProductCard: FC<ItemCardType> = ({
   price,
   category,
   terms: { discount_each_buyer, quantity, min_price, end_date },
+  images,
   last_published,
   last_updated,
   isPublishLoading,
+  _id,
 }) => {
   const isOutdated = dayjs(end_date).isBefore(dayjs());
   const isPublishedDisabled =
     last_published && dayjs(last_published).isAfter(last_updated);
 
+  const payload: ProductType = {
+    _id,
+    name,
+    category,
+    description,
+    price,
+    terms: { discount_each_buyer, quantity, min_price, end_date },
+    images,
+  };
+
   return (
     <Card
       extra={
         <div className={"flex gap-3"}>
-          <div
-            className={
-              "font-bold text-blue-500 hover:text-blue-300 cursor-pointer"
-            }
-            onClick={isOutdated ? onRenew : onEdit}
-          >
+          <EditOrRenewModal payload={payload}>
             {isOutdated ? "Renew" : "Edit"}
-          </div>
+          </EditOrRenewModal>
           <DeleteFilled
             onClick={onDelete}
             className={"cursor-pointer hover:text-red-500"}
