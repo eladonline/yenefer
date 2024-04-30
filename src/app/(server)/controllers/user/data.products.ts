@@ -223,18 +223,18 @@ export const publishProductController = async (
   const user = await User.findOneAndUpdate(
     productQuery,
     {
-      $set: { "data.product.$.last_publish": publishDate },
+      $set: { "data.products.$.last_published": publishDate },
     },
     { lean: true },
-  );
+  ).select("data.products");
   console.log(JSON.stringify(user, null, 2));
 
-  const publishedProduct = await Publish.findOneAndUpdate(
-    {
-      "products.publisher_id": id,
-    },
-    { $set: { "products.$.last_publish": publishDate } },
-  );
+  // const publishedProduct = await Publish.findOneAndUpdate(
+  //   {
+  //     "products.publisher_id": id,
+  //   },
+  //   { $set: { "products.$.last_publish": publishDate } },
+  // );
   // // TODO create product and publish at the publish collection
   // const publishDoc = new Publish({
   //   products:
