@@ -171,10 +171,14 @@ export const deleteProductController = async (
     { lean: true },
   )) as UserType | null;
 
-  if (user) {
-    const name = user?.data?.products?.[0]?.name;
-    await cloudinaryService.api.delete_resources_by_prefix(`${usr}/${name}`);
-    await cloudinaryService.api.delete_folder(`${usr}/${name}`);
+  if (user?.data?.products?.[0]?.images) {
+    try {
+      const name = user?.data?.products?.[0]?.name;
+      await cloudinaryService.api.delete_resources_by_prefix(`${usr}/${name}`);
+      await cloudinaryService.api.delete_folder(`${usr}/${name}`);
+    } catch (err: any) {
+      console.log(`user_id :${id}`, err?.error);
+    }
   }
 
   return NextResponse.json(
