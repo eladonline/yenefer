@@ -31,7 +31,8 @@ const ProductCard: FC<ItemCardType> = ({
 }) => {
   const isOutdated = dayjs(end_date).isBefore(dayjs());
   const isPublishedDisabled =
-    last_published && dayjs(last_published).isAfter(last_updated);
+    (last_published && dayjs(last_published).isAfter(last_updated)) ||
+    isOutdated;
 
   const payload: ProductType = {
     _id,
@@ -112,7 +113,7 @@ const ProductCard: FC<ItemCardType> = ({
         <Typography.Text>{price}</Typography.Text>
       </div>
       <PublishProduct
-        disabled={(isPublishedDisabled as boolean) || isOutdated}
+        disabled={isPublishedDisabled as boolean}
         payload={payload as PublishProductPayloadType}
         id={_id as string}
       />
