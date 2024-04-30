@@ -9,6 +9,8 @@ import User, { UserType } from "@/app/(server)/models/User";
 import _set from "lodash/set";
 import type { UploadFile } from "antd/lib";
 import Publish from "@/app/(server)/models/Publish";
+import _get from "lodash/get";
+import { PublishProductType } from "@/types/apis/publish/publish.products";
 
 type RequestPayloadType = NextRequest & {
   tokenPayload?: JwtPayload & clientTokenProps;
@@ -218,27 +220,43 @@ export const publishProductController = async (
     _id: id,
     "data.products._id": params.productId,
   };
-  const publishDate = new Date();
 
   const user = await User.findOneAndUpdate(
     productQuery,
     {
-      $set: { "data.products.$.last_published": publishDate },
+      $set: { "data.products.$.last_published": new Date() },
     },
-    { lean: true },
-  ).select("data.products");
-  console.log(JSON.stringify(user, null, 2));
+    { new: true },
+  ).select("data.products.0");
 
-  // const publishedProduct = await Publish.findOneAndUpdate(
-  //   {
-  //     "products.publisher_id": id,
-  //   },
-  //   { $set: { "products.$.last_publish": publishDate } },
-  // );
-  // // TODO create product and publish at the publish collection
-  // const publishDoc = new Publish({
-  //   products:
-  // })
+  const product: ProductType = _get(user, "data.products.0");
+  // console.log(JSON.stringify(user, null, 2));
+  const nextPublishPayload: PublishProductType = {
+    product_source_id: params.productId,
+    last_published: product.last_published as Date,
+    description: product.description,
+    name: product.name,
+    category: product.category,
+    price: product.price,
+    terms: product.terms,
+  };
+
+  if (product?.images) {
+    nextPublishPayload.images = product.images.map(({ src: { url } }) => url);
+  }
+
+  await Publish.findOneAndUpdate(
+    {
+      "publishers.publisher_id": id,
+      "products.product_source_id": params.productId,
+    },
+    {
+      $set: {
+        "publishers.$.products.$": nextPublishPayload,
+      },
+    },
+    { upsert: true },
+  );
 
   return NextResponse.json(
     { message: "Publish successfully" },

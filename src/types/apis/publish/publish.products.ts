@@ -1,5 +1,5 @@
 export type PublishProductType = {
-  publisher_id: string;
+  product_source_id: string;
   name: string;
   category: string;
   description: string;

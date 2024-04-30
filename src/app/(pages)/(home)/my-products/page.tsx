@@ -5,7 +5,6 @@ import { headers } from "next/headers";
 import Title from "antd/lib/typography/Title";
 import Products from "@/app/(pages)/(home)/my-products/lib/Products";
 import ProductProvider from "@/app/(pages)/(home)/my-products/lib/useProduct";
-import ModalProvider from "@/utils/hooks/useModal/useModal";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import filtersService from "@/utils/Filters";
 
@@ -31,13 +30,12 @@ const Page = async ({
         <header className={"text-center mb-4"}>
           <Title level={2}>Products</Title>
         </header>
-        <ModalProvider>
-          <ProductProvider data={data}>
-            <Products />
-          </ProductProvider>
-        </ModalProvider>
+        <ProductProvider data={data}>
+          <Products />
+        </ProductProvider>
       </div>
     </AntdRegistry>
   );
 };
+
 export default Page;

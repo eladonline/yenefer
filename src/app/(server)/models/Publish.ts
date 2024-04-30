@@ -2,14 +2,16 @@ import { Schema, model, models } from "mongoose";
 import { PublishProductType } from "@/types/apis/publish/publish.products";
 
 type PublishType = {
+  publisher_id: string;
   products: PublishProductType[];
 };
 
 const schema = new Schema<PublishType>({
+  publisher_id: String,
   products: [
     {
-      publisher_id: String,
-      lastPublished: { type: Date, required: true, default: Date.now },
+      product_source_id: String,
+      last_published: { type: Date, required: true, default: Date.now },
       description: { type: String, required: true },
       name: { type: String, required: true },
       category: { type: String, required: true },
