@@ -23,6 +23,8 @@ const Products: FC = () => {
     onDeleteItem,
     urlFilters,
     onPublishProduct,
+    currentlyInPublishRequest,
+    setCurrentlyInPublishRequest,
   } = useProduct();
   const router = useRouter();
 
@@ -105,16 +107,20 @@ const Products: FC = () => {
     [handleSubmit, modalApi, reset, resetFormToDefault, onSubmit],
   );
 
-  const handlePublishProductClick = useCallback((props: ProductType) => {
-    onPublishProduct(props._id as string, {
-      name: props.name,
-      category: props.category,
-      description: props.description,
-      price: props.price,
-      terms: props.terms,
-      images: props.images?.map(({ src: { url } }) => url),
-    });
-  }, []);
+  const handlePublishProductClick = useCallback(
+    (props: ProductType) => {
+      setCurrentlyInPublishRequest(props.name);
+      onPublishProduct(props._id as string, {
+        name: props.name,
+        category: props.category,
+        description: props.description,
+        price: props.price,
+        terms: props.terms,
+        images: props.images?.map(({ src: { url } }) => url),
+      }).finally(() => setCurrentlyInPublishRequest(null));
+    },
+    [onPublishProduct, setCurrentlyInPublishRequest],
+  );
 
   const handleFiltersClick = () => {
     let filters: { [key: string]: string } = {};
@@ -165,19 +171,21 @@ const Products: FC = () => {
           onRenew={() => handleRenewProductClick(props)}
           onEdit={() => handleEditProductClick(props)}
           onPublish={() => handlePublishProductClick(props)}
-          onDelete={(e) => {
-            let target = e.currentTarget;
-            target.style.visibility = "hidden";
-            onDeleteItem(props._id as string).catch(() => {
-              target.style.visibility = "visible";
-            });
-          }}
+          onDelete={() => onDeleteItem(props._id as string)}
           key={props._id}
+          isPublishLoading={currentlyInPublishRequest === props.name}
           {...props}
         />
       );
     });
-  }, [products, handleEditProductClick, handlePublishProductClick]);
+  }, [
+    products,
+    currentlyInPublishRequest,
+    handleRenewProductClick,
+    handleEditProductClick,
+    handlePublishProductClick,
+    onDeleteItem,
+  ]);
 
   return (
     <div className={"grid grid-cols-1 gap-[20px]"}>

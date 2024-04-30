@@ -15,6 +15,7 @@ type ItemCardType = ProductType & {
   onRenew: () => void;
   onDelete: (e: any) => void;
   onPublish: (e: any) => void;
+  isPublishLoading: boolean;
 };
 
 const ProductCard: FC<ItemCardType> = ({
@@ -29,6 +30,7 @@ const ProductCard: FC<ItemCardType> = ({
   terms: { discount_each_buyer, quantity, min_price, end_date },
   last_published,
   last_updated,
+  isPublishLoading,
 }) => {
   const isOutdated = dayjs(end_date).isBefore(dayjs());
   const isPublishedDisabled =
@@ -112,6 +114,7 @@ const ProductCard: FC<ItemCardType> = ({
         disabled={isPublishedDisabled as boolean}
         className={"ovrrd [&.ovrrd]:rounded-2xl mt-4 w-[100%]"}
         onClick={onPublish}
+        loading={isPublishLoading}
       >
         Publish
       </Button>

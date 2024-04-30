@@ -9,7 +9,15 @@ import {
   publishProduct,
 } from "@/app/services/products";
 import { SubmitHandler, useForm, UseFormReturn } from "react-hook-form";
-import { createContext, FC, ReactNode, useContext, useEffect } from "react";
+import {
+  createContext,
+  FC,
+  ReactNode,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { notification, UploadFile } from "antd/lib";
 import { NotificationInstance } from "antd/lib/notification/interface";
 import { useSearchParams } from "next/navigation";
@@ -31,6 +39,10 @@ type useProductsHook = {
     payload: PublishProductPayloadType,
   ) => Promise<void>;
   urlFilters: {};
+  currentlyInPublishRequest: string | null;
+  setCurrentlyInPublishRequest: (
+    name: useProductsHook["currentlyInPublishRequest"],
+  ) => void;
 };
 
 export const productDefaultValues: ProductFormType = {
@@ -55,6 +67,9 @@ const useLogic = (
   initialData: ProductType[],
   notificationApi: NotificationInstance,
 ): useProductsHook => {
+  const [currentlyInPublishRequest, setCurrentlyInPublishRequest] = useState<
+    string | null
+  >(null);
   const searchParams = useSearchParams();
   const queryClient = useQueryClient();
 
@@ -129,16 +144,19 @@ const useLogic = (
     }
   };
 
-  const onDeleteItem = async (_id: string): Promise<void> => {
-    try {
-      await deleteProduct(_id);
-      await refetch();
-      formFactory.reset({ ...productDefaultValues });
-    } catch (err: any) {
-      notificationApi.error({ message: err.message });
-      return Promise.reject();
-    }
-  };
+  const onDeleteItem = useCallback(
+    async (_id: string): Promise<void> => {
+      try {
+        await deleteProduct(_id);
+        await refetch();
+        formFactory.reset({ ...productDefaultValues });
+      } catch (err: any) {
+        notificationApi.error({ message: err.message });
+        return Promise.reject();
+      }
+    },
+    [refetch, formFactory, notificationApi],
+  );
 
   const onPublishProduct: useProductsHook["onPublishProduct"] = async (
     _id,
@@ -157,6 +175,8 @@ const useLogic = (
     onSubmitEdit,
     onDeleteItem,
     onPublishProduct,
+    currentlyInPublishRequest,
+    setCurrentlyInPublishRequest,
     urlFilters: filtersUtil.fromMapToJson(searchParams),
   };
 };
