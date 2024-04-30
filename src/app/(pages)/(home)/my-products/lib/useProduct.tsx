@@ -6,6 +6,7 @@ import {
   editProduct,
   getProducts,
   deleteProduct,
+  publishProduct,
 } from "@/app/services/products";
 import { SubmitHandler, useForm, UseFormReturn } from "react-hook-form";
 import { createContext, FC, ReactNode, useContext, useEffect } from "react";
@@ -14,6 +15,7 @@ import { NotificationInstance } from "antd/lib/notification/interface";
 import { useSearchParams } from "next/navigation";
 import filtersUtil from "@/utils/Filters";
 import { imageListToPayload } from "@/app/components/Inputs/Upload";
+import { PublishProductPayloadType } from "@/types/apis/publish/publish.products";
 
 const ProductContext = createContext<useProductsHook>({} as useProductsHook);
 
@@ -24,6 +26,10 @@ type useProductsHook = {
   onSubmitEdit: SubmitHandler<ProductFormType>;
   resetFormToDefault: () => void;
   onDeleteItem: (id: string) => Promise<void>;
+  onPublishProduct: (
+    id: string,
+    payload: PublishProductPayloadType,
+  ) => Promise<void>;
   urlFilters: {};
 };
 
@@ -134,6 +140,15 @@ const useLogic = (
     }
   };
 
+  const onPublishProduct: useProductsHook["onPublishProduct"] = async (
+    _id,
+    payload,
+  ) => {
+    try {
+      await publishProduct(_id, payload);
+    } catch (err) {}
+  };
+
   return {
     products,
     formFactory,
@@ -141,6 +156,7 @@ const useLogic = (
     resetFormToDefault: () => formFactory.reset({ ...productDefaultValues }),
     onSubmitEdit,
     onDeleteItem,
+    onPublishProduct,
     urlFilters: filtersUtil.fromMapToJson(searchParams),
   };
 };

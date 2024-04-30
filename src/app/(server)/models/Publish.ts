@@ -1,9 +1,8 @@
 import { Schema, model, models } from "mongoose";
-import { ProductType } from "@/types/apis/publish/publish.products";
+import { PublishProductType } from "@/types/apis/publish/publish.products";
 
 type PublishType = {
-  publisher_id: string;
-  products: ProductType[];
+  products: PublishProductType[];
 };
 
 const schema = new Schema<PublishType>({

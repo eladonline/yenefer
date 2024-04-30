@@ -22,6 +22,7 @@ const Products: FC = () => {
     onSubmitEdit,
     onDeleteItem,
     urlFilters,
+    onPublishProduct,
   } = useProduct();
   const router = useRouter();
 
@@ -104,6 +105,17 @@ const Products: FC = () => {
     [handleSubmit, modalApi, reset, resetFormToDefault, onSubmit],
   );
 
+  const handlePublishProductClick = useCallback((props: ProductType) => {
+    onPublishProduct(props._id as string, {
+      name: props.name,
+      category: props.category,
+      description: props.description,
+      price: props.price,
+      terms: props.terms,
+      images: props.images?.map(({ src: { url } }) => url),
+    });
+  }, []);
+
   const handleFiltersClick = () => {
     let filters: { [key: string]: string } = {};
     setModalConfigs({
@@ -152,6 +164,7 @@ const Products: FC = () => {
         <ProductCard
           onRenew={() => handleRenewProductClick(props)}
           onEdit={() => handleEditProductClick(props)}
+          onPublish={() => handlePublishProductClick(props)}
           onDelete={(e) => {
             let target = e.currentTarget;
             target.style.visibility = "hidden";
@@ -164,7 +177,7 @@ const Products: FC = () => {
         />
       );
     });
-  }, [products, handleEditProductClick]);
+  }, [products, handleEditProductClick, handlePublishProductClick]);
 
   return (
     <div className={"grid grid-cols-1 gap-[20px]"}>

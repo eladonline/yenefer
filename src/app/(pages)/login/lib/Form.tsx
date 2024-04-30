@@ -32,6 +32,7 @@ const Form: FC<FormType> = ({ onSubmit }) => {
           name={"username"}
           status={formState?.errors?.username && "error"}
           onChange={() => formError && clearErrors("formError")}
+          type={"username"}
         />
       </Field>
       <Field
@@ -44,6 +45,7 @@ const Form: FC<FormType> = ({ onSubmit }) => {
           name={"password"}
           status={formState?.errors?.password && "error"}
           onChange={() => formError && clearErrors("formError")}
+          type={"password"}
         />
       </Field>
       {formState.errors?.["formError"] && (

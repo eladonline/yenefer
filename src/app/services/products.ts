@@ -1,9 +1,11 @@
 import { AxiosResponse } from "axios";
 import api from "@/app/services/clientApi";
-import { ProductFormType, ProductType } from "@/types/apis/user/data";
+import { ProductFormType } from "@/types/apis/user/data";
+import { PublishProductPayloadType } from "@/types/apis/publish/publish.products";
 
 export const endpoints = {
   products: `/products`,
+  publish: "/publish",
 };
 
 export function getProducts(query: string | undefined): Promise<AxiosResponse> {
@@ -25,4 +27,13 @@ export function editProduct(
 
 export function deleteProduct(_id: string): Promise<AxiosResponse> {
   return api.http.delete(`${endpoints.products}/${_id}`);
+}
+
+export function publishProduct(
+  _id: string,
+  payload: PublishProductPayloadType,
+): Promise<AxiosResponse> {
+  return api.http.post(`${endpoints.products}${endpoints.publish}/${_id}`, {
+    body: payload,
+  });
 }

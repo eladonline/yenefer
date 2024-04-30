@@ -14,12 +14,14 @@ type ItemCardType = ProductType & {
   onEdit: () => void;
   onRenew: () => void;
   onDelete: (e: any) => void;
+  onPublish: (e: any) => void;
 };
 
 const ProductCard: FC<ItemCardType> = ({
   onEdit,
   onRenew,
   onDelete,
+  onPublish,
   name,
   description,
   price,
@@ -109,6 +111,7 @@ const ProductCard: FC<ItemCardType> = ({
       <Button
         disabled={isPublishedDisabled as boolean}
         className={"ovrrd [&.ovrrd]:rounded-2xl mt-4 w-[100%]"}
+        onClick={onPublish}
       >
         Publish
       </Button>
