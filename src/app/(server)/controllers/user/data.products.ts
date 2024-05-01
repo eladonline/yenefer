@@ -8,9 +8,13 @@ import { JwtPayload } from "jsonwebtoken";
 import User, { UserType } from "@/app/(server)/models/User";
 import _set from "lodash/set";
 import type { UploadFile } from "antd/lib";
-import Publish from "@/app/(server)/models/Publish";
+import Publish, { PublishType } from "@/app/(server)/models/Publish";
 import _get from "lodash/get";
 import { PublishProductType } from "@/types/apis/publish/publish.products";
+import dayjs from "dayjs";
+import timeDateUtil from "@/app/(server)/services/time";
+import Time from "@/app/(server)/services/time";
+import products from "@/app/(pages)/(home)/my-products/lib/Products";
 
 type RequestPayloadType = NextRequest & {
   tokenPayload?: JwtPayload & clientTokenProps;
@@ -220,17 +224,18 @@ export const publishProductController = async (
     _id: id,
     "data.products._id": params.productId,
   };
+  const timeUtil = new Time();
 
   const user = await User.findOneAndUpdate(
     productQuery,
     {
-      $set: { "data.products.$.last_published": new Date() },
+      $set: { "data.products.$.last_published": timeUtil.date },
     },
     { new: true },
-  ).select("data.products.0");
+  ).select("data.products");
 
   const product: ProductType = _get(user, "data.products.0");
-  // console.log(JSON.stringify(user, null, 2));
+
   const nextPublishPayload: PublishProductType = {
     product_source_id: params.productId,
     last_published: product.last_published as Date,
@@ -245,19 +250,39 @@ export const publishProductController = async (
     nextPublishPayload.images = product.images.map(({ src: { url } }) => url);
   }
 
-  await Publish.findOneAndUpdate(
-    {
-      "publishers.publisher_id": id,
-      "products.product_source_id": params.productId,
-    },
+  // const publishFilter: { [key: string]: any } = {
+  //   date: timeUtil.dateAsLocal,
+  //   hours: [
+  //     {
+  //       hour: timeUtil.hourAsLocal,
+  //       categories: [
+  //         {
+  //           category: product.category,
+  //           products: { product_source_id: params.productId },
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // };
+  const publishFilter: { [key: string]: any } = {
+    date: timeUtil.dateAsLocal,
+    "hours.hour": timeUtil.hourAsLocal,
+    "hours.categories.category": "computers",
+    "hours.categories.products.product_source_id": params.productId,
+  };
+
+  const publish: PublishType | null = await Publish.findOneAndUpdate(
+    publishFilter,
     {
       $set: {
-        "publishers.$.products.$": nextPublishPayload,
+        "hours.hour": timeUtil.hourAsLocal,
+        "hours.categories.category": "computers",
+        "hours.categories.products.product_source_id": params.productId,
       },
     },
     { upsert: true },
   );
-
+  console.log(publish);
   return NextResponse.json(
     { message: "Publish successfully" },
     { status: 200 },

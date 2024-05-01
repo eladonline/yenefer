@@ -1,24 +1,46 @@
 import { Schema, model, models } from "mongoose";
 import { PublishProductType } from "@/types/apis/publish/publish.products";
+const hoursEnum = Array.from(Array(25).keys());
 
-type PublishType = {
-  publisher_id: string;
-  products: PublishProductType[];
+export type PublishType = {
+  created: Date;
+  date: `${number}/${number}/${number}`;
+  hours: {
+    [key: number]: {
+      categories: [
+        {
+          category: string;
+          products: PublishProductType[];
+        },
+      ];
+    };
+  };
 };
 
 const schema = new Schema<PublishType>({
-  publisher_id: String,
-  products: [
+  created: { type: Date, default: Date.now },
+  date: { type: String, required: true },
+  hours: [
     {
-      product_source_id: String,
-      last_published: { type: Date, required: true, default: Date.now },
-      description: { type: String, required: true },
-      name: { type: String, required: true },
-      category: { type: String, required: true },
-      price: { type: Number, required: true },
-      images: { type: [{ type: String }], default: undefined },
+      hour: { type: String, enum: hoursEnum },
+      categories: [
+        {
+          category: { type: String, required: true },
+          products: [
+            {
+              product_source_id: { type: String, required: true },
+              last_published: { type: Date, required: true },
+              description: { type: String, required: true },
+              name: { type: String, required: true },
+              category: { type: String, required: true },
+              price: { type: Number, required: true },
+              images: { type: [{ type: String }], default: undefined },
+            },
+          ],
+        },
+      ],
     },
   ],
 });
 
-export default models.publish || model("publish", schema);
+export default models.publish || model("publish", schema, "publish");
