@@ -22,15 +22,18 @@ async function dbConnect() {
   if (cached.conn) {
     return cached.conn;
   }
+
   if (!cached.promise) {
     const opts = {
       bufferCommands: false,
+      family: 4,
     };
     cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
       console.log(`mongoose connected on ${MONGODB_URI}`);
       return mongoose;
     });
   }
+
   try {
     cached.conn = await cached.promise;
   } catch (e) {
