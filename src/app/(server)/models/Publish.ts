@@ -5,42 +5,25 @@ const hoursEnum = Array.from(Array(25).keys());
 export type PublishType = {
   created: Date;
   date: `${number}/${number}/${number}`;
-  hours: {
-    [key: number]: {
-      categories: [
-        {
-          category: string;
-          products: PublishProductType[];
-        },
-      ];
-    };
-  };
+  products: PublishProductType[];
 };
 
 const schema = new Schema<PublishType>({
   created: { type: Date, default: Date.now },
   date: { type: String, required: true },
-  hours: [
-    {
-      hour: { type: String, enum: hoursEnum },
-      categories: [
-        {
-          category: { type: String, required: true },
-          products: [
-            {
-              product_source_id: { type: String, required: true },
-              last_published: { type: Date, required: true },
-              description: { type: String, required: true },
-              name: { type: String, required: true },
-              category: { type: String, required: true },
-              price: { type: Number, required: true },
-              images: { type: [{ type: String }], default: undefined },
-            },
-          ],
-        },
-      ],
-    },
-  ],
+  products: {
+    type: [
+      {
+        product_source_id: { type: String, required: true },
+        last_published: { type: Date, required: true },
+        description: { type: String, required: true },
+        name: { type: String, required: true },
+        category: { type: String, required: true },
+        price: { type: Number, required: true },
+        images: { type: [{ type: String }], default: undefined },
+      },
+    ],
+  },
 });
 
 export default models.publish || model("publish", schema, "publish");

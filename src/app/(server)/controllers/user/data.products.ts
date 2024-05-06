@@ -250,39 +250,34 @@ export const publishProductController = async (
     nextPublishPayload.images = product.images.map(({ src: { url } }) => url);
   }
 
-  // const publishFilter: { [key: string]: any } = {
-  //   date: timeUtil.dateAsLocal,
-  //   hours: [
-  //     {
-  //       hour: timeUtil.hourAsLocal,
-  //       categories: [
-  //         {
-  //           category: product.category,
-  //           products: { product_source_id: params.productId },
-  //         },
-  //       ],
-  //     },
-  //   ],
-  // };
   const publishFilter: { [key: string]: any } = {
     date: timeUtil.dateAsLocal,
-    "hours.hour": timeUtil.hourAsLocal,
-    "hours.categories.category": "computers",
-    "hours.categories.products.product_source_id": params.productId,
+    "products.product_source_id": params.productId,
   };
 
-  const publish: PublishType | null = await Publish.findOneAndUpdate(
-    publishFilter,
-    {
-      $set: {
-        "hours.hour": timeUtil.hourAsLocal,
-        "hours.categories.category": "computers",
-        "hours.categories.products.product_source_id": params.productId,
-      },
-    },
-    { upsert: true },
-  );
-  console.log(publish);
+  const publishDoc = await Publish.findOneAndUpdate(publishFilter, {
+    $set: { "products.$": nextPublishPayload },
+  });
+
+  if (!publishDoc) {
+    const existsDoc = await Publish.exists({ date: timeUtil.dateAsLocal });
+
+    if (!existsDoc) {
+      const nextDoc = new Publish({
+        date: timeUtil.dateAsLocal,
+        products: [nextPublishPayload],
+      });
+      await nextDoc.save();
+    } else {
+      await Publish.findOneAndUpdate(
+        { date: timeUtil.dateAsLocal },
+        {
+          $push: { products: nextPublishPayload },
+        },
+      );
+    }
+  }
+
   return NextResponse.json(
     { message: "Publish successfully" },
     { status: 200 },
